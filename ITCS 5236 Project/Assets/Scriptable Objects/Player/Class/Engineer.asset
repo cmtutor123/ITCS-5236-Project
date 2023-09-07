@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0bdc7ae712e38042828019fde5cd0fa, type: 3}
+  m_Name: Engineer
+  m_EditorClassIdentifier: 
+  spaceshipName: Engineer
+  spaceshipDescription: Effective in building and repairing machinery.
+  thrustPower: 0
+  tetherDistance: 0
+  maxTetherCount: 0
+  playerWeapon: {fileID: 11400000, guid: e68c3103600317f4ea775dae3648aeda, type: 2}
+  playerAbility: {fileID: 11400000, guid: 09588199581dca841aca26e11f818dd2, type: 2}
+  spaceshipSprite: {fileID: 0}
