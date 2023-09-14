@@ -1,0 +1,8 @@
+.Name {
+    -unity-font-style: bold;
+}
+
+.Title {
+    -unity-font-style: bold;
+    color: rgb(139, 70, 188);
+}
