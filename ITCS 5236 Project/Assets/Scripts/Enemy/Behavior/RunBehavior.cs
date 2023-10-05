@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class RunBehavior : MonoBehaviour
 {
-    [SerializeField] private Behavior behavior;
+    [SerializeField] public Behavior behavior;
 
-    void Update()
+    void FixedUpdate()
     {
         behavior.RunBehavior();
+    }
+
+    public void SetBehavior(Behavior behavior)
+    {
+        this.behavior = behavior;
     }
 }
