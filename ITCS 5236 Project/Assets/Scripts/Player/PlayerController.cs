@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
 
+    private int playerId;
+
     [SerializeField] private GameObject spriteContainer;
 
     [SerializeField] private float speed = 5f;
@@ -25,4 +27,6 @@ public class PlayerController : MonoBehaviour
     }
 
     public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
+
+    public int GetPlayerId() { return playerId; }
 }
