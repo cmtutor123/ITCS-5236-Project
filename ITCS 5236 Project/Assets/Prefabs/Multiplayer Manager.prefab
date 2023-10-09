@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5669529994705670808}
   - component: {fileID: 2845311094012282531}
   m_Layer: 0
-  m_Name: Player Manager
-  m_TagString: Untagged
+  m_Name: Multiplayer Manager
+  m_TagString: MultiplayerManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_NotificationBehavior: 0
   m_MaxPlayerCount: 4
-  m_AllowJoining: 1
+  m_AllowJoining: 0
   m_JoinBehavior: 0
   m_PlayerJoinedEvent:
     m_PersistentCalls:
@@ -66,7 +66,7 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 5300629192605111423, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
+  m_PlayerPrefab: {fileID: 2614755728664696607, guid: 98708d7bd310b104fa1e75168f64e896, type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
