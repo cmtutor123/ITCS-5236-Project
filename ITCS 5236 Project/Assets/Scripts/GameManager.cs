@@ -51,8 +51,20 @@ public class GameManager : MonoBehaviour
         enemies.Remove(dropObject);
     }
 
-    public List<GameObject> GetDrops()
+    public List<GameObject> GetPlayers()
+    {
+        List<GameObject> playerList = new List<GameObject>();
+        foreach (GameObject player in players) if (player != null) playerList.Add(player);
+        return playerList;
+    }
+
+    public List<GameObject> GetEnemies()
     {
         return enemies;
+    }
+
+    public List<GameObject> GetDrops()
+    {
+        return drops;
     }
 }
