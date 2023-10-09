@@ -50,4 +50,9 @@ public class GameManager : MonoBehaviour
     {
         enemies.Remove(dropObject);
     }
+
+    public List<GameObject> GetDrops()
+    {
+        return enemies;
+    }
 }
