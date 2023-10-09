@@ -7,6 +7,10 @@ public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private GameObject playerObject;
 
+    private int playerId;
+
+    private bool hasPlayerObject;
+
     void Start()
     {
         
@@ -16,4 +20,9 @@ public class PlayerManager : MonoBehaviour
     {
         
     }
+
+    public bool HasPlayerObject()
+    {
+        return hasPlayerObject;
+    }    
 }

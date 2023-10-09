@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
+[RequireComponent(typeof(PlayerManager))]
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private PlayerManager playerManager;
 
-    private int playerId;
+    private Rigidbody2D rb;
 
     [SerializeField] private GameObject spriteContainer;
 
@@ -17,13 +17,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        playerManager = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
-        if (movementInput != Vector2.zero) spriteContainer.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan2(movementInput.y, movementInput.x) - 90));
-        rb.AddForce(movementInput * speed);
+        if (playerManager.HasPlayerObject())
+        {
+
+        }
     }
 
     public void OnAim(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
@@ -47,6 +50,4 @@ public class PlayerController : MonoBehaviour
     {
 
     }
-
-    public int GetPlayerId() { return playerId; }
 }
