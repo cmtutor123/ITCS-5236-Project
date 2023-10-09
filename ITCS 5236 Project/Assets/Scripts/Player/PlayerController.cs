@@ -26,7 +26,27 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(movementInput * speed);
     }
 
-    public void OnMove(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
+    public void OnAim(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
+
+    public void OnMove()
+    {
+        
+    }
+
+    public void OnShoot()
+    {
+
+    }
+
+    public void OnAbility()
+    {
+
+    }
+
+    public void OnTether()
+    {
+
+    }
 
     public int GetPlayerId() { return playerId; }
 }
