@@ -135,10 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Multiplayer Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 2845311094012282531, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
-      propertyPath: m_AllowJoining
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5669529994705670808, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
