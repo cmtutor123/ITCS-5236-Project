@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 177936956006349794}
   - component: {fileID: 3430581893298719719}
+  - component: {fileID: 973104959277091670}
+  - component: {fileID: 611244867598065734}
   m_Layer: 0
   m_Name: PlayerManager
   m_TagString: Untagged
@@ -86,3 +88,31 @@ MonoBehaviour:
   m_DefaultActionMap: playerControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &973104959277091670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614755728664696607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad953dfb9f27f6c4198811e2153447b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteContainer: {fileID: 0}
+  speed: 5
+  movementInput: {x: 0, y: 0}
+--- !u!114 &611244867598065734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2614755728664696607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b51ea76665fc14f851e4d21a3f4888, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 5300629192605111423, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
