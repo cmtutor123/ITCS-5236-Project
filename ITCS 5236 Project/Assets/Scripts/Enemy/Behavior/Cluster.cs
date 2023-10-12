@@ -6,15 +6,22 @@ public class Cluster : MonoBehaviour
 {
     private GameManager manager;
     private List<GameObject> drops;
+    private Vector3 destination;
     [SerializeField] float centroidChangeRange;
+    [SerializeField] int clusterNumbers;
+    [SerializeField] int carryCapacity;
 
     // Start is called before the first frame update
     void Start() {
         // initialize manager
-        manager = new GameManager();
+        //manager = GameObject.FindObjectWithTag("GameManager").GetComponent<GameManager>();
 
         // get a list of all the drops
-        drops = manager.GetDrops();
+        //drops = manager.GetDrops();
+
+        // run clustering algorithm and find destination
+        //destination = ClusterBehavior(drops, clusterNumbers);
+
     }
 
     // Update is called once per frame
@@ -86,6 +93,11 @@ public class Cluster : MonoBehaviour
 
             // determine if we should break
             clusterDone = CentroidsInRange(centroids, oldCentroids, centroidChangeRange);
+
+            // find the final location to send AI
+            //Vector3 finalLocation = getDestination(centroids, clusters);
+
+            //return finalLocation;
         }
 
 
@@ -157,5 +169,34 @@ public class Cluster : MonoBehaviour
         return true;
 
     }
+
+
+    // determine best location to go based on distance and number of drops
+   /* private Vector3 getDestination(List<Vector3> centroids, List<List<GameObject>> clusters) {
+        // go to location with most amount of drops and closest
+
+        float bestLocation = Mathf.Infinity;
+        float currentLocation = Mathf.Infiniy;
+
+        bestLocationIndex = 0;
+
+        for (int i = 0; i < centroids.Count; i++) {
+
+            // determine the weight of a current cluster
+            currentLocation =  Mathf.Pow((EuclideanDistance(self, centroid) / clusters[i].Count), 2.0f);
+            
+            // if better location found then set as new destination
+            if(currentLocation < bestLocation) {
+                bestLocation = currentLocation;
+                bestLocationIndex = i;
+            } 
+
+        }
+
+        vector3 bestCentroidLocation = centorids[bestLocationIndex];
+
+        retrun bestCentroidLocation;
+
+    } */
 
 }
