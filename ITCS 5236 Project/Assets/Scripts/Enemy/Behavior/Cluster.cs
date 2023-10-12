@@ -6,6 +6,7 @@ public class Cluster : MonoBehaviour
 {
     private GameManager manager;
     private List<GameObject> drops;
+    [SerializeField] float centroidChangeRange;
 
     // Start is called before the first frame update
     void Start() {
@@ -14,8 +15,6 @@ public class Cluster : MonoBehaviour
 
         // get a list of all the drops
         drops = manager.GetDrops();
-
-
     }
 
     // Update is called once per frame
@@ -36,7 +35,7 @@ public class Cluster : MonoBehaviour
         int y_max = 1000;
 
         List<Vector3> centroids = new List<Vector3>();
-
+        List<Vector3> oldCentroids = new List<Vector3>();
         for(int i = 0; i < numberOfClusters; i++) {
             centroids.Add(new Vector3(Random.value * x_max, Random.value * y_max, 0.0f));
         }
@@ -47,36 +46,51 @@ public class Cluster : MonoBehaviour
             clusters.Add(new List<GameObject>());
         }
         
-        // GET THE DISTANCE BETWEEN EVERY POINT [GAME OBJECT] TO EVERY CENTROID
-        // AND STORE POINT TO THE CLOSEST CLUSTER. (CLUSTER N CORRELATES TO CENTROID N).
+        // ITTERATE UNTIL THE CENTROIDS ARE IN THE CENTER OF THE CLUSTERS
+        bool clusterDone = false;
 
-        // keep track of closest cluster/centroid
-        float bestDistance;        
-        int indexOfBestDistance;
-        
-        foreach (GameObject point in objects) {
-            bestDistance = Mathf.Infinity;
-            indexOfBestDistance = 0;
+        while(!clusterDone) {    
+            // GET THE DISTANCE BETWEEN EVERY POINT [GAME OBJECT] TO EVERY CENTROID
+            // AND STORE POINT TO THE CLOSEST CLUSTER. (CLUSTER N CORRELATES TO CENTROID N).
 
-            for (int i = 0; i < numberOfClusters; i++){
-                // distance between point and centroid i
-                float curDistance = EuclideanDistance(point.transform.position, centroids[i]);
+            // clear clusters for itteration
+            clusters = ClearClusters(clusters);
 
-                // if current distance is smaller than best distance than change best distance
-                if(curDistance < bestDistance) {
-                    bestDistance = curDistance;
-                    indexOfBestDistance = i;
+            // keep track of closest cluster/centroid
+            float bestDistance;        
+            int indexOfBestDistance;
+            
+            foreach (GameObject point in objects) {
+                bestDistance = Mathf.Infinity;
+                indexOfBestDistance = 0;
+
+                for (int i = 0; i < numberOfClusters; i++){
+                    // distance between point and centroid i
+                    float curDistance = EuclideanDistance(point.transform.position, centroids[i]);
+
+                    // if current distance is smaller than best distance than change best distance
+                    if(curDistance < bestDistance) {
+                        bestDistance = curDistance;
+                        indexOfBestDistance = i;
+                    }
                 }
-            }
 
-            // Add point into closest cluster
-            clusters[indexOfBestDistance].Add(point);
+                // Add point into closest cluster
+                clusters[indexOfBestDistance].Add(point);
+            }
+        
+
+            // UPDATE CENTROID POSITION BASE ON AVERAGE POSITION OF POINTS IN CLUSTER
+            oldCentroids = centroids;
+            centroids = UpdateCentroids(centroids, clusters);
+
+            // determine if we should break
+            clusterDone = CentroidsInRange(centroids, oldCentroids, centroidChangeRange);
         }
 
 
-        // UPDATE CENTROID POSITION BASE ON AVERAGE POSITION OF POINTS IN CLUSTER
 
-        // centroids = UpdateCentroids(centroids, clusters);
+
     }
 
     // return the distance between an object and a vector
@@ -88,7 +102,7 @@ public class Cluster : MonoBehaviour
     }
 
     // Update each centroid based on the average of the coinciding cluster
-   /* private List<Vector3> UpdateCentroids(List<Vector3> centroids, List<List<GameObject>> clusters) {
+    private List<Vector3> UpdateCentroids(List<Vector3> centroids, List<List<GameObject>> clusters) {
         
          // find the average points for each centroid
         float x_total;
@@ -106,11 +120,42 @@ public class Cluster : MonoBehaviour
              }
 
             // set centroid to average of x and y total of a cluster
-            centroids[i].x = x_total / clusters[i].Count;
-            centroids[i].y = y_total / clusters[i].Count;
+            Vector3 tempCentroid = centroids[i];
+
+            tempCentroid.x = x_total / clusters[i].Count;
+            tempCentroid.y = y_total / clusters[i].Count;
+
+            centroids[i] = tempCentroid;
         }
 
         
         return centroids;
-    } */
+    } 
+
+    // clear the clusters to be reorganized
+    private List<List<GameObject>> ClearClusters(List<List<GameObject>> clusters) {
+        foreach (List<GameObject> cluster in clusters) {
+            cluster.Clear();
+        }
+        return clusters;
+    }
+
+    // check if the centroid location is drastically changing. If not, then stop running the
+    // clustering algorithm
+    private bool CentroidsInRange(List<Vector3> newCentroids, List<Vector3> oldCentroids, float range) {
+        float[] centroidDifference = new float[newCentroids.Count];
+
+        // find the distance for every variable and retrun if out of range
+        for(int i = 0; i < newCentroids.Count; i++) {
+            centroidDifference[i] = EuclideanDistance(newCentroids[i], oldCentroids[i]);
+            if(centroidDifference[i] > range) {
+                return false;
+            }
+        }
+
+        // if all centroids are in range then return true
+        return true;
+
+    }
+
 }
