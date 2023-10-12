@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInputManager))]
 public class MultiplayerManager : MonoBehaviour
 {
-
     private PlayerInputManager playerInputManager;
 
     private void Start()
@@ -23,5 +22,10 @@ public class MultiplayerManager : MonoBehaviour
     public void DisablePlayerJoin()
     {
         playerInputManager.DisableJoining();
+    }
+
+    public int GetNextPlayerId()
+    {
+        return playerInputManager.playerCount - 1;
     }
 }
