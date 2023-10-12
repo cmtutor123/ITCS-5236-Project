@@ -6,6 +6,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInputManager))]
 public class MultiplayerManager : MonoBehaviour
 {
+    private const float uiPosY = 0f;
+    private const float uiPosX = 0f;
+    private const float uiPosOffsetX = 0f;
+
     private PlayerInputManager playerInputManager;
 
     private void Start()
@@ -27,5 +31,10 @@ public class MultiplayerManager : MonoBehaviour
     public int GetNextPlayerId()
     {
         return playerInputManager.playerCount - 1;
+    }
+
+    public Vector2 GetPlayerUIPosition(int playerId)
+    {
+        return new Vector2(uiPosX + uiPosOffsetX * playerId, uiPosY);
     }
 }
