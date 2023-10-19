@@ -1,0 +1,38 @@
+.Number {
+    -unity-font-style: bold;
+    font-size: 16px;
+    -unity-text-align: upper-center;
+    -unity-text-outline-width: 1px;
+    -unity-text-outline-color: rgba(255, 255, 255, 0.31);
+    color: rgb(255, 255, 255);
+    top: 5%;
+}
+
+.select {
+    flex-grow: 1;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-top: 5%;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.ship {
+    background-image: url('project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&guid=bc044ac37a7194e09973270ece75edd3&type=3#Square');
+    left: auto;
+    right: auto;
+    top: auto;
+    min-width: 75%;
+    min-height: 75%;
+    max-width: 75%;
+    max-height: 75%;
+}
+
+.enter {
+    bottom: auto;
+    max-width: none;
+    max-height: none;
+    align-self: center;
+    min-width: 50%;
+}

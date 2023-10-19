@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Select.uss?fileID=7433441132597879392&amp;guid=f329f33fc4b0a4596a56c0b0cfdf16aa&amp;type=3#Select" />
+    <Style src="project://database/Assets/Start.uss?fileID=7433441132597879392&amp;guid=aefeb202aa23d4735803a84bb6f259a6&amp;type=3#Start" />
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); -unity-background-image-tint-color: rgb(32, 32, 32);">
+        <ui:Label tabindex="-1" text="Title of Game" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; -unity-text-align: upper-center; font-size: 24px; -unity-text-outline-width: 10px; -unity-text-outline-color: rgba(241, 241, 241, 0.33);" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="select" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="select" />
+        <ui:Button text="Button" parse-escape-sequences="true" display-tooltip-when-elided="true" class="select" />
+    </ui:VisualElement>
+</ui:UXML>

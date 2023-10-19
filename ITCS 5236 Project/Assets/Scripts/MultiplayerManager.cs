@@ -2,18 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 [RequireComponent(typeof(PlayerInputManager))]
 public class MultiplayerManager : MonoBehaviour
 {
-    private const float uiPosY = 0f;
-    private const float uiPosX = 0f;
-    private const float uiPosOffsetX = 0f;
-
     private PlayerInputManager playerInputManager;
-
+    private VisualElement selections;
     private void Start()
     {
+        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         playerInputManager = GetComponent<PlayerInputManager>();
         EnablePlayerJoin();
     }
