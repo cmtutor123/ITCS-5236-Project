@@ -33,6 +33,7 @@ public class MultiplayerManager : MonoBehaviour
 
     public Vector2 GetPlayerUIPosition(int playerId)
     {
-        return new Vector2(uiPosX + uiPosOffsetX * playerId, uiPosY);
+        return new Vector2();
+        //return new Vector2(uiPosX + uiPosOffsetX * playerId, uiPosY);
     }
 }
