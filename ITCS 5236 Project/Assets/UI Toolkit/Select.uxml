@@ -1,33 +1,33 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/PlayerUI.uss?fileID=7433441132597879392&amp;guid=0f8794efdeed0024788a25bb0694d915&amp;type=3#PlayerUI" />
-    <Style src="project://database/Assets/Select.uss?fileID=7433441132597879392&amp;guid=f329f33fc4b0a4596a56c0b0cfdf16aa&amp;type=3#Select" />
+    <Style src="project://database/Assets/UI%20Toolkit/Select.uss?fileID=7433441132597879392&amp;guid=f329f33fc4b0a4596a56c0b0cfdf16aa&amp;type=3#Select" />
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: row; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); background-color: rgba(51, 51, 51, 0); -unity-background-image-tint-color: rgb(32, 32, 32);">
         <ui:VisualElement name="Player1" style="flex-grow: 1;">
             <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Number" />
             <ui:VisualElement class="select">
-                <ui:VisualElement name="S1" class="ship" style="flex-grow: 1;" />
-                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B1" class="enter" />
+                <ui:VisualElement name="S1" focusable="true" class="ship" style="flex-grow: 1;" />
+                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B1" tabindex="1" class="enter" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Player2" style="flex-grow: 1; display: flex; visibility: visible;">
             <ui:Label tabindex="-1" text="Player 2" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Number" />
             <ui:VisualElement class="select" style="min-width: auto; min-height: auto;">
-                <ui:VisualElement name="S2" class="ship" style="flex-grow: 1;" />
-                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B2" class="enter" />
+                <ui:VisualElement name="S2" focusable="true" class="ship" style="flex-grow: 1;" />
+                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B2" tabindex="1" class="enter" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Player3" style="flex-grow: 1; display: flex;">
             <ui:Label tabindex="-1" text="Player 3" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Number" />
             <ui:VisualElement class="select" style="min-width: auto; min-height: auto;">
-                <ui:VisualElement name="S3" class="ship" style="flex-grow: 1;" />
-                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B3" class="enter" />
+                <ui:VisualElement name="S3" focusable="true" class="ship" style="flex-grow: 1;" />
+                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B3" tabindex="1" class="enter" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Player4" style="flex-grow: 1;">
             <ui:Label tabindex="-1" text="Player 4" parse-escape-sequences="true" display-tooltip-when-elided="true" class="Number" />
             <ui:VisualElement class="select" style="min-width: auto; min-height: auto;">
-                <ui:VisualElement name="S4" class="ship" style="flex-grow: 1;" />
-                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B4" class="enter" />
+                <ui:VisualElement name="S4" focusable="true" class="ship" style="flex-grow: 1;" />
+                <ui:Button text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="B4" tabindex="1" class="enter" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

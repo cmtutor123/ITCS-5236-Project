@@ -35,6 +35,6 @@ public class PlayerManager : MonoBehaviour
     public void LoadPlayerSelectUI()
     {
         playerSelectUI = Instantiate(prefabPlayerSelectUI);
-        playerSelectUI.transform.position = multiplayerManager.GetPlayerUIPosition(playerId);
+        //playerSelectUI.transform.position = multiplayerManager.GetPlayerUIPosition(playerId);
     }
 }
