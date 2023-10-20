@@ -9,6 +9,8 @@ public class ControlsPlayer : MonoBehaviour
     private PlayerControls input = null;
     private VisualElement root;
     private VisualElement startScreen;
+    private VisualElement settingsScreen;
+    private VisualElement creditsScreen;
     private VisualElement background;
     private Rigidbody2D rb;
 
@@ -28,11 +30,27 @@ public class ControlsPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         root = GetComponent<UIDocument>().rootVisualElement;
         startScreen = root.Q<VisualElement>("StartMenu");
+        settingsScreen = root.Q<VisualElement>("SettingsMenu");
+        creditsScreen = root.Q<VisualElement>("CreditsMenu");
         background = root.Q<VisualElement>("Background");
         Button startButton = startScreen.Q<Button>("Start");
+        Button settingsButton = startScreen.Q<Button>("Settings");
+        Button creditButton = startScreen.Q<Button>("Credits");
+        Button quitButton = startScreen.Q<Button>("Quit");
         startButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
             background.style.display = DisplayStyle.None;
+        });
+        settingsButton.RegisterCallback<ClickEvent>(ev => {
+            startScreen.style.display = DisplayStyle.None;
+            settingsScreen.style.display = DisplayStyle.Flex;
+        });
+        creditButton.RegisterCallback<ClickEvent>(ev => {
+            startScreen.style.display = DisplayStyle.None;
+            creditsScreen.style.display = DisplayStyle.Flex;
+        });
+        quitButton.RegisterCallback<ClickEvent>(ev => {
+            Application.Quit();
         });
     }
 
