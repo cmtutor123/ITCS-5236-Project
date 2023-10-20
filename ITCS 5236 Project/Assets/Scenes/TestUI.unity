@@ -339,6 +339,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5300629192605111423, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1784647352}
+    - targetCorrespondingSourceObject: {fileID: 5300629192605111423, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1784647360}
   m_SourcePrefab: {fileID: 100100000, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
 --- !u!1 &1784647351 stripped
 GameObject:
@@ -432,6 +435,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
+--- !u!114 &1784647360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1784647351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: cc135fc4612dcc948862748dd40be08b, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 13e5145d01dd04798b0c82f7c480f59d, type: 3}
+  m_SortingOrder: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
