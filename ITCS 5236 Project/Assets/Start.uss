@@ -1,20 +1,12 @@
-.select {
-    width: 50%;
-    height: 10%;
-    align-self: center;
-    margin-top: 2%;
-    margin-right: auto;
-    margin-bottom: 2%;
-    margin-left: auto;
-    max-height: 10%;
-    padding-top: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-}
-
 .text {
     font-size: 24px;
     -unity-text-outline-width: 4px;
     -unity-text-outline-color: rgba(255, 255, 255, 0.31);
+}
+
+.button {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
 }
