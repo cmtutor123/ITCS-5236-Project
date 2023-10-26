@@ -308,6 +308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527e11b50ef4b4b71a76f6bec6f3c147, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  speed: 0
+  aliveTime: 0
+  playerBullet: 0
+  source: {fileID: 0}
 --- !u!64 &557069614
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -407,6 +412,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: prefabPlayerBase
+      value: 
+      objectReference: {fileID: 3600230558251281360, guid: 6f0980dea43f7494da081b1263fb5c3f, type: 3}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: prefabEnemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: prefabEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 8638231603787127113, guid: e69bf4cda4909f94fa1ccd8b537bb095, type: 3}
     - target: {fileID: 5669529994705670808, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

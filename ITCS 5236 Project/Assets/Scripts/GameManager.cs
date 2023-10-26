@@ -9,12 +9,17 @@ public class GameManager : MonoBehaviour
     private const float PLAYER_SPAWN_DELAY = 0.5f;
     private const float ENEMY_SPAWN_DELAY = 5f;
 
+    private const float BOUNDRY_X_MIN = -2, BOUNDRY_X_MAX = 2, BOUNDRY_Y_MIN = -2, BOUNDRY_Y_MAX = 2;
+
     private PlayerManager[] playerManagers;
     private int playerCount = 0;
     private List<GameObject> enemies, drops;
 
     private int currentWave;
-    private bool inWave;
+    private bool inRound;
+
+    [SerializeField] private GameObject prefabPlayerBase;
+    [SerializeField] private List<GameObject> prefabEnemies;
 
     private void Start()
     {
@@ -95,13 +100,13 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartRound()
     {
         yield return InitialPlayerSpawn();
-        inWave = true;
+        inRound = true;
         yield return StartEnemyWaves(currentWave);
     }
 
     public void EndRound()
     {
-        inWave = false;
+        inRound = false;
         currentWave++;
     }
 
@@ -118,16 +123,16 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(PLAYER_SPAWN_DELAY);
     }
 
-    public IEnumerator StartEnemyWaves(int wave)
+    public IEnumerator StartEnemyWaves(int round)
     {
-        if (InWave(wave)) SpawnEnemies(wave);
+        if (InRound(round)) SpawnEnemies(round);
         yield return new WaitForSeconds(ENEMY_SPAWN_DELAY);
-        if (InWave(wave)) yield return StartEnemyWaves(wave);
+        if (InRound(round)) yield return StartEnemyWaves(round);
     }
 
-    public bool InWave(int wave)
+    public bool InRound(int round)
     {
-        return inWave && wave == currentWave;
+        return inRound && round == currentWave;
     }
 
     public bool PlayerExists(int id)
@@ -142,6 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void SpawnEnemies(int wave)
     {
-        Debug.Log("Spawning Enemies");
+        if (prefabEnemies.Count == 0) return;
+        Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], new Vector2(Random.Range(BOUNDRY_X_MIN, BOUNDRY_X_MAX), Random.Range(BOUNDRY_Y_MIN, BOUNDRY_Y_MAX)), Quaternion.identity);
     }
 }
