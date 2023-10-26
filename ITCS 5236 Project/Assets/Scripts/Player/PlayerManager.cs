@@ -6,12 +6,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerController))]
 public class PlayerManager : MonoBehaviour
 {
+    private GameManager gameManager;
+
     [SerializeField] private GameObject prefabPlayerShip;
-    [SerializeField] private GameObject prefabPlayerSelectUI;
-
-    private GameObject playerSelectUI;
-
-    private MultiplayerManager multiplayerManager;
 
     private int playerId;
 
@@ -19,8 +16,8 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        //multiplayerManager = GetComponent<MultiplayerManager>();
-        //playerId = multiplayerManager.GetNextPlayerId();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        gameManager.RegisterPlayer(this);
     }
 
     void Update()
@@ -33,9 +30,13 @@ public class PlayerManager : MonoBehaviour
         return hasPlayerObject;
     }
 
-    public void LoadPlayerSelectUI()
+    public void SetPlayerId(int id)
     {
-        playerSelectUI = Instantiate(prefabPlayerSelectUI);
-        //playerSelectUI.transform.position = multiplayerManager.GetPlayerUIPosition(playerId);
+        playerId = id;
+    }
+
+    public int GetPlayerId()
+    {
+        return playerId;
     }
 }

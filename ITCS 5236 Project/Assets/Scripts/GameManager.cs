@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private const int MAX_PLAYERS = 4;
 
-    private GameObject[] players;
+    private PlayerManager[] playerManagers;
     private List<GameObject> enemies, drops;
 
     private void Start()
@@ -16,19 +16,41 @@ public class GameManager : MonoBehaviour
 
     private void InitializeRegisters()
     {
-        players = new GameObject[MAX_PLAYERS];
+        playerManagers = new PlayerManager[MAX_PLAYERS];
         enemies = new List<GameObject>();
         drops = new List<GameObject>();
     }
 
-    public void RegisterPlayer(GameObject playerObject, int playerId)
+    public void RegisterPlayer(PlayerManager playerManager)
     {
-        players[playerId] = playerObject;
+        int newPlayerId = GetNextPlayerId();
+        playerManager.SetPlayerId(newPlayerId);
+        playerManagers[newPlayerId] = playerManager;
     }
 
-    public void UnregisterPlayer(int playerId)
+    public void UnregisterPlayer(PlayerManager playerManager)
     {
-        players[playerId] = null;
+        int removedPlayerId = playerManager.GetPlayerId();
+        playerManagers[removedPlayerId] = null;
+        for (int i = removedPlayerId; i < MAX_PLAYERS - 1; i++)
+        {
+            PlayerManager currentPlayer = playerManagers[i + 1];
+            currentPlayer.SetPlayerId(i);
+            playerManagers[i] = currentPlayer;
+            playerManagers[i + 1] = null;
+        }
+    }
+
+    public int GetNextPlayerId()
+    {
+        for (int i = 0; i < MAX_PLAYERS; i++)
+        {
+            if (playerManagers[i] == null)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void RegisterEnemy(GameObject enemyObject)
@@ -54,7 +76,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> GetPlayers()
     {
         List<GameObject> playerList = new List<GameObject>();
-        foreach (GameObject player in players) if (player != null) playerList.Add(player);
+        //foreach (GameObject player in players) if (player != null) playerList.Add(player);
         return playerList;
     }
 
@@ -73,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void StartRound(int wave)
+    public void StartRound()
     {
 
     }

@@ -25,7 +25,7 @@ public class RegisterManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (player) gameManager.UnregisterPlayer(playerId);
+        if (player) gameManager.UnregisterPlayer(null);
         else if (enemy) gameManager.UnregisterEnemy(gameObject);
         else if (drop) gameManager.UnregisterDrop(gameObject);
     }
