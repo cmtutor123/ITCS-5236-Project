@@ -12,8 +12,9 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 5f;
     private float initialSpeed;
-    private bulletDamage;
-    private bulletSpeed;
+    private float bulletDamage;
+    private float bulletSpeed;
+    private bool canShoot;
     Vector2 aimDirection = Vector2.zero;
 
 
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void Shoot(){
+        canShoot = false;
         Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
         _temp.GetComponent<Bullet>().setPlayerBullet(true);
         _temp.GetComponent<Bullet>().source = gameObject;
@@ -85,7 +87,7 @@ public class PlayerController : MonoBehaviour
     }
     public void ShootOnPerformed(InputAction.CallbackContext context)
     {
-        if()
+        if(canShoot)
         {
             Shoot();
             StartCoroutine(ShootDelay());
@@ -95,5 +97,6 @@ public class PlayerController : MonoBehaviour
     IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shootDelay);
+        canShoot = true;
     }
 }
