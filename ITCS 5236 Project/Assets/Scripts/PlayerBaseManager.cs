@@ -4,15 +4,46 @@ using UnityEngine;
 
 public class PlayerBaseManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private GameManager gameManager;
+
+    private int currentResources;
+    private int neededResources;
+    private bool inWave;
+
+    private void Start()
     {
-        
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        inWave = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (inWave && currentResources >= neededResources)
+        {
+            EndWave();
+        }
+    }
+
+    public void StartWave(int resources)
+    {
+        currentResources = 0;
+        neededResources = resources;
+        inWave = true;
+    }
+
+    public void EndWave()
+    {
+        inWave = false;
+        gameManager.EndRound();
+    }
+
+    public void EndGame()
+    {
+
+    }
+
+    public void AddResources(int amount)
+    {
+        currentResources += Mathf.Clamp(amount, 0, int.MaxValue - currentResources);
     }
 }

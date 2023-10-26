@@ -9,7 +9,7 @@ public class Health : MonoBehaviour
 
     private float currentHealth;
 
-    private UnityEvent deathEvent;
+    [SerializeField] private UnityEvent deathEvent;
 
     void Start()
     {
