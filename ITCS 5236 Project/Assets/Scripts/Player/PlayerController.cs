@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerControls input = null;
     private Rigidbody2D rb;
-    private Bullet bullet;
+    private float shootDelay;
+    [SerializeField] private Bullet bullet;
 
     public float moveSpeed = 5f;
     private float initialSpeed;
+    private bulletDamage;
+    private bulletSpeed;
     Vector2 aimDirection = Vector2.zero;
 
 
@@ -29,6 +32,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(aimDirection.x * moveSpeed, aimDirection.y * moveSpeed);
+    }
+
+    void Shoot(){
+        Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
+        _temp.GetComponent<Bullet>().setPlayerBullet(true);
+        _temp.GetComponent<Bullet>().source = gameObject;
+        _temp.GetComponent<Bullet>().damage = bulletDamage;
+        _temp.GetComponent<Bullet>().speed = bulletSpeed;
     }
 
     public void MoveOnPerformed(InputAction.CallbackContext context)
@@ -74,6 +85,15 @@ public class PlayerController : MonoBehaviour
     }
     public void ShootOnPerformed(InputAction.CallbackContext context)
     {
-        Instantiate(bullet, transform.position, transform.rotation);
+        if()
+        {
+            Shoot();
+            StartCoroutine(ShootDelay());
+        }
+        
+    }
+    IEnumerator ShootDelay()
+    {
+        yield return new WaitForSeconds(shootDelay);
     }
 }
