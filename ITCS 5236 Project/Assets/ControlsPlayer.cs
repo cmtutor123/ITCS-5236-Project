@@ -58,42 +58,36 @@ public class ControlsPlayer : MonoBehaviour
         input.Ship.Unjoin.performed -= UnjoinOnPerformed;
     }
 
-    private void MoveOnPerformed(InputAction.CallbackContext context){
+    public void MoveOnPerformed(InputAction.CallbackContext context){
         moveSpeed = initialSpeed;
     }
-    private void MoveOnCanceled(InputAction.CallbackContext context){
+    public void MoveOnCanceled(InputAction.CallbackContext context){
         moveSpeed = 0f;
     }
-    private void AimOnPerformed(InputAction.CallbackContext context){
+    public void AimOnPerformed(InputAction.CallbackContext context){
         aimDirection = context.ReadValue<Vector2>();
         Debug.Log("Aim: " + aimDirection);
     }
-    private void AimOnCanceled(InputAction.CallbackContext context){
+    public void AimOnCanceled(InputAction.CallbackContext context){
         aimDirection = Vector2.zero;
     }
-    private void AbilityOnPerformed(InputAction.CallbackContext context){
+    public void AbilityOnPerformed(InputAction.CallbackContext context){
         Debug.Log("Ability");
     }
-    private void TetherOnPerformed(InputAction.CallbackContext context){
+    public void TetherOnPerformed(InputAction.CallbackContext context){
         Debug.Log("Tether");
     }
-    private void TetherOnCanceled(InputAction.CallbackContext context){
+    public void TetherOnCanceled(InputAction.CallbackContext context){
         Debug.Log("TetherStopped");
     }
-    private void PauseOnPerformed(InputAction.CallbackContext context){
+    public void PauseOnPerformed(InputAction.CallbackContext context){
         Debug.Log("Pause");
     }
-    private void JoinOnPerformed(InputAction.CallbackContext context){
+    public void JoinOnPerformed(InputAction.CallbackContext context){
         Debug.Log("Join");
     }
-    private void UnjoinOnPerformed(InputAction.CallbackContext context){
+    public void UnjoinOnPerformed(InputAction.CallbackContext context){
         Debug.Log("Unjoin");
-    }
-
-    public void OnPlayerJoined(PlayerInput playerInput)
-    {
-        Debug.Log("Message Received");
-        GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<UIControl>().joinPlayer();
     }
 
 }
