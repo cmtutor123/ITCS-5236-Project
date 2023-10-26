@@ -1,27 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-[RequireComponent(typeof(DeathManager))]
 public class Health : MonoBehaviour
 {
     [SerializeField] private float maxHealth = 100;
 
     private float currentHealth;
 
-    private DeathManager deathManager;
+    private UnityEvent deathEvent;
 
     void Start()
     {
-        deathManager = GetComponent<DeathManager>();
         currentHealth = maxHealth;
     }
 
     void Update()
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && deathEvent != null)
         {
-            deathManager.TriggerDeath();
+            deathEvent.Invoke();
         }
+    }
+
+    public void Damage(int amount)
+    {
+        currentHealth -= Mathf.Clamp(amount, 0, currentHealth);
+    }
+
+    public void Heal(int amount)
+    {
+        currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
 }
