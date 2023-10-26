@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class UIControl : MonoBehaviour
 {
+    private GameManager gameManager;
+
     private VisualElement root;
     private VisualElement startScreen;
     private VisualElement settingsScreen;
@@ -17,6 +19,8 @@ public class UIControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
         root = GetComponent<UIDocument>().rootVisualElement;
 
         startScreen = root.Q<VisualElement>("StartMenu");
@@ -85,6 +89,7 @@ public class UIControl : MonoBehaviour
     {
         selectScreen.style.display = DisplayStyle.None;
         background.style.display = DisplayStyle.None;
+        gameManager.StartGame();
     }
 
     public void updatePlayerSelect()

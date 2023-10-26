@@ -39,4 +39,9 @@ public class PlayerManager : MonoBehaviour
     {
         return playerId;
     }
+
+    public void SpawnPlayer()
+    {
+        Instantiate(prefabPlayerShip);
+    }
 }

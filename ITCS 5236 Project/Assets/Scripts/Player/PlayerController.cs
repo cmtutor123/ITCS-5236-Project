@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerManager))]
+//[RequireComponent(typeof(PlayerManager))]
 public class PlayerController : MonoBehaviour
 {
-    private PlayerManager playerManager;
+    //private PlayerManager playerManager;
 
     private Rigidbody2D rb;
 
@@ -17,16 +17,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        playerManager = GetComponent<PlayerManager>();
+        //playerManager = GetComponent<PlayerManager>();
         rb = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
     {
-        if (playerManager.HasPlayerObject())
+        /*if (playerManager.HasPlayerObject())
         {
 
-        }
+        }*/
     }
 
     public void OnAim(InputAction.CallbackContext ctx) => movementInput = ctx.ReadValue<Vector2>();
