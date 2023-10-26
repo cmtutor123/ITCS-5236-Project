@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        //if (isAlive) playerShipController.
+        if (isAlive) playerShipController.ShootOnPerformed(context);
     }
 
     public void OnAbility(InputAction.CallbackContext context)
