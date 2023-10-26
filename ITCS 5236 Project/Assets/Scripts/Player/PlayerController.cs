@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerControls input = null;
     private Rigidbody2D rb;
+    private Bullet bullet;
 
     public float moveSpeed = 5f;
     private float initialSpeed;
@@ -70,5 +71,9 @@ public class PlayerController : MonoBehaviour
     public void UnjoinOnPerformed(InputAction.CallbackContext context)
     {
         Debug.Log("Unjoin");
+    }
+    public void ShootOnPerformed(InputAction.CallbackContext context)
+    {
+        Instantiate(bullet, transform.position, transform.rotation);
     }
 }
