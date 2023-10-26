@@ -13,7 +13,6 @@ public class MultiplayerManager : MonoBehaviour
     {
         //VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         playerInputManager = GetComponent<PlayerInputManager>();
-        EnablePlayerJoin();
     }
 
     public void EnablePlayerJoin()

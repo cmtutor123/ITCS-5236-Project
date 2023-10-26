@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class UIControl : MonoBehaviour
 {
     private GameManager gameManager;
+    private MultiplayerManager multiplayerManager;
 
     private VisualElement root;
     private VisualElement startScreen;
@@ -20,6 +21,7 @@ public class UIControl : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        multiplayerManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<MultiplayerManager>();
 
         root = GetComponent<UIDocument>().rootVisualElement;
 
@@ -53,6 +55,7 @@ public class UIControl : MonoBehaviour
             startScreen.style.display = DisplayStyle.None;
             selectScreen.style.display = DisplayStyle.Flex;
             updatePlayerSelect();
+            multiplayerManager.EnablePlayerJoin();
         });
         
         Player1Select.RegisterCallback<ClickEvent>(ev => {
@@ -94,7 +97,6 @@ public class UIControl : MonoBehaviour
 
     public void updatePlayerSelect()
     {
-        Debug.Log("Update Player Select");
         for (int i = 0; i < 4; i++)
         {
             if (i < playersJoined)
@@ -110,7 +112,6 @@ public class UIControl : MonoBehaviour
 
     public void joinPlayer()
     {
-        Debug.Log("JoinPlayer()");
         if (playersJoined < 4) playersJoined++;
         updatePlayerSelect();
     }
@@ -126,6 +127,7 @@ public class UIControl : MonoBehaviour
         playersReady++;
         if (playersJoined > 0 && playersReady == playersJoined)
         {
+            multiplayerManager.DisablePlayerJoin();
             startGame();
         }
     }
