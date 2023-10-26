@@ -8,6 +8,8 @@ TagManager:
   - GameManager
   - MultiplayerManager
   - PlayerUI
+  - Drop
+  - Enemy1
   layers:
   - Default
   - TransparentFX
