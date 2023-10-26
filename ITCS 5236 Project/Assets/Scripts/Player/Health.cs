@@ -24,12 +24,12 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void Damage(int amount)
+    public void Damage(float amount)
     {
         currentHealth -= Mathf.Clamp(amount, 0, currentHealth);
     }
 
-    public void Heal(int amount)
+    public void Heal(float amount)
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
