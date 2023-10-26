@@ -7,10 +7,14 @@ public class GameManager : MonoBehaviour
     private const int MAX_PLAYERS = 4;
 
     private const float PLAYER_SPAWN_DELAY = 0.5f;
+    private const float ENEMY_SPAWN_DELAY = 5f;
 
     private PlayerManager[] playerManagers;
     private int playerCount = 0;
     private List<GameObject> enemies, drops;
+
+    private int currentWave;
+    private bool inWave;
 
     private void Start()
     {
@@ -66,10 +70,10 @@ public class GameManager : MonoBehaviour
         enemies.Remove(dropObject);
     }
 
-    public List<GameObject> GetPlayers()
+    public List<PlayerManager> GetPlayers()
     {
-        List<GameObject> playerList = new List<GameObject>();
-        //foreach (GameObject player in players) if (player != null) playerList.Add(player);
+        List<PlayerManager> playerList = new List<PlayerManager>();
+        for (int i = 0; i < playerCount; i++) playerList.Add(playerManagers[i]);
         return playerList;
     }
 
@@ -91,11 +95,14 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartRound()
     {
         yield return InitialPlayerSpawn();
+        inWave = true;
+        yield return StartEnemyWaves(currentWave);
     }
 
     public void EndRound()
     {
-
+        inWave = false;
+        currentWave++;
     }
 
     public IEnumerator InitialPlayerSpawn()
@@ -111,6 +118,18 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(PLAYER_SPAWN_DELAY);
     }
 
+    public IEnumerator StartEnemyWaves(int wave)
+    {
+        if (InWave(wave)) SpawnEnemies(wave);
+        yield return new WaitForSeconds(ENEMY_SPAWN_DELAY);
+        if (InWave(wave)) yield return StartEnemyWaves(wave);
+    }
+
+    public bool InWave(int wave)
+    {
+        return inWave && wave == currentWave;
+    }
+
     public bool PlayerExists(int id)
     {
         return playerManagers[id] != null;
@@ -119,5 +138,10 @@ public class GameManager : MonoBehaviour
     public void SpawnPlayer(int id)
     {
         playerManagers[id].SpawnPlayer();
+    }
+
+    public void SpawnEnemies(int wave)
+    {
+        Debug.Log("Spawning Enemies");
     }
 }
