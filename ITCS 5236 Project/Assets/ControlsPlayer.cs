@@ -90,4 +90,10 @@ public class ControlsPlayer : MonoBehaviour
         Debug.Log("Unjoin");
     }
 
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        Debug.Log("Message Received");
+        GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<UIControl>().joinPlayer();
+    }
+
 }

@@ -67,4 +67,19 @@ public class GameManager : MonoBehaviour
     {
         return drops;
     }
+
+    public void StartGame()
+    {
+
+    }
+
+    public void StartRound(int wave)
+    {
+
+    }
+
+    public void EndRound()
+    {
+
+    }
 }

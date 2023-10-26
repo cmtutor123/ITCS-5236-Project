@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerManager : MonoBehaviour
@@ -18,8 +19,8 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        multiplayerManager = GetComponent<MultiplayerManager>();
-        playerId = multiplayerManager.GetNextPlayerId();
+        //multiplayerManager = GetComponent<MultiplayerManager>();
+        //playerId = multiplayerManager.GetNextPlayerId();
     }
 
     void Update()

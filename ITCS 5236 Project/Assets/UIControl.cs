@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
 public class UIControl : MonoBehaviour
 {
@@ -11,7 +12,8 @@ public class UIControl : MonoBehaviour
     private VisualElement selectScreen;
     private VisualElement creditsScreen;
     private VisualElement background;
-    int players = 1;
+    int playersJoined = 0;
+    int playersReady = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,47 +48,20 @@ public class UIControl : MonoBehaviour
         startButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
             selectScreen.style.display = DisplayStyle.Flex;
-            //Code to determine amount of players in game
-            if(true)
-            {
-                //players++
-            }
-            for (int i = 0; i < 4; i++)
-            {
-                if (i < players)
-                {
-                    selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.Flex;
-                }
-                else
-                {
-                    selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.None;
-                }
-            }
+            updatePlayerSelect();
         });
         
         Player1Select.RegisterCallback<ClickEvent>(ev => {
-            players--;
-            if(players < 1){
-                startGame();
-            }
+            readyPlayer();
         });
         Player2Select.RegisterCallback<ClickEvent>(ev => {
-            players--;
-            if(players < 1){
-                startGame();
-            }
+            readyPlayer();
         });
         Player3Select.RegisterCallback<ClickEvent>(ev => {
-            players--;
-            if(players < 1){
-                startGame();
-            }
+            readyPlayer();
         });
         Player4Select.RegisterCallback<ClickEvent>(ev => {
-            players--;
-            if(players < 1){
-                startGame();
-            }
+            readyPlayer();
         });
         settingsButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
@@ -111,7 +86,50 @@ public class UIControl : MonoBehaviour
         selectScreen.style.display = DisplayStyle.None;
         background.style.display = DisplayStyle.None;
     }
-    // Update is called once per frame
+
+    public void updatePlayerSelect()
+    {
+        Debug.Log("Update Player Select");
+        for (int i = 0; i < 4; i++)
+        {
+            if (i < playersJoined)
+            {
+                selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.Flex;
+            }
+            else
+            {
+                selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.None;
+            }
+        }
+    }
+
+    public void joinPlayer()
+    {
+        Debug.Log("JoinPlayer()");
+        if (playersJoined < 4) playersJoined++;
+        updatePlayerSelect();
+    }
+
+    public void unjoinPlayer()
+    {
+        if (playersJoined > 0) playersJoined--;
+        updatePlayerSelect();
+    }
+
+    public void readyPlayer()
+    {
+        playersReady++;
+        if (playersJoined > 0 && playersReady == playersJoined)
+        {
+            startGame();
+        }
+    }
+
+    public void unreadyPlayer()
+    {
+        playersReady--;
+    }
+
     void Update()
     {
         

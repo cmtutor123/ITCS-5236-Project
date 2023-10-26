@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2845311094012282531}
   - component: {fileID: 1773412275725153758}
   m_Layer: 0
-  m_Name: Multiplayer Manager
-  m_TagString: MultiplayerManager
+  m_Name: GameManager
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

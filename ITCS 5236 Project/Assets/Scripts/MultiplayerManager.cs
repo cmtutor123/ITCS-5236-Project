@@ -11,7 +11,7 @@ public class MultiplayerManager : MonoBehaviour
     private VisualElement selections;
     private void Start()
     {
-        VisualElement root = GetComponent<UIDocument>().rootVisualElement;
+        //VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         playerInputManager = GetComponent<PlayerInputManager>();
         EnablePlayerJoin();
     }
@@ -35,5 +35,10 @@ public class MultiplayerManager : MonoBehaviour
     {
         return new Vector2();
         //return new Vector2(uiPosX + uiPosOffsetX * playerId, uiPosY);
+    }
+
+    public void OnPlayerJoined(PlayerInput playerInput)
+    {
+        GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<UIControl>().joinPlayer();
     }
 }
