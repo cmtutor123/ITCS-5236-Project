@@ -17,6 +17,7 @@ public class UIControl : MonoBehaviour
     private VisualElement background;
     int playersJoined = 0;
     int playersReady = 0;
+    int playerShips[4] = {1, 1, 1, 1};
     // Start is called before the first frame update
     void Start()
     {
@@ -137,6 +138,19 @@ public class UIControl : MonoBehaviour
     {
         playersReady--;
         B+playerId+.backgroundImage = null;
+    }
+    public void playerChange(int playerId, float direction){
+        if(direction > 0){
+            playerShips[playerId] += 1;
+        } else {
+            playerShips[playerId] -= 1;
+        }
+        if(playerShips[playerId] > 3){
+            playerShips[playerId] = 1;
+        } else if(playerShips[playerId] < 1){
+            playerShips[playerId] = 3;
+        }
+        changeShip(playerId, playerShips[playerId]);
     }
     public void changeShip(int playerId, int shipId)
     {

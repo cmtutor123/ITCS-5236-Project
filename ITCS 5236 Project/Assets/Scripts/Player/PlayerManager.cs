@@ -100,33 +100,33 @@ public class PlayerManager : MonoBehaviour
     public void OnButtonBack(InputAction.CallbackContext context)
     {
         Debug.Log("Back Button Pressed");
-        if (onPlayerSelect && !isReady) ChangeShip();
+        if (onPlayerSelect && isReady) UnreadyPlayer();
+        else if (onPlayerSelect && !isReady) UnjoinPlayer();
     }
 
     public void OnButtonChange(InputAction.CallbackContext context)
     {
         Debug.Log("Change Button Pressed");
-        if (onPlayerSelect && isReady) UnreadyPlayer();
-        else if (onPlayerSelect && !isReady) UnjoinPlayer();
+        if (onPlayerSelect && !isReady) ChangeShip(context.readValue.x);
     }
 
     public void UnjoinPlayer()
     {
-        uiControl.PlayerUnjoin(playerId);
+        uiControl.playerUnjoin(playerId);
     }
 
     public void UnreadyPlayer()
     {
-        uiControl.PlayerUnready(playerId);
+        uiControl.playerUnready(playerId);
     }
 
     public void ReadyPlayer()
     {
-        uiControl.PlayerReady(playerId);
+        uiControl.playerReady(playerId);
     }
 
-    public void ChangeShip()
+    public void ChangeShip(float direction)
     {
-        uiControl.PlayerChange(playerId);
+        uiControl.playerChange(playerId, direction);
     }
 }
