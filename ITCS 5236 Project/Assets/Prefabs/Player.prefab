@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 7881124538300997965}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,6 +209,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &117979452467282095
 MonoBehaviour:
   m_ObjectHideFlags: 0
