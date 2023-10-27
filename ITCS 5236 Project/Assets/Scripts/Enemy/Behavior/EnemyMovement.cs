@@ -20,7 +20,13 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float radiusOfSat;
-    [SerializeField] private float damage;
+
+    // for shooting
+    [SerializeField] private Bullet bullet;
+    [SerializeField] float bulletDamage;
+    [SerializeField] float bulletSpeed;
+    [SerializeField] float shootDelay;
+    private bool canShoot;
 
 
     private Rigidbody2D rb;
@@ -38,6 +44,10 @@ public class EnemyMovement : MonoBehaviour
         // get all plains
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
 
+
+        // allow enemy to shoot
+        canShoot = true;
+
     }
 
     // Move enemy to destination/create & destroy when moving off screen
@@ -54,18 +64,26 @@ public class EnemyMovement : MonoBehaviour
             if(towardsTarget.magnitude > radiusOfSat) {
                 // normalize vector (size of 1)
                 towardsTarget.Normalize();
-                towardsTarget *= maxSpeed;
+                
 
                 // turn towards target
-                float angle = Mathf.Atan2(towardsTarget.y, towardsTarget.x) * Mathf.Rad2Deg;
-                Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                myTransform.rotation = Quaternion.Lerp(myTransform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                Quaternion aimTowards = Quaternion.FromToRotation(Vector3.up, towardsTarget);
+                myTransform.rotation =  Quaternion.Lerp(myTransform.rotation, aimTowards, rotationSpeed * Time.deltaTime);
 
                 // move enemy
+                towardsTarget *= maxSpeed;
                 rb.AddForce(towardsTarget); 
             }
+
+            // if enemy has reached destination then stop moving and start shooting
             else {
                 rb.velocity = Vector2.zero;
+
+                if(canShoot) {
+                    Debug.Log("Shooting");
+                    Shoot();
+                    StartCoroutine(ShootDelay());
+                }
             }
         }
 
@@ -75,6 +93,26 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Enemy outside of bounds");
              Instantiate(enemyToSpawn, myTransform.position, Quaternion.identity);
         }
+    }
+
+
+
+
+    // Shoot a bullet in the direction enemy is facing
+     void Shoot(){
+        canShoot = false;
+        Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
+        _temp.GetComponent<Bullet>().setPlayerBullet(false);
+        _temp.GetComponent<Bullet>().source = gameObject;
+        _temp.GetComponent<Bullet>().damage = bulletDamage;
+        _temp.GetComponent<Bullet>().speed = bulletSpeed;
+    }
+
+    // cooldown for shooting
+    IEnumerator ShootDelay()
+    {
+        yield return new WaitForSeconds(shootDelay);
+        canShoot = true;
     }
 
     // On collision with other objects do different actions
@@ -94,7 +132,7 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Enemy collision with player");
 
             // create a drop at place of death
-            Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
+            // Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
         }
 
 
