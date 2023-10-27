@@ -11,11 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Bullet bullet;
     public float bulletDamage;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private int tetherAmount;
+    private int maxTethers;
     public float moveSpeed = 5f;
     private float initialSpeed;
     
     private bool canShoot = true;
     Vector2 aimDirection = Vector2.zero;
+    private GameObject tether;
+    
 
 
     private void Awake()
@@ -27,6 +31,7 @@ public class PlayerController : MonoBehaviour
     {
         initialSpeed = moveSpeed;
         moveSpeed = 0f;
+        maxTethers = tetherAmount;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -68,11 +73,34 @@ public class PlayerController : MonoBehaviour
     }
     public void TetherOnPerformed(InputAction.CallbackContext context)
     {
-        Debug.Log("Tether");
+        if(tetherAmount > 0)
+        {
+            foreach(Physics2D.CircleCast(transform.position, 3f, Vector2.zero))
+            {
+                if(hit.collider.gameObject.tag == "Drop" && tetherAmount > 0 && !hit.collider.gameObject.GetComponent<Tether>().tethered)
+                {
+                    tether = hit.collider.gameObject;
+                    tether.GetComponent<Tether>().tethered = true;
+                    tetherAmount--;
+                }
+            }
+
+        }
+        else
+        {
+            Debug.Log("No Tethers Left")
+        }
     }
     public void TetherOnCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("TetherStopped");
+        if(tetherAmount < maxTethers)
+        {
+            tetherAmount = maxTethers;
+        }
+        else
+        {
+            Debug.Log("Max Tethers")
+        }
     }
     public void PauseOnPerformed(InputAction.CallbackContext context)
     {
