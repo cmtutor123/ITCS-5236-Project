@@ -131,12 +131,14 @@ public class EnemyMovement : MonoBehaviour
 
             Destroy(this.gameObject);
             other.gameObject.GetComponent<Health>.damage(impactDamage);
-
-            // create a drop at place of death
-            // Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
         }
 
 
+    }
+
+    private void onDeath(){
+        // create a drop at place of death
+        Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
     }
 
 
