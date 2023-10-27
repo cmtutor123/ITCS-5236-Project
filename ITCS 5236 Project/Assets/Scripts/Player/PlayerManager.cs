@@ -113,18 +113,18 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Back Button Pressed");
-            if (onPlayerSelect && !isReady) ChangeShip();
+            Debug.Log("Change Button Pressed");
+            if (onPlayerSelect && isReady) UnreadyPlayer();
+            else if (onPlayerSelect && !isReady) UnjoinPlayer();
         }
     }
 
     public void OnButtonChange(InputAction.CallbackContext context)
     {
-        if (context.performed)
+		if (context.performed)
         {
-            Debug.Log("Change Button Pressed");
-            if (onPlayerSelect && isReady) UnreadyPlayer();
-            else if (onPlayerSelect && !isReady) UnjoinPlayer();
+            Debug.Log("Back Button Pressed");
+            if (onPlayerSelect && !isReady) ChangeShip(context.readValue.x);
         }
     }
 
@@ -133,22 +133,25 @@ public class PlayerManager : MonoBehaviour
         gameManager.UnregisterPlayer(this);
         uiControl.unjoinPlayer();
         Destroy(gameObject);
+		uiControl.playerUnjoin(playerId);
     }
 
     public void UnreadyPlayer()
     {
         isReady = false;
         uiControl.unreadyPlayer();
+        uiControl.playerUnready(playerId);
     }
 
     public void ReadyPlayer()
     {
         isReady = true;
         uiControl.readyPlayer();
+        uiControl.playerReady(playerId);
     }
 
-    public void ChangeShip()
+    public void ChangeShip(float direction)
     {
-
+        uiControl.playerChange(playerId, direction);
     }
 }

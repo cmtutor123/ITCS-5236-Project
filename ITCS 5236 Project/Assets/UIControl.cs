@@ -17,6 +17,7 @@ public class UIControl : MonoBehaviour
     private VisualElement background;
     int playersJoined = 0;
     int playersReady = 0;
+    int playerShips[4] = {1, 1, 1, 1};
     // Start is called before the first frame update
     void Start()
     {
@@ -122,7 +123,7 @@ public class UIControl : MonoBehaviour
         updatePlayerSelect();
     }
 
-    public void readyPlayer()
+    public void readyPlayer(int playerId)
     {
         playersReady++;
         if (playersJoined > 0 && playersReady == playersJoined)
@@ -130,11 +131,30 @@ public class UIControl : MonoBehaviour
             multiplayerManager.DisablePlayerJoin();
             startGame();
         }
+        B+playerId+.backgroundImage = "Assets/Art/PlayerSelect/PlayerReady.png";
     }
 
-    public void unreadyPlayer()
+    public void unreadyPlayer(int playerId)
     {
         playersReady--;
+        B+playerId+.backgroundImage = null;
+    }
+    public void playerChange(int playerId, float direction){
+        if(direction > 0){
+            playerShips[playerId] += 1;
+        } else {
+            playerShips[playerId] -= 1;
+        }
+        if(playerShips[playerId] > 3){
+            playerShips[playerId] = 1;
+        } else if(playerShips[playerId] < 1){
+            playerShips[playerId] = 3;
+        }
+        changeShip(playerId, playerShips[playerId]);
+    }
+    public void changeShip(int playerId, int shipId)
+    {
+        B+playerId+.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
     }
 
     void Update()
