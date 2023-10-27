@@ -69,8 +69,11 @@ public class PlayerManager : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Move Button Pressed");
-        if (hasPlayerObject) playerShipController.MoveOnPerformed(context);
+        if (context.performed)
+        {
+            Debug.Log("Move Button Pressed");
+            if (hasPlayerObject) playerShipController.MoveOnPerformed(context);
+        }
     }
 
     public void OnShoot(InputAction.CallbackContext context)
@@ -81,47 +84,69 @@ public class PlayerManager : MonoBehaviour
 
     public void OnAbility(InputAction.CallbackContext context)
     {
-        Debug.Log("Ability Button Pressed");
-        if (hasPlayerObject) playerShipController.AbilityOnPerformed(context);
+        if (context.performed)
+        {
+            Debug.Log("Ability Button Pressed");
+            if (hasPlayerObject) playerShipController.AbilityOnPerformed(context);
+        }
     }
 
     public void OnTether(InputAction.CallbackContext context)
     {
-        Debug.Log("Tether Button Pressed");
-        if (hasPlayerObject) playerShipController.TetherOnPerformed(context);
+        if (context.performed)
+        {
+            Debug.Log("Tether Button Pressed");
+            if (hasPlayerObject) playerShipController.TetherOnPerformed(context);
+        }
     }
 
     public void OnButtonSelect(InputAction.CallbackContext context)
     {
-        Debug.Log("Select Button Pressed");
-        if (onPlayerSelect && !isReady) ReadyPlayer();
+        if (context.performed)
+        {
+            Debug.Log("Select Button Pressed");
+            if (onPlayerSelect && !isReady) ReadyPlayer();
+        }
     }
 
     public void OnButtonBack(InputAction.CallbackContext context)
     {
-        Debug.Log("Back Button Pressed");
-        if (onPlayerSelect && isReady) UnreadyPlayer();
-        else if (onPlayerSelect && !isReady) UnjoinPlayer();
+        if (context.performed)
+        {
+            Debug.Log("Change Button Pressed");
+            if (onPlayerSelect && isReady) UnreadyPlayer();
+            else if (onPlayerSelect && !isReady) UnjoinPlayer();
+        }
     }
 
     public void OnButtonChange(InputAction.CallbackContext context)
     {
-        Debug.Log("Change Button Pressed");
-        if (onPlayerSelect && !isReady) ChangeShip(context.readValue.x);
+		if (context.performed)
+        {
+            Debug.Log("Back Button Pressed");
+            if (onPlayerSelect && !isReady) ChangeShip(context.readValue.x);
+        }
     }
 
     public void UnjoinPlayer()
     {
-        uiControl.playerUnjoin(playerId);
+        gameManager.UnregisterPlayer(this);
+        uiControl.unjoinPlayer();
+        Destroy(gameObject);
+		uiControl.playerUnjoin(playerId);
     }
 
     public void UnreadyPlayer()
     {
+        isReady = false;
+        uiControl.unreadyPlayer();
         uiControl.playerUnready(playerId);
     }
 
     public void ReadyPlayer()
     {
+        isReady = true;
+        uiControl.readyPlayer();
         uiControl.playerReady(playerId);
     }
 
