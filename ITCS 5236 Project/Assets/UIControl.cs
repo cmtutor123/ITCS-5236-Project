@@ -122,7 +122,7 @@ public class UIControl : MonoBehaviour
         updatePlayerSelect();
     }
 
-    public void readyPlayer()
+    public void readyPlayer(int playerId)
     {
         playersReady++;
         if (playersJoined > 0 && playersReady == playersJoined)
@@ -130,11 +130,17 @@ public class UIControl : MonoBehaviour
             multiplayerManager.DisablePlayerJoin();
             startGame();
         }
+        B+playerId+.backgroundImage = "Assets/Art/PlayerSelect/PlayerReady.png";
     }
 
-    public void unreadyPlayer()
+    public void unreadyPlayer(int playerId)
     {
         playersReady--;
+        B+playerId+.backgroundImage = null;
+    }
+    public void changeShip(int playerId, int shipId)
+    {
+        B+playerId+.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
     }
 
     void Update()

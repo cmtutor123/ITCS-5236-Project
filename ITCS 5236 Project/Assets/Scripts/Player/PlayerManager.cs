@@ -112,21 +112,21 @@ public class PlayerManager : MonoBehaviour
 
     public void UnjoinPlayer()
     {
-
+        uiControl.PlayerUnjoin(playerId);
     }
 
     public void UnreadyPlayer()
     {
-
+        uiControl.PlayerUnready(playerId);
     }
 
     public void ReadyPlayer()
     {
-
+        uiControl.PlayerReady(playerId);
     }
 
     public void ChangeShip()
     {
-
+        uiControl.PlayerChange(playerId);
     }
 }
