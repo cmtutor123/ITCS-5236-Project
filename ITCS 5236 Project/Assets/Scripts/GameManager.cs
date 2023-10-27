@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject prefabPlayerBase;
     [SerializeField] private List<GameObject> prefabEnemies;
 
+    private GameObject playerBaseManager;
+
     private void Start()
     {
         InitializeRegisters();
@@ -94,6 +96,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        SpawnPlayerBase();
         StartCoroutine(StartRound());
     }
 
@@ -149,5 +152,10 @@ public class GameManager : MonoBehaviour
     {
         if (prefabEnemies.Count == 0) return;
         Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], new Vector2(Random.Range(BOUNDRY_X_MIN, BOUNDRY_X_MAX), Random.Range(BOUNDRY_Y_MIN, BOUNDRY_Y_MAX)), Quaternion.identity);
+    }
+
+    public void SpawnPlayerBase()
+    {
+        playerBaseManager = Instantiate(prefabPlayerBase);
     }
 }

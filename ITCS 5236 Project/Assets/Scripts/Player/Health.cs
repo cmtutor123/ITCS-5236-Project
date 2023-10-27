@@ -29,11 +29,6 @@ public class Health : MonoBehaviour
         currentHealth -= Mathf.Clamp(amount, 0, currentHealth);
     }
 
-    void deathEvent()
-    {
-        Destroy(gameObject);
-    }
-
     public void Heal(float amount)
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
