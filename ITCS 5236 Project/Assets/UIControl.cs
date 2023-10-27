@@ -179,7 +179,20 @@ public class UIControl : MonoBehaviour
     }
     public void changeShip(int playerId, int shipId)
     {
-        B+playerId+.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
+        switch(playerId){
+            case 1:
+                Ship1.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
+                break;
+            case 2:
+                Ship2.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
+                break;
+            case 3:
+                Ship3.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
+                break;
+            case 4:
+                Ship4.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
+                break;
+        }
     }
 
     void Update()
