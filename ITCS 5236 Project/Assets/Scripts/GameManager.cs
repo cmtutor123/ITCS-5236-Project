@@ -158,4 +158,19 @@ public class GameManager : MonoBehaviour
     {
         playerBaseManager = Instantiate(prefabPlayerBase, Vector2.zero, Quaternion.identity);
     }
+
+    public Transform GetPlayerTarget()
+    {
+        List<GameObject> alivePlayers = new List<GameObject>();
+        for (int i = 0; i < playerCount; i++)
+        {
+            if (playerManagers[i].HasPlayerObject())
+            {
+                alivePlayers.Add(playerManagers[i].GetPlayerShip());
+            }
+        }
+        Debug.Log(alivePlayers.Count);
+        if (alivePlayers.Count == 0) return null;
+        return alivePlayers[Random.Range(0, alivePlayers.Count)].transform;
+    }
 }

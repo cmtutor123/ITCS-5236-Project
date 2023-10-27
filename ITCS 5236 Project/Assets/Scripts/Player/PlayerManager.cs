@@ -9,8 +9,6 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private GameObject prefabPlayerShip;
 
-    private bool isAlive = false;
-
     private GameObject playerShip = null;
 
     private PlayerController playerShipController;
@@ -28,6 +26,11 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public GameObject GetPlayerShip()
+    {
+        return playerShip;
     }
 
     public bool HasPlayerObject()
@@ -49,31 +52,31 @@ public class PlayerManager : MonoBehaviour
     {
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
-        isAlive = true;
+        hasPlayerObject = true;
     }
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        if (isAlive) playerShipController.AimOnPerformed(context);
+        if (hasPlayerObject) playerShipController.AimOnPerformed(context);
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (isAlive) playerShipController.MoveOnPerformed(context);
+        if (hasPlayerObject) playerShipController.MoveOnPerformed(context);
     }
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        if (isAlive) playerShipController.ShootOnPerformed(context);
+        if (hasPlayerObject) playerShipController.ShootOnPerformed(context);
     }
 
     public void OnAbility(InputAction.CallbackContext context)
     {
-        if (isAlive) playerShipController.AbilityOnPerformed(context);
+        if (hasPlayerObject) playerShipController.AbilityOnPerformed(context);
     }
 
     public void OnTether(InputAction.CallbackContext context)
     {
-        if (isAlive) playerShipController.TetherOnPerformed(context);
+        if (hasPlayerObject) playerShipController.TetherOnPerformed(context);
     }
 }

@@ -275,7 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 4135757015496335809}
-  targetTransform: {fileID: 3476185299712758159, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
+  targetTransform: {fileID: 0}
   enemyToSpawn: {fileID: 8586627782194996169}
   dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   maxSpeed: 3
@@ -284,6 +284,7 @@ MonoBehaviour:
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
   bulletDamage: 20
   bulletSpeed: 5
+  impactDamage: 0
   shootDelay: 1
 --- !u!114 &8648298871676590603
 MonoBehaviour:

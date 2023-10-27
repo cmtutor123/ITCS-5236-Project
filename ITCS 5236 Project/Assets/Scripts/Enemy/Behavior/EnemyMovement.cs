@@ -32,9 +32,13 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private GameManager gameManager;
+
     
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
         rb = GetComponent<Rigidbody2D>(); 
 
         // used to detect player on screen
@@ -54,6 +58,11 @@ public class EnemyMovement : MonoBehaviour
     // Move enemy to destination/create & destroy when moving off screen
     void Update()
     {        
+        if (targetTransform == null)
+        {
+            targetTransform = gameManager.GetPlayerTarget();
+            if (targetTransform == null) return;
+        }
         // Check if enemy is inside of bounds (screen)
         // If inside then move to object (using kinematic arrive)
         var bounds = m_collider.bounds;
