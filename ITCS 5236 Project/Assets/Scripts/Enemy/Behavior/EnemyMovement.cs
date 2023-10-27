@@ -60,7 +60,8 @@ public class EnemyMovement : MonoBehaviour
     {        
         if (targetTransform == null)
         {
-            targetTransform = gameManager.GetPlayerTarget();
+            GameObject playerObject = gameManager.GetPlayerTarget();
+            if (playerObject != null) targetTransform = playerObject.transform;
             if (targetTransform == null) return;
         }
         // Check if enemy is inside of bounds (screen)
