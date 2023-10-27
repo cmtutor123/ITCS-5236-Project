@@ -156,6 +156,6 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayerBase()
     {
-        playerBaseManager = Instantiate(prefabPlayerBase);
+        playerBaseManager = Instantiate(prefabPlayerBase, Vector2.zero, Quaternion.identity);
     }
 }
