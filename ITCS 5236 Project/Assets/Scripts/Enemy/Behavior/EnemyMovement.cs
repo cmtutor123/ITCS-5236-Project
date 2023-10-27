@@ -130,13 +130,18 @@ public class EnemyMovement : MonoBehaviour
         if(other.gameObject.tag == "Player") {
 
             Destroy(this.gameObject);
-            other.gameObject.GetComponent<Health>().Damage(impactDamage);
 
             // create a drop at place of death
             // Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
+            other.gameObject.GetComponent<Health>.Damage(impactDamage);
         }
 
 
+    }
+
+    private void onDeath(){
+        // create a drop at place of death
+        Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
     }
 
 
