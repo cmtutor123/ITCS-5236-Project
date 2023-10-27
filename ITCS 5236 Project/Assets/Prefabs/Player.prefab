@@ -224,7 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad953dfb9f27f6c4198811e2153447b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootDelay: 0.2
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
+  bulletDamage: 5
+  bulletSpeed: 15
   moveSpeed: 5
 --- !u!114 &7881124538300997965
 MonoBehaviour:

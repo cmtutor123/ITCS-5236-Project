@@ -7,14 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerControls input = null;
     private Rigidbody2D rb;
-    private float shootDelay;
+    public float shootDelay;
     [SerializeField] private Bullet bullet;
-
+    public float bulletDamage;
+    [SerializeField] private float bulletSpeed;
     public float moveSpeed = 5f;
     private float initialSpeed;
-    private float bulletDamage;
-    private float bulletSpeed;
-    private bool canShoot;
+    
+    private bool canShoot = true;
     Vector2 aimDirection = Vector2.zero;
 
 
@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(){
         canShoot = false;
+        Debug.Log("Fire");
         Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
         _temp.GetComponent<Bullet>().setPlayerBullet(true);
         _temp.GetComponent<Bullet>().source = gameObject;

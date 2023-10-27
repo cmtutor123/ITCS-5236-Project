@@ -275,9 +275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 4135757015496335809}
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 3476185299712758159, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
   enemyToSpawn: {fileID: 8586627782194996169}
-  dropPrefab: {fileID: 0}
+  dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   maxSpeed: 3
   rotationSpeed: 2
   radiusOfSat: 3

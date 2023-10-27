@@ -25,6 +25,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private Bullet bullet;
     [SerializeField] float bulletDamage;
     [SerializeField] float bulletSpeed;
+    [SerializeField] float impactDamage;
     [SerializeField] float shootDelay;
     private bool canShoot;
 
@@ -129,7 +130,7 @@ public class EnemyMovement : MonoBehaviour
         if(other.gameObject.tag == "Player") {
 
             Destroy(this.gameObject);
-            Debug.Log("Enemy collision with player");
+            other.gameObject.GetComponent<Health>.damage(impactDamage);
 
             // create a drop at place of death
             // Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
