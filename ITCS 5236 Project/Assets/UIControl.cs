@@ -34,14 +34,14 @@ public class UIControl : MonoBehaviour
         VisualElement Player2 = selectScreen.Q<VisualElement>("Player2");
         VisualElement Player3 = selectScreen.Q<VisualElement>("Player3");
         VisualElement Player4 = selectScreen.Q<VisualElement>("Player4");
-        VisualElement Ship1 = Player1.Q<VisualElement>("S1");
-        VisualElement Ship2 = Player2.Q<VisualElement>("S2");
-        VisualElement Ship3 = Player3.Q<VisualElement>("S3");
-        VisualElement Ship4 = Player4.Q<VisualElement>("S4");
-        Button Player1Select = Player1.Q<Button>("B1");
-        Button Player2Select = Player2.Q<Button>("B2");
-        Button Player3Select = Player3.Q<Button>("B3");
-        Button Player4Select = Player4.Q<Button>("B4");
+        VisualElement B1 = Player1.Q<VisualElement>("B1");
+        VisualElement B2 = Player2.Q<VisualElement>("B2");
+        VisualElement B3 = Player3.Q<VisualElement>("B3");
+        VisualElement B4 = Player4.Q<VisualElement>("B4");
+        VisualElement Ship1 = B1.Q<VisualElement>("S1");
+        VisualElement Ship2 = B2.Q<VisualElement>("S2");
+        VisualElement Ship3 = B3.Q<VisualElement>("S3");
+        VisualElement Ship4 = B4.Q<VisualElement>("S4");
 
         background = root.Q<VisualElement>("Background");
 
@@ -58,7 +58,7 @@ public class UIControl : MonoBehaviour
             multiplayerManager.EnablePlayerJoin();
         });
         
-        Player1Select.RegisterCallback<ClickEvent>(ev => {
+        /**Player1Select.RegisterCallback<ClickEvent>(ev => {
             readyPlayer();
         });
         Player2Select.RegisterCallback<ClickEvent>(ev => {
@@ -69,7 +69,7 @@ public class UIControl : MonoBehaviour
         });
         Player4Select.RegisterCallback<ClickEvent>(ev => {
             readyPlayer();
-        });
+        });**/
         settingsButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
             settingsScreen.style.display = DisplayStyle.Flex;

@@ -95,6 +95,16 @@ public class PlayerController : MonoBehaviour
         }
         
     }
+    public void ChangeOnPerformed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Change");
+    }
+
+    public void SelectOnPerformed(InputAction.CallbackContext context)
+    {
+        Debug.Log("Select");
+    }
+
     IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shootDelay);

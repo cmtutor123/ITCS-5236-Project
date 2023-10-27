@@ -55,6 +55,16 @@ public class PlayerManager : MonoBehaviour
         hasPlayerObject = true;
     }
 
+    public void OnChange(InputAction.CallbackContext context)
+    {
+        if (hasPlayerObject) playerShipController.ChangeOnPerformed(context);
+    }
+
+    public void OnSelect(InputAction.CallbackContext context)
+    {
+        if (hasPlayerObject) playerShipController.SelectOnPerformed(context);
+    }
+
     public void OnAim(InputAction.CallbackContext context)
     {
         if (hasPlayerObject) playerShipController.AimOnPerformed(context);

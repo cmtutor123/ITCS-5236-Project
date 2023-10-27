@@ -1,38 +1,38 @@
-.Number {
-    -unity-font-style: bold;
-    font-size: 16px;
-    -unity-text-align: upper-center;
-    -unity-text-outline-width: 1px;
-    -unity-text-outline-color: rgba(255, 255, 255, 0.31);
-    color: rgb(255, 255, 255);
-    top: 5%;
+.select {
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    min-width: 25%;
+    margin-top: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-left: auto;
 }
 
-.select {
-    flex-grow: 1;
-    margin-right: 5%;
-    margin-bottom: 5%;
-    margin-left: 5%;
-    margin-top: 5%;
-    align-items: center;
-    justify-content: space-around;
+.label {
+    font-size: 100%;
+    -unity-text-outline-width: 4px;
+    -unity-text-outline-color: rgba(255, 255, 255, 0.31);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    max-height: none;
+    height: 10%;
+    width: 100%;
 }
 
 .ship {
+    margin-right: 5%;
+    margin-bottom: 2%;
+    margin-left: 5%;
     background-image: url('project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&guid=bc044ac37a7194e09973270ece75edd3&type=3#Square');
-    left: auto;
-    right: auto;
-    top: auto;
-    min-width: 75%;
-    min-height: 75%;
-    max-width: 75%;
-    max-height: 75%;
-}
-
-.enter {
-    bottom: auto;
-    max-width: none;
-    max-height: none;
-    align-self: center;
-    min-width: 50%;
+    margin-top: auto;
+    min-height: auto;
 }
