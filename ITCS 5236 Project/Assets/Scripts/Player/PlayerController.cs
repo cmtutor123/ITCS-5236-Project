@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     {
         if(tetherAmount > 0)
         {
-            foreach(Physics2D.CircleCast(transform.position, 3f, Vector2.zero))
+            foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, aimDirection))
             {
                 if(hit.collider.gameObject.tag == "Drop" && tetherAmount > 0 && !hit.collider.gameObject.GetComponent<Tether>().tethered)
                 {
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Tethers Left")
+            Debug.Log("No Tethers Left");
         }
     }
     public void TetherOnCanceled(InputAction.CallbackContext context)

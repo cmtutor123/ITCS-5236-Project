@@ -15,9 +15,11 @@ public class UIControl : MonoBehaviour
     private VisualElement selectScreen;
     private VisualElement creditsScreen;
     private VisualElement background;
+    private VisualElement[] readyB;
+    private VisualElement[] shipB;
     int playersJoined = 0;
     int playersReady = 0;
-    int playerShips[4] = {1, 1, 1, 1};
+    int[] playerShips = {1, 1, 1, 1};
     // Start is called before the first frame update
     void Start()
     {
@@ -31,18 +33,21 @@ public class UIControl : MonoBehaviour
         creditsScreen = root.Q<VisualElement>("CreditsMenu");
         selectScreen = root.Q<VisualElement>("SelectMenu");
 
+        readyB = new VisualElement[4];
+        shipB = new VisualElement[4];
+
         VisualElement Player1 = selectScreen.Q<VisualElement>("Player1");
         VisualElement Player2 = selectScreen.Q<VisualElement>("Player2");
         VisualElement Player3 = selectScreen.Q<VisualElement>("Player3");
         VisualElement Player4 = selectScreen.Q<VisualElement>("Player4");
-        VisualElement B1 = Player1.Q<VisualElement>("B1");
-        VisualElement B2 = Player2.Q<VisualElement>("B2");
-        VisualElement B3 = Player3.Q<VisualElement>("B3");
-        VisualElement B4 = Player4.Q<VisualElement>("B4");
-        VisualElement Ship1 = B1.Q<VisualElement>("S1");
-        VisualElement Ship2 = B2.Q<VisualElement>("S2");
-        VisualElement Ship3 = B3.Q<VisualElement>("S3");
-        VisualElement Ship4 = B4.Q<VisualElement>("S4");
+        readyB[0]= Player1.Q<VisualElement>("B1");
+        readyB[1]= Player2.Q<VisualElement>("B2");
+        readyB[2]= Player3.Q<VisualElement>("B3");
+        readyB[3] = Player4.Q<VisualElement>("B4");
+        shipB[0]= readyB[0].Q<VisualElement>("S1");
+        shipB[1]= readyB[1].Q<VisualElement>("S2");
+        shipB[2]= readyB[2].Q<VisualElement>("S3");
+        shipB[3]= readyB[3].Q<VisualElement>("S4");
 
         background = root.Q<VisualElement>("Background");
 
@@ -117,7 +122,7 @@ public class UIControl : MonoBehaviour
         updatePlayerSelect();
     }
 
-    public void unjoinPlayer()
+    public void unjoinPlayer(int playerId)
     {
         if (playersJoined > 0) playersJoined--;
         updatePlayerSelect();
@@ -131,40 +136,16 @@ public class UIControl : MonoBehaviour
             multiplayerManager.DisablePlayerJoin();
             startGame();
         }
-        switch(playerId){
-            case 1:
-                B1.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-            case 2:
-                B2.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-            case 3:
-                B3.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-            case 4:
-                B4.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-        }
+        //Need assets
+        readyB[playerId].style.backgroundImage = null;
     }
 
     public void unreadyPlayer(int playerId)
     {
         playersReady--;
-        switch(playerId){
-            case 1:
-                B1.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-            case 2:
-                B2.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-            case 3:
-                B3.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
-            case 4:
-                B4.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
-                break;
+        readyB[playerId].style.backgroundImage = null;
     }
-    public void playerChange(int playerId, float direction){
+    public void PlayerChangeShips(int playerId, float direction){
         if(direction > 0){
             playerShips[playerId] += 1;
         } else {
@@ -179,20 +160,8 @@ public class UIControl : MonoBehaviour
     }
     public void changeShip(int playerId, int shipId)
     {
-        switch(playerId){
-            case 1:
-                Ship1.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
-                break;
-            case 2:
-                Ship2.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
-                break;
-            case 3:
-                Ship3.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
-                break;
-            case 4:
-                Ship4.backgroundImage = "Assets/Art/PlayerSelect/Ship" + shipId + ".png";
-                break;
-        }
+        // Need assets
+        shipB[playerId].style.backgroundImage = null;
     }
 
     void Update()

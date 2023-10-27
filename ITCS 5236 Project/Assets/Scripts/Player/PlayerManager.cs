@@ -124,34 +124,31 @@ public class PlayerManager : MonoBehaviour
 		if (context.performed)
         {
             Debug.Log("Back Button Pressed");
-            if (onPlayerSelect && !isReady) ChangeShip(context.readValue.x);
+            if (onPlayerSelect && !isReady) ChangeShip(context.ReadValue<float>());
         }
     }
 
     public void UnjoinPlayer()
     {
         gameManager.UnregisterPlayer(this);
-        uiControl.unjoinPlayer();
         Destroy(gameObject);
-		uiControl.playerUnjoin(playerId);
+		uiControl.unjoinPlayer(playerId);
     }
 
     public void UnreadyPlayer()
     {
         isReady = false;
-        uiControl.unreadyPlayer();
-        uiControl.playerUnready(playerId);
+        uiControl.unreadyPlayer(playerId);
     }
 
     public void ReadyPlayer()
     {
         isReady = true;
-        uiControl.readyPlayer();
-        uiControl.playerReady(playerId);
+        uiControl.unreadyPlayer(playerId);
     }
 
     public void ChangeShip(float direction)
     {
-        uiControl.playerChange(playerId, direction);
+        uiControl.PlayerChangeShips(playerId, direction);
     }
 }
