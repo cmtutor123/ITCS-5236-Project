@@ -131,13 +131,38 @@ public class UIControl : MonoBehaviour
             multiplayerManager.DisablePlayerJoin();
             startGame();
         }
-        B+playerId+.backgroundImage = "Assets/Art/PlayerSelect/PlayerReady.png";
+        switch(playerId){
+            case 1:
+                B1.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+            case 2:
+                B2.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+            case 3:
+                B3.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+            case 4:
+                B4.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+        }
     }
 
     public void unreadyPlayer(int playerId)
     {
         playersReady--;
-        B+playerId+.backgroundImage = null;
+        switch(playerId){
+            case 1:
+                B1.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+            case 2:
+                B2.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+            case 3:
+                B3.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
+            case 4:
+                B4.backgroundImage = "Assets/Art/PlayerSelect/Ready.png";
+                break;
     }
     public void playerChange(int playerId, float direction){
         if(direction > 0){

@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Max Tethers")
+            Debug.Log("Max Tethers");
         }
     }
     public void PauseOnPerformed(InputAction.CallbackContext context)
