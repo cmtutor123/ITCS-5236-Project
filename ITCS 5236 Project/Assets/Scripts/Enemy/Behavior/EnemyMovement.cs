@@ -133,7 +133,7 @@ public class EnemyMovement : MonoBehaviour
 
             // create a drop at place of death
             // Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
-            other.gameObject.GetComponent<Health>.Damage(impactDamage);
+            other.gameObject.GetComponent<Health>().Damage(impactDamage);
         }
 
 
