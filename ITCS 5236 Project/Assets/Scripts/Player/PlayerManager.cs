@@ -144,7 +144,7 @@ public class PlayerManager : MonoBehaviour
     public void ReadyPlayer()
     {
         isReady = true;
-        uiControl.unreadyPlayer(playerId);
+        uiControl.readyPlayer(playerId);
     }
 
     public void ChangeShip(float direction)
