@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private const float PLAYER_SPAWN_DELAY = 0.5f;
     private const float ENEMY_SPAWN_DELAY = 5f;
 
-    public static float BOUNDRY_X_MIN = -15, BOUNDRY_X_MAX = 15, BOUNDRY_Y_MIN = -8, BOUNDRY_Y_MAX = 8;
+    public static float BOUNDRY_X_MIN = -15, BOUNDRY_X_MAX = 15, BOUNDRY_Y_MIN = -8.75f, BOUNDRY_Y_MAX = 8.75f;
 
     private PlayerManager[] playerManagers;
     private int playerCount = 0;
