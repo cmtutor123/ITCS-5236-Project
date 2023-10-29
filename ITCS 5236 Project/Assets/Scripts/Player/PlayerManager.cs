@@ -89,7 +89,12 @@ public class PlayerManager : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         Debug.Log("Shoot Button Pressed");
-        if (hasPlayerObject) playerShipController.ShootOnPerformed(context);
+        if(context.performed){
+            if (hasPlayerObject) playerShipController.ShootOnPerformed(context);
+        }
+        if(context.canceled){
+            if (hasPlayerObject) playerShipController.ShootOnCanceled(context);
+        }
     }
 
     public void OnAbility(InputAction.CallbackContext context)

@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private GameObject tether;
 
     private bool canMove = false;
+    private bool isShooting = false;
     
 
 
@@ -36,6 +37,10 @@ public class PlayerController : MonoBehaviour
         initialSpeed = moveSpeed;
         maxTethers = tetherAmount;
         rb = GetComponent<Rigidbody2D>();
+    }
+    void Update(){
+        if(isShooting)
+            Shoot();
     }
 
     void FixedUpdate()
@@ -75,13 +80,16 @@ public class PlayerController : MonoBehaviour
     }
 
     void Shoot(){
-        canShoot = false;
-        Debug.Log("Fire");
-        Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
-        _temp.GetComponent<Bullet>().setPlayerBullet(true);
-        _temp.GetComponent<Bullet>().source = gameObject;
-        _temp.GetComponent<Bullet>().damage = bulletDamage;
-        _temp.GetComponent<Bullet>().speed = bulletSpeed;
+            if(canShoot){
+                canShoot = false;
+                Debug.Log("Fire");
+                Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
+                _temp.GetComponent<Bullet>().setPlayerBullet(true);
+                _temp.GetComponent<Bullet>().source = gameObject;
+                _temp.GetComponent<Bullet>().damage = bulletDamage;
+                _temp.GetComponent<Bullet>().speed = bulletSpeed;
+                StartCoroutine(ShootDelay());
+            }
     }
 
     public void MoveOnPerformed(InputAction.CallbackContext context)
@@ -156,12 +164,11 @@ public class PlayerController : MonoBehaviour
     }
     public void ShootOnPerformed(InputAction.CallbackContext context)
     {
-        if(canShoot)
-        {
-            Shoot();
-            StartCoroutine(ShootDelay());
-        }
-        
+        isShooting = true;
+    }
+    public void ShootOnCanceled(InputAction.CallbackContext context)
+    {
+        isShooting = false;
     }
     public void ChangeOnPerformed(InputAction.CallbackContext context)
     {
