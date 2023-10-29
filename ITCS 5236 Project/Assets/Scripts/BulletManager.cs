@@ -33,11 +33,6 @@ public class Bullet : MonoBehaviour
                 collision.gameObject.GetComponent<Health>().Damage(damage);
                 Debug.Log(collision.gameObject.GetComponent<Health>().GetHealth());
                 Destroy(gameObject);
-
-                //create drop at death
-                if(collision.gameObject.GetComponent<Health>().GetHealth() < 0) {
-                    Instantiate(dropPrefab, collision.transform.position, Quaternion.identity);
-                }   
             }
             if (collision.tag == "Player")
             {
