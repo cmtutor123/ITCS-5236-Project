@@ -33,4 +33,8 @@ public class Health : MonoBehaviour
     {
         currentHealth += Mathf.Clamp(amount, 0, maxHealth - currentHealth);
     }
+    public float GetHealth()
+    {
+        return currentHealth;
+    }
 }

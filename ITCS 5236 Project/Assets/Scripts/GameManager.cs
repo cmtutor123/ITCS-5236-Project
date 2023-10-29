@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private List<GameObject> enemies, drops;
 
     private int currentWave;
+    private UIControl uiControl;
     private bool inRound;
 
     [SerializeField] private GameObject prefabPlayerBase;
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         InitializeRegisters();
+        uiControl = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<UIControl>();
     }
 
     private void InitializeRegisters()
@@ -111,6 +113,10 @@ public class GameManager : MonoBehaviour
     {
         inRound = false;
         currentWave++;
+    }
+
+    public void EndGame(){
+        uiControl.EndGame();
     }
 
     public IEnumerator InitialPlayerSpawn()

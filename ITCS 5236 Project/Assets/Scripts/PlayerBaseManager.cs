@@ -39,7 +39,7 @@ public class PlayerBaseManager : MonoBehaviour
 
     public void EndGame()
     {
-
+        gameManager.EndGame();
     }
 
     public void AddResources(int amount)

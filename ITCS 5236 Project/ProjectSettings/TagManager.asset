@@ -11,6 +11,7 @@ TagManager:
   - Drop
   - Enemy1
   - Base
+  - Enemy
   layers:
   - Default
   - TransparentFX

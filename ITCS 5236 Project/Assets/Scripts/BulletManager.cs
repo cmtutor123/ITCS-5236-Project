@@ -21,16 +21,17 @@ public class Bullet : MonoBehaviour
         transform.position += transform.up * speed * Time.deltaTime;
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {   
         if(collision.gameObject != source)
         {
-            if (collision.gameObject.tag == "Enemy")
+            if (collision.tag == "Enemy")
             {
                 collision.gameObject.GetComponent<Health>().Damage(damage);
+                Debug.Log(collision.gameObject.GetComponent<Health>().GetHealth());
                 Destroy(gameObject);
             }
-            if (collision.gameObject.tag == "Player")
+            if (collision.tag == "Player")
             {
                 if(!playerBullet)
                     collision.gameObject.GetComponent<Health>().Damage(damage);
@@ -38,7 +39,7 @@ public class Bullet : MonoBehaviour
                     collision.gameObject.GetComponent<Rigidbody2D>().AddForce(transform.up * 1);
                 Destroy(gameObject);
             }
-            if (collision.gameObject.tag == "Base")
+            if (collision.tag == "Base")
             {
                 if(!playerBullet)
                     //A {} can be added here including the destroy(gameobject) if we want the player bullet to travel thru base

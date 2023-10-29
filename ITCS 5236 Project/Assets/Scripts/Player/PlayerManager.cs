@@ -151,4 +151,10 @@ public class PlayerManager : MonoBehaviour
     {
         uiControl.PlayerChangeShips(playerId, direction);
     }
+
+    public void Death()
+    {
+        gameManager.UnregisterPlayer(this);
+        Destroy(gameObject);
+    }
 }

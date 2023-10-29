@@ -164,8 +164,10 @@ public class UIControl : MonoBehaviour
         shipB[playerId].style.backgroundImage = null;
     }
 
-    void Update()
+    public void EndGame()
     {
-        
+        // Need assets
+        background.style.display = DisplayStyle.Flex;
+        startScreen.style.display = DisplayStyle.Flex;
     }
 }

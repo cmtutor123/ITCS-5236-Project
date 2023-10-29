@@ -148,7 +148,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &6288990292013126679
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -211,7 +211,19 @@ MonoBehaviour:
   maxHealth: 100
   deathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4551078448849309539}
+        m_TargetAssemblyTypeName: DeathManager, Assembly-CSharp
+        m_MethodName: TriggerDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &117979452467282095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +239,8 @@ MonoBehaviour:
   shootDelay: 0.2
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
   bulletDamage: 5
-  bulletSpeed: 15
+  bulletSpeed: 10
+  tetherAmount: 0
   moveSpeed: 5
 --- !u!114 &7881124538300997965
 MonoBehaviour:
