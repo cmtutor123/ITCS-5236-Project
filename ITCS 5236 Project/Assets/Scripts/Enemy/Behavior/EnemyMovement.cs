@@ -158,7 +158,6 @@ public class EnemyMovement : MonoBehaviour
     public void onDeath(){
         // create a drop at place of death
         Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
-
-
 }

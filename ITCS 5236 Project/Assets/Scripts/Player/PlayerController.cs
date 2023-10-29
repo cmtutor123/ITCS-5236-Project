@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 5f;
     private float initialSpeed;
+    public float turnSpeed;
     
     private bool canShoot = true;
     Vector2 aimDirection = Vector2.zero;
@@ -55,13 +56,21 @@ public class PlayerController : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, GameManager.BOUNDRY_Y_MIN);
         }
-        if (canMove)
+        if(aimDirection != Vector2.zero)
         {
-            rb.AddForce(aimDirection * moveSpeed);
+            Vector2 _temp = aimDirection;
+            _temp.Normalize();
+            transform.up = Vector2.Lerp(transform.up, _temp, turnSpeed);
         }
         if (rb.velocity.magnitude > maxMoveSpeed)
         {
             rb.velocity = rb.velocity.normalized * maxMoveSpeed;
+        }
+        if (canMove)
+        {
+            rb.AddForce(transform.up * moveSpeed);
+        } else {
+            rb.velocity = rb.velocity * 0.9f;
         }
     }
 
