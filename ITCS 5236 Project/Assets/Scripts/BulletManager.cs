@@ -10,7 +10,6 @@ public class Bullet : MonoBehaviour
     public float aliveTime;
     public bool playerBullet;
 
-    [SerializeField] private GameObject dropPrefab;
     public GameObject source;
     void Start()
     {
