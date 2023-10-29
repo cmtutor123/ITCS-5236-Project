@@ -165,7 +165,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.2924528, g: 0.028693475, b: 0.21502474, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 4135757015496335809}
-  targetTransform: {fileID: 0}
   enemyToSpawn: {fileID: 8586627782194996169}
   dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   maxSpeed: 3

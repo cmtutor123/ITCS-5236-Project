@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "EnemyDrop":
-                if(drops.Count != 0) {
+                if(drops.Count > 0) {
                     Debug.Log("EnemyDrop created");
                     targetTransform = drops[Random.Range(0, drops.Count)].transform;
                 }

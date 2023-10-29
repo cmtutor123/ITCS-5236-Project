@@ -50,6 +50,7 @@ MonoBehaviour:
   speed: 1
   aliveTime: 3
   playerBullet: 0
+  dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   source: {fileID: 0}
 --- !u!58 &6042490017162609482
 CircleCollider2D:

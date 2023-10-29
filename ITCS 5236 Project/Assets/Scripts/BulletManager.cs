@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float aliveTime;
     public bool playerBullet;
+
+    [SerializeField] private GameObject dropPrefab;
     public GameObject source;
     void Start()
     {
@@ -25,12 +27,17 @@ public class Bullet : MonoBehaviour
     {   
         if(collision.gameObject != source)
         {
-            if (collision.tag == "Enemy")
+            if (collision.tag == "EnemyBase" || collision.tag == "EnemyPlayer" || collision.tag == "EnemyDrop" )
             {
                 Debug.Log("Bullet hit Enemy");
                 collision.gameObject.GetComponent<Health>().Damage(damage);
                 Debug.Log(collision.gameObject.GetComponent<Health>().GetHealth());
                 Destroy(gameObject);
+
+                //create drop at death
+                if(collision.gameObject.GetComponent<Health>().GetHealth() < 0) {
+                    Instantiate(dropPrefab, collision.transform.position, Quaternion.identity);
+                }   
             }
             if (collision.tag == "Player")
             {
