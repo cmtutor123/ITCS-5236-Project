@@ -157,7 +157,32 @@ public class GameManager : MonoBehaviour
     public void SpawnEnemies(int wave)
     {
         if (prefabEnemies.Count == 0) return;
-        Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], new Vector2(Random.Range(BOUNDRY_X_MIN, BOUNDRY_X_MAX), Random.Range(BOUNDRY_Y_MIN, BOUNDRY_Y_MAX)), Quaternion.identity);
+        Vector2 spawnLocation;
+        if (Random.Range(0, 2) == 0)
+        {
+            float xPos = Random.Range(BOUNDRY_X_MIN, BOUNDRY_X_MAX);
+            if (Random.Range(0, 2) == 0)
+            {
+                spawnLocation = new Vector2(xPos, BOUNDRY_Y_MIN);
+            }
+            else
+            {
+                spawnLocation = new Vector2(xPos, BOUNDRY_Y_MAX);
+            }
+        }
+        else
+        {
+            float yPos = Random.Range(BOUNDRY_Y_MIN, BOUNDRY_Y_MAX);
+            if (Random.Range(0, 2) == 0)
+            {
+                spawnLocation = new Vector2(BOUNDRY_X_MIN, yPos);
+            }
+            else
+            {
+                spawnLocation = new Vector2(BOUNDRY_X_MAX, yPos);
+            }
+        }
+        Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
     }
 
     public void SpawnPlayerBase()

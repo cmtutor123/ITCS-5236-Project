@@ -67,7 +67,7 @@ public class EnemyMovement : MonoBehaviour
         // Check if enemy is inside of bounds (screen)
         // If inside then move to object (using kinematic arrive)
         var bounds = m_collider.bounds;
-        if(GeometryUtility.TestPlanesAABB(cameraFrustum, bounds)) {
+        if(InBounds()) {
             // calculate vector from character to target a
             Vector3 towardsTarget = targetTransform.position - myTransform.position;
 
@@ -104,6 +104,12 @@ public class EnemyMovement : MonoBehaviour
             Debug.Log("Enemy outside of bounds");
              Instantiate(enemyToSpawn, myTransform.position, Quaternion.identity);
         }
+    }
+
+    public bool InBounds()
+    {
+        return transform.position.x >= GameManager.BOUNDRY_X_MIN && transform.position.x <= GameManager.BOUNDRY_X_MAX && transform.position.y >= GameManager.BOUNDRY_Y_MIN && transform.position.y <= GameManager.BOUNDRY_Y_MAX;
+        //return GeometryUtility.TestPlanesAABB(cameraFrustum, m_collider.bounds);
     }
 
 
