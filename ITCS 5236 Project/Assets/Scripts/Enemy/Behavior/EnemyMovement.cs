@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
 {
     // get current 
     [SerializeField] private Transform myTransform;
-    [SerializeField] private Transform targetTransform;
+    private Transform targetTransform;
     [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private GameObject dropPrefab;
 
@@ -38,6 +38,8 @@ public class EnemyMovement : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        targetTransform = gameManager.targetTransform;
+
 
         rb = GetComponent<Rigidbody2D>(); 
 
@@ -58,6 +60,7 @@ public class EnemyMovement : MonoBehaviour
     // Move enemy to destination/create & destroy when moving off screen
     void Update()
     {        
+
         if (targetTransform == null)
         {
             GameObject playerObject = gameManager.GetPlayerTarget();
@@ -91,7 +94,7 @@ public class EnemyMovement : MonoBehaviour
                 rb.velocity = Vector2.zero;
 
                 if(canShoot) {
-                    Debug.Log("Shooting");
+                    //Debug.Log("Shooting");
                     Shoot();
                     StartCoroutine(ShootDelay());
                 }

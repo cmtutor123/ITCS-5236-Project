@@ -100,8 +100,8 @@ GameObject:
   - component: {fileID: 5118659240384486038}
   - component: {fileID: 8648298871676590603}
   m_Layer: 0
-  m_Name: Enemy
-  m_TagString: Enemy
+  m_Name: EnemyBase
+  m_TagString: EnemyBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
   dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   maxSpeed: 3
   rotationSpeed: 2
-  radiusOfSat: 3
+  radiusOfSat: 5
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
   bulletDamage: 20
   bulletSpeed: 5

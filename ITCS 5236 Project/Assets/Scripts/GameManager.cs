@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     private const float PLAYER_SPAWN_DELAY = 0.5f;
     private const float ENEMY_SPAWN_DELAY = 5f;
 
+    public Transform targetTransform;
+
     public static float BOUNDRY_X_MIN = -15, BOUNDRY_X_MAX = 15, BOUNDRY_Y_MIN = -8.75f, BOUNDRY_Y_MAX = 8.75f;
 
     private PlayerManager[] playerManagers;
@@ -182,7 +184,35 @@ public class GameManager : MonoBehaviour
                 spawnLocation = new Vector2(BOUNDRY_X_MAX, yPos);
             }
         }
-        Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
+        GameObject newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
+
+        Debug.Log(newEnemy.tag);
+        switch(newEnemy.tag) {
+            case "EnemyPlayer":
+                Debug.Log("EnemyPlayer created");
+                targetTransform = null;
+                break;
+
+            case "EnemyBase":
+                Debug.Log("EnemyBase created");
+                targetTransform = playerBaseManager.transform; 
+                break;
+
+            case "EnemyDrop":
+                if(drops.Count != 0) {
+                    Debug.Log("EnemyDrop created");
+                    targetTransform = drops[Random.Range(0, drops.Count)].transform;
+                }
+                else {
+                    targetTransform = null;
+                }
+                break;
+
+            default:
+                Debug.Log("ERROR: Default created");
+                targetTransform = null;
+                break;
+        }
     }
 
     public void SpawnPlayerBase()
