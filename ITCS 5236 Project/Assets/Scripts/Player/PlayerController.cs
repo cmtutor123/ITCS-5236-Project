@@ -14,11 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int tetherAmount;
     private int maxTethers;
     public float moveSpeed = 5f;
+    public float maxMoveSpeed = 5f;
     private float initialSpeed;
     
     private bool canShoot = true;
     Vector2 aimDirection = Vector2.zero;
     private GameObject tether;
+
+    private bool canMove = false;
     
 
 
@@ -30,14 +33,36 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         initialSpeed = moveSpeed;
-        moveSpeed = 0f;
         maxTethers = tetherAmount;
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        rb.velocity = new Vector2(aimDirection.x * moveSpeed, aimDirection.y * moveSpeed);
+        if (transform.position.x < GameManager.BOUNDRY_X_MIN)
+        {
+            transform.position = new Vector2(GameManager.BOUNDRY_X_MAX, transform.position.y);
+        }
+        if (transform.position.x > GameManager.BOUNDRY_X_MAX)
+        {
+            transform.position = new Vector2(GameManager.BOUNDRY_X_MIN, transform.position.y);
+        }
+        if (transform.position.y < GameManager.BOUNDRY_Y_MIN)
+        {
+            transform.position = new Vector2(transform.position.x, GameManager.BOUNDRY_Y_MAX);
+        }
+        if (transform.position.y > GameManager.BOUNDRY_Y_MAX)
+        {
+            transform.position = new Vector2(transform.position.x, GameManager.BOUNDRY_Y_MIN);
+        }
+        if (canMove)
+        {
+            rb.AddForce(aimDirection * moveSpeed);
+        }
+        if (rb.velocity.magnitude > maxMoveSpeed)
+        {
+            rb.velocity = rb.velocity.normalized * maxMoveSpeed;
+        }
     }
 
     void Shoot(){
@@ -54,9 +79,15 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeed = initialSpeed;
     }
+
+    public void MoveOnStarted(InputAction.CallbackContext context)
+    {
+        canMove = true;
+    }
+
     public void MoveOnCanceled(InputAction.CallbackContext context)
     {
-        moveSpeed = 0f;
+        canMove = false;
     }
     public void AimOnPerformed(InputAction.CallbackContext context)
     {

@@ -69,10 +69,20 @@ public class PlayerManager : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (false && context.performed)
         {
             Debug.Log("Move Button Pressed");
             if (hasPlayerObject) playerShipController.MoveOnPerformed(context);
+        }
+        else if (context.started)
+        {
+            Debug.Log("Move Button Started");
+            if (hasPlayerObject) playerShipController.MoveOnStarted(context);
+        }
+        else if (context.canceled)
+        {
+            Debug.Log("Move Button Canceled");
+            if (hasPlayerObject) playerShipController.MoveOnCanceled(context);
         }
     }
 
