@@ -201,7 +201,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &6926530266666275673
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 4135757015496335809}
-  targetTransform: {fileID: 0}
   enemyToSpawn: {fileID: 8586627782194996169}
   dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   maxSpeed: 4
