@@ -127,12 +127,13 @@ public class PlayerController : MonoBehaviour
     {
         if(tetherAmount > 0)
         {
-            foreach(RaycastHit2D hit in Physics2D.RaycastAll(transform.position, aimDirection))
+            foreach(RaycastHit2D hit in Physics2D.CircleCastAll(transform.position, 5f, Vector2.zero))
             {
                 if(hit.collider.gameObject.tag == "Drop" && tetherAmount > 0 && !hit.collider.gameObject.GetComponent<Tether>().tethered)
                 {
                     tether = hit.collider.gameObject;
                     tether.GetComponent<Tether>().tethered = true;
+                    tether.GetComponent<Tether>().tetheredTo = gameObject;
                     tetherAmount--;
                 }
             }

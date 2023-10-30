@@ -240,7 +240,7 @@ MonoBehaviour:
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
   bulletDamage: 50
   bulletSpeed: 10
-  tetherAmount: 0
+  tetherAmount: 2
   moveSpeed: 10
   maxMoveSpeed: 15
   turnSpeed: 0.5

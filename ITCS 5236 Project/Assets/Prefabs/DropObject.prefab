@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3358571904783020152}
   - component: {fileID: 4726984551518794932}
   - component: {fileID: 8708130661654803069}
+  - component: {fileID: 4402256443965376952}
   m_Layer: 0
   m_Name: DropObject
   m_TagString: Drop
@@ -178,3 +179,19 @@ MonoBehaviour:
   player: 0
   enemy: 0
   drop: 1
+--- !u!114 &4402256443965376952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5532215529028779746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea8f8bbf0de1451eb584540d055fd62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tethered: 0
+  tetheredTo: {fileID: 0}
+  maxMoveSpeed: 100
+  tetherSpeed: 10

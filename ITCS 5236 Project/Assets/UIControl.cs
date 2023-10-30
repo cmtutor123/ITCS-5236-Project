@@ -56,6 +56,7 @@ public class UIControl : MonoBehaviour
         Button creditButton = startScreen.Q<Button>("Credits");
         Button quitButton = startScreen.Q<Button>("Exit");
         Button backButton = creditsScreen.Q<Button>("Back");
+        Button back2Button = settingsScreen.Q<Button>("Back");
 
         startButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
@@ -84,9 +85,12 @@ public class UIControl : MonoBehaviour
             startScreen.style.display = DisplayStyle.None;
             creditsScreen.style.display = DisplayStyle.Flex;
         });
-        backButton.RegisterCallback<ClickEvent>(ev => {
+        back2Button.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.Flex;
             settingsScreen.style.display = DisplayStyle.None;
+        });
+        backButton.RegisterCallback<ClickEvent>(ev => {
+            startScreen.style.display = DisplayStyle.Flex;
             creditsScreen.style.display = DisplayStyle.None;
         });
         quitButton.RegisterCallback<ClickEvent>(ev => {
