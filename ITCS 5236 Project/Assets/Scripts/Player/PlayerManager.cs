@@ -113,6 +113,9 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Tether Button Pressed");
             if (hasPlayerObject) playerShipController.TetherOnPerformed(context);
         }
+        if(context.canceled){
+            if (hasPlayerObject) playerShipController.TetherOnCanceled(context);
+        }
     }
 
     public void OnButtonSelect(InputAction.CallbackContext context)

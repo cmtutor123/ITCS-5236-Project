@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     [SerializeField] private int tetherAmount;
     private int maxTethers;
+    private GameObject[] tethers;
     public float moveSpeed = 5f;
     public float maxMoveSpeed = 5f;
     private float initialSpeed;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         initialSpeed = moveSpeed;
         maxTethers = tetherAmount;
+        tethers = new GameObject[maxTethers];
         rb = GetComponent<Rigidbody2D>();
         jetfire = transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
     }
@@ -131,6 +133,7 @@ public class PlayerController : MonoBehaviour
             {
                 if(hit.collider.gameObject.tag == "Drop" && tetherAmount > 0 && !hit.collider.gameObject.GetComponent<Tether>().tethered)
                 {
+                    tethers.SetValue(hit.collider.gameObject, tetherAmount-1);
                     tether = hit.collider.gameObject;
                     tether.GetComponent<Tether>().tethered = true;
                     tether.GetComponent<Tether>().tetheredTo = gameObject;
@@ -146,14 +149,17 @@ public class PlayerController : MonoBehaviour
     }
     public void TetherOnCanceled(InputAction.CallbackContext context)
     {
-        if(tetherAmount < maxTethers)
+        Debug.Log("Tether Canceled");
+        tetherAmount = maxTethers;
+        foreach(GameObject tether in tethers)
         {
-            tetherAmount = maxTethers;
+            if(tether != null)
+            {
+                tether.GetComponent<Tether>().tethered = false;
+                tether.GetComponent<Tether>().tetheredTo = null;
+            }
         }
-        else
-        {
-            Debug.Log("Max Tethers");
-        }
+
     }
     public void PauseOnPerformed(InputAction.CallbackContext context)
     {

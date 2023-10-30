@@ -39,9 +39,10 @@ public class Tether : MonoBehaviour
             if(Vector2.Distance(transform.position, tetheredTo.transform.position) > 2)
                 rb.AddForce((tetheredTo.transform.position - transform.position).normalized * tetherSpeed);
             if(Vector2.Distance(transform.position, tetheredTo.transform.position) > 0.5)
-                rb.velocity = rb.velocity * 0.9f;
+                rb.velocity = rb.velocity * 0.97f;
         } else {
             lr.positionCount = 0;
+            rb.velocity = rb.velocity * 0.97f;
         }
     }
 }
