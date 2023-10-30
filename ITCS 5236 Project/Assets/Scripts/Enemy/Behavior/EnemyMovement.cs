@@ -41,7 +41,9 @@ public class EnemyMovement : MonoBehaviour
 
     private GameManager gameManager;
     private GameObject jetfire;
-
+    float tempX;
+    float tempY;
+    bool escape;
     
     void Start()
     {
@@ -67,6 +69,7 @@ public class EnemyMovement : MonoBehaviour
         tetherAmount = 3;
         maxTethers = tetherAmount;
         tethers = new GameObject[maxTethers];
+        escape = false;
 
     }
 
@@ -76,7 +79,11 @@ public class EnemyMovement : MonoBehaviour
 
         if (targetTransform == null)
         {
-            GameObject playerObject = gameManager.GetPlayerTarget();
+            GameObject playerObject = null;
+            if(gameObject.tag == "EnemyDrop")
+                targetTransform = gameManager.GetDropTarget();
+            else if(gameObject.tag == "EnemyPlayer")
+                playerObject = gameManager.GetPlayerTarget();
             if (playerObject != null) targetTransform = playerObject.transform;
             if (targetTransform == null) return;
         }
@@ -85,7 +92,11 @@ public class EnemyMovement : MonoBehaviour
         var bounds = m_collider.bounds;
         if(InBounds()) {
             // calculate vector from character to target a
-            Vector3 towardsTarget = targetTransform.position - myTransform.position;
+            Vector3 towardsTarget;
+            if(!escape)
+                towardsTarget = targetTransform.position - myTransform.position;
+            else
+                towardsTarget = (new Vector3(tempX, tempY, 0)) - myTransform.position;
 
             // If we haven't reached target then move in the direction towards target
             if(towardsTarget.magnitude > radiusOfSat) {
@@ -109,8 +120,12 @@ public class EnemyMovement : MonoBehaviour
                 jetfire.SetActive(false);
 
                 // tether or shoot depending on enemy type
-                if(gameObject.tag == "EnemyDrop") {
+                if(gameObject.tag == "EnemyDrop" && targetTransform.tag == "Drop") {
                     TetherOnPerformed();
+                } else if (gameObject.tag == "EnemyDrop" && tetherAmount <= 0 && targetTransform.tag != "Drop") {
+                    Escape();
+                } else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && targetTransform.tag == null){
+                    Escape();
                 }
                 else if(canShoot) {
                     //Debug.Log("Shooting");
@@ -137,6 +152,10 @@ public class EnemyMovement : MonoBehaviour
 
     // Shoot a bullet in the direction enemy is facing
      void Shoot(){
+        Vector3 towardsTarget = targetTransform.position - myTransform.position;
+        towardsTarget.Normalize();
+        Quaternion aimTowards = Quaternion.FromToRotation(Vector3.up, towardsTarget);
+        myTransform.rotation =  Quaternion.Lerp(myTransform.rotation, aimTowards, rotationSpeed * Time.deltaTime);
         canShoot = false;
         Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
         _temp.GetComponent<Bullet>().setPlayerBullet(false);
@@ -195,6 +214,8 @@ public class EnemyMovement : MonoBehaviour
                     tether.GetComponent<Tether>().tethered = true;
                     tether.GetComponent<Tether>().tetheredTo = gameObject;
                     tetherAmount--;
+                    targetTransform = null;
+                    gameManager.UnregisterDrop(tether);
                 }
             }
         }
@@ -202,12 +223,14 @@ public class EnemyMovement : MonoBehaviour
         {
             Debug.Log("No Tethers Left");
         }
+    }
+    void Escape(){
 
         // set destination to leave screen (destroys self and drops)
-        float enemyXPosition = gameObject.transform.position.x;
-        float enemyYPosition = gameObject.transform.position.y;
-        float tempX = enemyXPosition;
-        float tempY = enemyYPosition;
+        float enemyXPosition = transform.position.x;
+        float enemyYPosition = transform.position.y;
+        tempX = enemyXPosition;
+        tempY = enemyYPosition;
         if(enemyXPosition - Mathf.Abs(GameManager.BOUNDRY_X_MIN) < enemyXPosition - Mathf.Abs(GameManager.BOUNDRY_X_MAX)) {
             tempX = GameManager.BOUNDRY_X_MIN - 10;
         }
@@ -219,9 +242,8 @@ public class EnemyMovement : MonoBehaviour
             tempY = GameManager.BOUNDRY_Y_MIN - 10;
         }
         else {
-            tempY = GameManager.BOUNDRY_Y_MIN - 10;
+            tempY = GameManager.BOUNDRY_Y_MAX + 10;
         }
-
-        targetTransform.position = new Vector3(tempX, tempY, 0.0f);
+        escape = true;
     }
 }

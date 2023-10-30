@@ -15,11 +15,17 @@ public class UIControl : MonoBehaviour
     private VisualElement selectScreen;
     private VisualElement creditsScreen;
     private VisualElement background;
+    private VisualElement inGame;
     private VisualElement[] readyB;
     private VisualElement[] shipB;
+    private ProgressBar[] playerHP;
+    private ProgressBar baseHP;
+    private Label[] playerNames;
+    private VisualElement[] playerHUD;
     int playersJoined = 0;
     int playersReady = 0;
     int[] playerShips = {1, 1, 1, 1};
+    public bool gameStarted = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +38,12 @@ public class UIControl : MonoBehaviour
         settingsScreen = root.Q<VisualElement>("SettingsMenu");
         creditsScreen = root.Q<VisualElement>("CreditsMenu");
         selectScreen = root.Q<VisualElement>("SelectMenu");
+        inGame = root.Q<VisualElement>("InGame");
 
         readyB = new VisualElement[4];
         shipB = new VisualElement[4];
+
+        background = root.Q<VisualElement>("Background");
 
         VisualElement Player1 = selectScreen.Q<VisualElement>("Player1");
         VisualElement Player2 = selectScreen.Q<VisualElement>("Player2");
@@ -49,7 +58,23 @@ public class UIControl : MonoBehaviour
         shipB[2]= readyB[2].Q<VisualElement>("S3");
         shipB[3]= readyB[3].Q<VisualElement>("S4");
 
-        background = root.Q<VisualElement>("Background");
+        playerHUD = new VisualElement[4];
+        playerHUD[0] = inGame.Q<VisualElement>("P1");
+        playerHUD[1] = inGame.Q<VisualElement>("P2");
+        playerHUD[2] = inGame.Q<VisualElement>("P3");
+        playerHUD[3] = inGame.Q<VisualElement>("P4");
+        playerHP = new ProgressBar[4];
+        playerHP[0] = inGame.Q<ProgressBar>("P1HP");
+        playerHP[1] = inGame.Q<ProgressBar>("P2HP");
+        playerHP[2] = inGame.Q<ProgressBar>("P3HP");
+        playerHP[3] = inGame.Q<ProgressBar>("P4HP");
+        playerNames = new Label[4];
+        playerNames[0] = inGame.Q<Label>("P1N");
+        playerNames[1] = inGame.Q<Label>("P2N");
+        playerNames[2] = inGame.Q<Label>("P3N");
+        playerNames[3] = inGame.Q<Label>("P4N");
+
+        baseHP = inGame.Q<ProgressBar>("BaseHP");
 
         Button startButton = startScreen.Q<Button>("Start");
         Button settingsButton = startScreen.Q<Button>("Settings");
@@ -98,10 +123,27 @@ public class UIControl : MonoBehaviour
         });
     }
 
+    void Update(){
+        if(gameStarted){
+            for(int i=0; i < playersJoined; i++){
+                playerHP[i].value = gameManager.GetPlayerHealth(i);
+            }
+            baseHP.value = gameManager.GetBaseHealth();
+        }
+    }
+
     void startGame()
     {
         selectScreen.style.display = DisplayStyle.None;
         background.style.display = DisplayStyle.None;
+        inGame.style.display = DisplayStyle.Flex;
+        for(int i=0; i < 4; i++){
+            if(i < playersJoined){
+                playerHUD[i].style.display = DisplayStyle.Flex;
+            } else {
+                playerHUD[i].style.display = DisplayStyle.None;
+            }
+        }
         gameManager.StartGame();
     }
 

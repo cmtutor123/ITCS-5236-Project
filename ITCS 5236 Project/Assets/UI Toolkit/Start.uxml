@@ -2,9 +2,9 @@
     <Style src="project://database/Assets/UI%20Toolkit/Select.uss?fileID=7433441132597879392&amp;guid=f329f33fc4b0a4596a56c0b0cfdf16aa&amp;type=3#Select" />
     <Style src="project://database/Assets/UI%20Toolkit/Start.uss?fileID=7433441132597879392&amp;guid=aefeb202aa23d4735803a84bb6f259a6&amp;type=3#Start" />
     <Style src="project://database/Assets/UI%20Toolkit/PlayerUI.uss?fileID=7433441132597879392&amp;guid=0f8794efdeed0024788a25bb0694d915&amp;type=3#PlayerUI" />
-    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); -unity-background-image-tint-color: rgb(32, 32, 32); width: 100%; height: 100%; max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%;">
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); -unity-background-image-tint-color: rgb(32, 32, 32); width: 100%; height: 100%; max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%; display: flex;">
         <ui:VisualElement name="StartMenu" style="flex-grow: 1; justify-content: center; align-items: stretch; align-self: auto; display: flex; width: 100%; height: 100%; max-width: initial; max-height: initial; min-width: initial; min-height: initial;">
-            <ui:Label tabindex="-1" text="Title of Game" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="-unity-font-style: bold; -unity-text-align: upper-center; font-size: 24px; -unity-text-outline-width: 10px; -unity-text-outline-color: rgba(241, 241, 241, 0.33); -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&amp;guid=e4e32a6f8f3de46bcb86acc3c6fbb648&amp;type=3#Ubuntu-Bold&apos;);" />
+            <ui:Label tabindex="-1" text="Untitled Space Game" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="-unity-font-style: bold; -unity-text-align: upper-center; font-size: 24px; -unity-text-outline-width: 10px; -unity-text-outline-color: rgba(241, 241, 241, 0.33); -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&amp;guid=e4e32a6f8f3de46bcb86acc3c6fbb648&amp;type=3#Ubuntu-Bold&apos;);" />
             <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Start" class="button" style="display: flex;" />
             <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="button" style="display: flex;" />
             <ui:Button text="Credits" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Credits" class="button" style="display: flex;" />
@@ -42,6 +42,36 @@
                     <ui:VisualElement name="S4" class="ship" style="flex-grow: 1;" />
                 </ui:VisualElement>
             </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="InGame" style="flex-grow: 0; display: none; width: 100%; height: 100%; position: absolute; flex-shrink: 0;">
+        <ui:Label tabindex="-1" text="Wave ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" class="Title" style="-unity-text-align: upper-center; align-self: auto; justify-content: flex-start; position: absolute; left: 50%; top: auto; right: 50%;">
+            <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" class="resource" style="position: relative; left: auto; right: auto; bottom: auto; top: 25%;" />
+        </ui:Label>
+        <ui:VisualElement name="P1" style="flex-direction: row; min-width: 25%; max-width: 25%; flex-grow: 0; display: flex; position: absolute; left: 0; top: 0; flex-shrink: 0;">
+            <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1N" class="Name" style="-unity-text-align: upper-left;" />
+            <ui:ProgressBar value="22" name="P1HP" class="bars" />
+            <ui:Label tabindex="-1" text="P1R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1R" class="resource" style="left: auto; position: absolute; top: 25%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="P2" style="flex-direction: row-reverse; min-width: 25%; flex-grow: 0; max-width: 25%; position: absolute; right: 0; top: 0; flex-shrink: 0;">
+            <ui:Label tabindex="-1" text="Player 2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2N" class="Name" style="-unity-text-align: upper-right; text-overflow: clip;" />
+            <ui:ProgressBar value="22" name="P2HP" class="bars" />
+            <ui:Label tabindex="-1" text="P2R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2R" class="resource" style="position: absolute; top: 25%;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="P3" style="flex-direction: row; flex-grow: 0; max-width: 25%; position: absolute; left: 0; bottom: 0; flex-shrink: 0; min-width: 25%;">
+            <ui:Label tabindex="-1" text="Player 3" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3N" class="Name" />
+            <ui:ProgressBar value="22" name="P3HP" class="bars" />
+            <ui:Label tabindex="-1" text="P3R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3R" class="resource" style="bottom: 25%; position: absolute;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="P4" style="flex-direction: row-reverse; min-width: 25%; flex-shrink: 0; position: absolute; right: 0; bottom: 0;">
+            <ui:Label tabindex="-1" text="Player 4" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4N" class="Name" />
+            <ui:ProgressBar value="22" name="P4HP" class="bars" />
+            <ui:Label tabindex="-1" text="P4R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4R" class="resource" style="bottom: 25%; position: absolute;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 0; position: absolute; left: 50%; flex-shrink: 0; width: 25%; display: none;" />
+        <ui:VisualElement name="BaseBox" style="flex-grow: 0; position: absolute; bottom: 0; left: auto; flex-shrink: 0; width: 25%; right: auto; align-self: center; flex-direction: column-reverse;">
+            <ui:Label tabindex="-1" text="Base Health" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BaseText" class="Title" style="-unity-text-align: upper-center;" />
+            <ui:ProgressBar value="22" high-value="2000" name="BaseHP" style="height: 14px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

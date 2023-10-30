@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SpawnPlayerBase();
+        uiControl.gameStarted = true;
         StartCoroutine(StartRound());
     }
 
@@ -243,12 +244,22 @@ public class GameManager : MonoBehaviour
         if (alivePlayers.Count == 0) return null;
         return alivePlayers[Random.Range(0, alivePlayers.Count)];
     }
+    public Transform GetDropTarget(){
+        if(drops.Count > 0) {
+            return drops[Random.Range(0, drops.Count)].transform;
+        } else {
+            return null;
+        }
+    }
 
-    public static float GetPlayerHealth(int playerIndex)
+    public float GetPlayerHealth(int playerIndex)
     {
         PlayerManager currentPlayer = playerManagers[playerIndex];
         if (currentPlayer == null) return 0;
         else if (!currentPlayer.HasPlayerObject()) return 0;
         else return currentPlayer.GetPlayerShip().GetComponent<Health>().GetHealth();
+    }
+    public float GetBaseHealth(){
+        return playerBaseManager.GetComponent<Health>().GetHealth();
     }
 }

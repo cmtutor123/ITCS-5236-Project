@@ -1,36 +1,38 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/PlayerUI.uss?fileID=7433441132597879392&amp;guid=0f8794efdeed0024788a25bb0694d915&amp;type=3#PlayerUI" />
-    <ui:VisualElement name="TopBar" style="flex-direction: row; justify-content: space-between;">
-        <ui:VisualElement name="P1" style="flex-direction: row;">
-            <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1N" class="Name" style="-unity-text-align: upper-left;" />
-            <ui:ProgressBar value="22" title="my-progress" name="P1HP" />
+    <ui:VisualElement name="InGame" style="flex-grow: 1;">
+        <ui:VisualElement name="TopBar" style="flex-direction: row; justify-content: space-between;">
+            <ui:VisualElement name="P1" style="flex-direction: row;">
+                <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1N" class="Name" style="-unity-text-align: upper-left;" />
+                <ui:ProgressBar value="22" title="my-progress" name="P1HP" />
+            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="Wave ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" class="Title" style="-unity-text-align: upper-center; align-self: auto; justify-content: flex-start;" />
+            <ui:VisualElement name="P2" style="flex-direction: row-reverse;">
+                <ui:Label tabindex="-1" text="Player 2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2N" class="Name" style="-unity-text-align: upper-right; text-overflow: clip;" />
+                <ui:ProgressBar value="22" title="my-progress" name="P2HP" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:Label tabindex="-1" text="Wave ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" class="Title" style="-unity-text-align: upper-center; align-self: auto; justify-content: flex-start;" />
-        <ui:VisualElement name="P2" style="flex-direction: row-reverse;">
-            <ui:Label tabindex="-1" text="Player 2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2N" class="Name" style="-unity-text-align: upper-right; text-overflow: clip;" />
-            <ui:ProgressBar value="22" title="my-progress" name="P2HP" />
+        <ui:VisualElement name="TopResource" style="flex-direction: row; justify-content: space-between; top: -3%;">
+            <ui:Label tabindex="-1" text="P1R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1R" />
+            <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" />
+            <ui:Label tabindex="-1" text="P2R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2R" />
         </ui:VisualElement>
-    </ui:VisualElement>
-    <ui:VisualElement name="TopResource" style="flex-direction: row; justify-content: space-between; top: -3%;">
-        <ui:Label tabindex="-1" text="P1R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1R" />
-        <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" />
-        <ui:Label tabindex="-1" text="P2R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2R" />
-    </ui:VisualElement>
-    <ui:VisualElement style="flex-grow: 1;" />
-    <ui:VisualElement name="BottomResource" style="flex-direction: row; justify-content: space-between; bottom: -3%;">
-        <ui:Label tabindex="-1" text="P3R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3R" />
-        <ui:ProgressBar value="22" title="my-progress" name="BaseHP" />
-        <ui:Label tabindex="-1" text="P4R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4R" />
-    </ui:VisualElement>
-    <ui:VisualElement name="BottomBar" style="flex-direction: row; align-items: auto; justify-content: space-between;">
-        <ui:VisualElement name="P3" style="flex-direction: row;">
-            <ui:Label tabindex="-1" text="Player 3" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3N" class="Name" />
-            <ui:ProgressBar value="22" title="my-progress" name="P3HP" />
+        <ui:VisualElement style="flex-grow: 1;" />
+        <ui:VisualElement name="BottomResource" style="flex-direction: row; justify-content: space-between; bottom: -3%;">
+            <ui:Label tabindex="-1" text="P3R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3R" />
+            <ui:ProgressBar value="22" title="my-progress" name="BaseHP" />
+            <ui:Label tabindex="-1" text="P4R x##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4R" />
         </ui:VisualElement>
-        <ui:Label tabindex="-1" text="Base Health" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BaseText" class="Title" />
-        <ui:VisualElement name="P4" style="flex-direction: row-reverse;">
-            <ui:Label tabindex="-1" text="Player 4" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4N" class="Name" />
-            <ui:ProgressBar value="22" title="my-progress" name="P4HP" />
+        <ui:VisualElement name="BottomBar" style="flex-direction: row; align-items: auto; justify-content: space-between;">
+            <ui:VisualElement name="P3" style="flex-direction: row;">
+                <ui:Label tabindex="-1" text="Player 3" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3N" class="Name" />
+                <ui:ProgressBar value="22" title="my-progress" name="P3HP" />
+            </ui:VisualElement>
+            <ui:Label tabindex="-1" text="Base Health" parse-escape-sequences="true" display-tooltip-when-elided="true" name="BaseText" class="Title" />
+            <ui:VisualElement name="P4" style="flex-direction: row-reverse;">
+                <ui:Label tabindex="-1" text="Player 4" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4N" class="Name" />
+                <ui:ProgressBar value="22" title="my-progress" name="P4HP" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
