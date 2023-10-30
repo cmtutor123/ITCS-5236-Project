@@ -33,6 +33,7 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D rb;
 
     private GameManager gameManager;
+    private GameObject jetfire;
 
     
     void Start()
@@ -47,6 +48,7 @@ public class EnemyMovement : MonoBehaviour
         mainCamera = Camera.main;
         m_renderer = GetComponent<MeshRenderer>();
         m_collider = GetComponent<BoxCollider2D>();
+        jetfire = transform.GetChild(0).gameObject;
 
         // get all plains
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
@@ -81,6 +83,7 @@ public class EnemyMovement : MonoBehaviour
                 
 
                 // turn towards target
+                jetfire.SetActive(true);
                 Quaternion aimTowards = Quaternion.FromToRotation(Vector3.up, towardsTarget);
                 myTransform.rotation =  Quaternion.Lerp(myTransform.rotation, aimTowards, rotationSpeed * Time.deltaTime);
 
@@ -92,6 +95,7 @@ public class EnemyMovement : MonoBehaviour
             // if enemy has reached destination then stop moving and start shooting
             else {
                 rb.velocity = Vector2.zero;
+                jetfire.SetActive(false);
 
                 if(canShoot) {
                     //Debug.Log("Shooting");
