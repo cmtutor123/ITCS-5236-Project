@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
 
     public static float BOUNDRY_X_MIN = -15, BOUNDRY_X_MAX = 15, BOUNDRY_Y_MIN = -8.75f, BOUNDRY_Y_MAX = 8.75f;
 
-    private PlayerManager[] playerManagers;
-    private int playerCount = 0;
+    private static PlayerManager[] playerManagers;
+    private static int playerCount = 0;
     private List<GameObject> enemies, drops;
 
     private int currentWave;
@@ -242,5 +242,13 @@ public class GameManager : MonoBehaviour
         }
         if (alivePlayers.Count == 0) return null;
         return alivePlayers[Random.Range(0, alivePlayers.Count)];
+    }
+
+    public static float GetPlayerHealth(int playerIndex)
+    {
+        PlayerManager currentPlayer = playerManagers[playerIndex];
+        if (currentPlayer == null) return 0;
+        else if (!currentPlayer.HasPlayerObject()) return 0;
+        else return currentPlayer.GetPlayerShip().GetComponent<Health>().GetHealth();
     }
 }
