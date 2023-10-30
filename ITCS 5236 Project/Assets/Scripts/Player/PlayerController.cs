@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public float shootDelay;
     [SerializeField] private Bullet bullet;
+    private GameObject jetfire;
     public float bulletDamage;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private int tetherAmount;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
         initialSpeed = moveSpeed;
         maxTethers = tetherAmount;
         rb = GetComponent<Rigidbody2D>();
+        jetfire = transform.GetChild(0).GetChild(1).GetChild(0).gameObject;
     }
     void Update(){
         if(isShooting)
@@ -73,8 +75,10 @@ public class PlayerController : MonoBehaviour
         }
         if (canMove)
         {
+            jetfire.SetActive(true);
             rb.AddForce(transform.up * moveSpeed);
         } else {
+            jetfire.SetActive(false);
             rb.velocity = rb.velocity * 0.9f;
         }
     }
