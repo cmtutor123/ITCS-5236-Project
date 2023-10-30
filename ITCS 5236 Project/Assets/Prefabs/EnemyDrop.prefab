@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 8586627782194996169}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.62, y: 2.71, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -279,12 +279,12 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 8586627782194996169}
   dropPrefab: {fileID: 5532215529028779746, guid: fc2794f42d23afa4a8b2e31a490bf6bb, type: 3}
   maxSpeed: 3
-  rotationSpeed: 0
+  rotationSpeed: 2
   radiusOfSat: 2
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
   bulletDamage: 20
   bulletSpeed: 5
-  impactDamage: 0
+  impactDamage: 25
   shootDelay: 1
 --- !u!114 &8648298871676590603
 MonoBehaviour:
