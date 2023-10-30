@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         uiControl = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<UIControl>();
     }
 
+
     private void InitializeRegisters()
     {
         playerManagers = new PlayerManager[MAX_PLAYERS];
@@ -59,6 +60,10 @@ public class GameManager : MonoBehaviour
             playerManagers[i + 1] = null;
         }
         playerCount--;
+
+        if(playerCount == 0) {
+            EndGame();
+        }
     }
 
     public void RegisterEnemy(GameObject enemyObject)
