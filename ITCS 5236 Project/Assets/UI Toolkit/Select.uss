@@ -7,6 +7,7 @@
     margin-right: auto;
     margin-bottom: auto;
     margin-left: auto;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&guid=e4e32a6f8f3de46bcb86acc3c6fbb648&type=3#Ubuntu-Bold');
 }
 
 .label {
@@ -26,6 +27,8 @@
     max-height: none;
     height: 10%;
     width: 100%;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&guid=e4e32a6f8f3de46bcb86acc3c6fbb648&type=3#Ubuntu-Bold');
+    -unity-font-definition: initial;
 }
 
 .ship {
@@ -35,4 +38,5 @@
     background-image: url('project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&guid=bc044ac37a7194e09973270ece75edd3&type=3#Square');
     margin-top: auto;
     min-height: auto;
+    -unity-background-scale-mode: scale-to-fit;
 }

@@ -2,6 +2,8 @@
     font-size: 24px;
     -unity-text-outline-width: 4px;
     -unity-text-outline-color: rgba(255, 255, 255, 0.31);
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&guid=e4e32a6f8f3de46bcb86acc3c6fbb648&type=3#Ubuntu-Bold');
+    -unity-font-definition: initial;
 }
 
 .button {
@@ -9,4 +11,6 @@
     margin-left: auto;
     margin-right: auto;
     display: none;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&guid=e4e32a6f8f3de46bcb86acc3c6fbb648&type=3#Ubuntu-Bold');
+    -unity-font-definition: initial;
 }

@@ -108,6 +108,7 @@ public class UIControl : MonoBehaviour
             if (i < playersJoined)
             {
                 selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.Flex;
+                shipB[i].style.backgroundImage = new StyleBackground(Resources.Load<Sprite>("Ship1"));
             }
             else
             {
@@ -161,7 +162,7 @@ public class UIControl : MonoBehaviour
     public void changeShip(int playerId, int shipId)
     {
         // Need assets
-        shipB[playerId].style.backgroundImage = null;
+        shipB[playerId].style.backgroundImage = new StyleBackground(Resources.Load<Sprite>("Ship" + shipId));
     }
 
     public void EndGame()

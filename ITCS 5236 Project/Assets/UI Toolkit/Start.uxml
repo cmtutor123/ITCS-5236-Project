@@ -4,7 +4,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/PlayerUI.uss?fileID=7433441132597879392&amp;guid=0f8794efdeed0024788a25bb0694d915&amp;type=3#PlayerUI" />
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); -unity-background-image-tint-color: rgb(32, 32, 32); width: 100%; height: 100%; max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%;">
         <ui:VisualElement name="StartMenu" style="flex-grow: 1; justify-content: center; align-items: stretch; align-self: auto; display: flex; width: 100%; height: 100%; max-width: initial; max-height: initial; min-width: initial; min-height: initial;">
-            <ui:Label tabindex="-1" text="Title of Game" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold; -unity-text-align: upper-center; font-size: 24px; -unity-text-outline-width: 10px; -unity-text-outline-color: rgba(241, 241, 241, 0.33);" />
+            <ui:Label tabindex="-1" text="Title of Game" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="-unity-font-style: bold; -unity-text-align: upper-center; font-size: 24px; -unity-text-outline-width: 10px; -unity-text-outline-color: rgba(241, 241, 241, 0.33); -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&amp;guid=e4e32a6f8f3de46bcb86acc3c6fbb648&amp;type=3#Ubuntu-Bold&apos;);" />
             <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Start" class="button" style="display: flex;" />
             <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="button" style="display: flex;" />
             <ui:Button text="Credits" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Credits" class="button" style="display: flex;" />
@@ -14,12 +14,14 @@
             <ui:Label tabindex="-1" text="Created by:&#10;&#10;Haley S.&#10;Caleb T.&#10;Makani W." parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="width: 100%; -unity-text-align: upper-center;" />
             <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Back" class="button" style="display: flex;" />
         </ui:VisualElement>
-        <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; display: none;" />
+        <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; display: none;">
+            <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Back" class="button" style="display: flex;" />
+        </ui:VisualElement>
         <ui:VisualElement name="SelectMenu" style="flex-grow: 0; flex-direction: row; display: none; position: relative; width: 100%; height: 100%; max-width: initial; min-width: 100%; max-height: initial; min-height: 100%; flex-shrink: 0;">
             <ui:VisualElement name="Player1" class="select" style="flex-grow: 1; display: flex;">
                 <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" class="label" />
                 <ui:VisualElement name="B1" style="flex-grow: 1;">
-                    <ui:VisualElement name="S1" class="ship" style="flex-grow: 1;" />
+                    <ui:VisualElement name="S1" class="ship" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); -unity-background-scale-mode: scale-to-fit;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Player2" class="select" style="flex-grow: 1; display: flex;">

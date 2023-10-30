@@ -128,7 +128,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Change Button Pressed");
+            Debug.Log("Back Button Pressed");
             if (onPlayerSelect && isReady) UnreadyPlayer();
             else if (onPlayerSelect && !isReady) UnjoinPlayer();
         }
@@ -138,8 +138,8 @@ public class PlayerManager : MonoBehaviour
     {
 		if (context.performed)
         {
-            Debug.Log("Back Button Pressed");
-            if (onPlayerSelect && !isReady) ChangeShip(context.ReadValue<float>());
+            Debug.Log("Change Button Pressed");
+            if (onPlayerSelect && !isReady) ChangeShip(context.ReadValue<Vector2>().x);
         }
     }
 
