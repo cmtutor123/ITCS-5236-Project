@@ -73,12 +73,12 @@ public class GameManager : MonoBehaviour
 
     public void RegisterDrop(GameObject dropObject)
     {
-        enemies.Add(dropObject);
+        drops.Add(dropObject);
     }
 
     public void UnregisterDrop(GameObject dropObject)
     {
-        enemies.Remove(dropObject);
+        drops.Remove(dropObject);
     }
 
     public List<PlayerManager> GetPlayers()
@@ -199,6 +199,8 @@ public class GameManager : MonoBehaviour
                 break;
 
             case "EnemyDrop":
+
+                Debug.Log(drops.Count);
                 if(drops.Count > 0) {
                     Debug.Log("EnemyDrop created");
                     targetTransform = drops[Random.Range(0, drops.Count)].transform;
