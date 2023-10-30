@@ -21,13 +21,20 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float radiusOfSat;
 
-    // for shooting
+    // for shooting (Player and Base Enemy)
     [SerializeField] private Bullet bullet;
     [SerializeField] float bulletDamage;
     [SerializeField] float bulletSpeed;
     [SerializeField] float impactDamage;
     [SerializeField] float shootDelay;
     private bool canShoot;
+
+
+    // for tethering (DropEnemy)
+    private int tetherAmount;
+    private int maxTethers;
+    private GameObject[] tethers;
+    private GameObject tether;
 
 
     private Rigidbody2D rb;
@@ -53,9 +60,13 @@ public class EnemyMovement : MonoBehaviour
         // get all plains
         cameraFrustum = GeometryUtility.CalculateFrustumPlanes(mainCamera);
 
-
         // allow enemy to shoot
         canShoot = true;
+
+        // set up values for tethering
+        tetherAmount = 3;
+        maxTethers = tetherAmount;
+        tethers = new GameObject[maxTethers];
 
     }
 
@@ -97,7 +108,11 @@ public class EnemyMovement : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 jetfire.SetActive(false);
 
-                if(canShoot) {
+                // tether or shoot depending on enemy type
+                if(gameObject.tag == "EnemyDrop") {
+                    TetherOnPerformed();
+                }
+                else if(canShoot) {
                     //Debug.Log("Shooting");
                     Shoot();
                     StartCoroutine(ShootDelay());
@@ -109,7 +124,7 @@ public class EnemyMovement : MonoBehaviour
         else {
             Destroy(this.gameObject);
             Debug.Log("Enemy outside of bounds");
-             Instantiate(enemyToSpawn, myTransform.position, Quaternion.identity);
+            Instantiate(enemyToSpawn, myTransform.position, Quaternion.identity);
         }
     }
 
@@ -118,8 +133,6 @@ public class EnemyMovement : MonoBehaviour
         return transform.position.x >= GameManager.BOUNDRY_X_MIN && transform.position.x <= GameManager.BOUNDRY_X_MAX && transform.position.y >= GameManager.BOUNDRY_Y_MIN && transform.position.y <= GameManager.BOUNDRY_Y_MAX;
         //return GeometryUtility.TestPlanesAABB(cameraFrustum, m_collider.bounds);
     }
-
-
 
 
     // Shoot a bullet in the direction enemy is facing
@@ -166,5 +179,49 @@ public class EnemyMovement : MonoBehaviour
         // create a drop at place of death
         Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
         Destroy(this.gameObject);
+    }
+
+    public void TetherOnPerformed()
+    {
+        // check if there you have teathers left and grab drop object
+        if(tetherAmount > 0)
+        {
+            foreach(RaycastHit2D hit in Physics2D.CircleCastAll(gameObject.transform.position, 5f, Vector2.zero))
+            {
+                if(hit.collider.gameObject.tag == "Drop" && tetherAmount > 0 && !hit.collider.gameObject.GetComponent<Tether>().tethered)
+                {
+                    tethers.SetValue(hit.collider.gameObject, tetherAmount-1);
+                    tether = hit.collider.gameObject;
+                    tether.GetComponent<Tether>().tethered = true;
+                    tether.GetComponent<Tether>().tetheredTo = gameObject;
+                    tetherAmount--;
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("No Tethers Left");
+        }
+
+        // set destination to leave screen (destroys self and drops)
+        float enemyXPosition = gameObject.transform.position.x;
+        float enemyYPosition = gameObject.transform.position.y;
+        float tempX = enemyXPosition;
+        float tempY = enemyYPosition;
+        if(enemyXPosition - Mathf.Abs(GameManager.BOUNDRY_X_MIN) < enemyXPosition - Mathf.Abs(GameManager.BOUNDRY_X_MAX)) {
+            tempX = GameManager.BOUNDRY_X_MIN - 10;
+        }
+        else {
+            tempX = GameManager.BOUNDRY_X_MAX + 10;
+        }
+
+        if(enemyYPosition - Mathf.Abs(GameManager.BOUNDRY_Y_MIN) < enemyYPosition - Mathf.Abs(GameManager.BOUNDRY_Y_MAX)) {
+            tempY = GameManager.BOUNDRY_Y_MIN - 10;
+        }
+        else {
+            tempY = GameManager.BOUNDRY_Y_MIN - 10;
+        }
+
+        targetTransform.position = new Vector3(tempX, tempY, 0.0f);
     }
 }

@@ -184,25 +184,33 @@ public class GameManager : MonoBehaviour
                 spawnLocation = new Vector2(BOUNDRY_X_MAX, yPos);
             }
         }
-        GameObject newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
+
+        GameObject newEnemy;
+       /* if(drops.Count <= 0) {
+            newEnemy = Instantiate(prefabEnemies[Random.Range(0, 1)], spawnLocation, Quaternion.identity);
+        } else {
+            newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
+        } */
+
+        newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
 
         Debug.Log(newEnemy.tag);
         switch(newEnemy.tag) {
             case "EnemyPlayer":
-                Debug.Log("EnemyPlayer created");
+                // Debug.Log("EnemyPlayer created");
                 targetTransform = null;
                 break;
 
             case "EnemyBase":
-                Debug.Log("EnemyBase created");
+                // Debug.Log("EnemyBase created");
                 targetTransform = playerBaseManager.transform; 
                 break;
 
             case "EnemyDrop":
 
-                Debug.Log(drops.Count);
+                // Debug.Log(drops.Count);
                 if(drops.Count > 0) {
-                    Debug.Log("EnemyDrop created");
+                    // Debug.Log("EnemyDrop created");
                     targetTransform = drops[Random.Range(0, drops.Count)].transform;
                 }
                 else {

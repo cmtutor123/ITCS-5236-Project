@@ -303,11 +303,11 @@ PrefabInstance:
     - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: prefabEnemies.Array.data[1]
       value: 
-      objectReference: {fileID: 8586627782194996169, guid: 68b4aa8e771f9a642ba0758a5ffbf25d, type: 3}
+      objectReference: {fileID: 8586627782194996169, guid: 8a626d0176f2af642a295dc523f71afd, type: 3}
     - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: prefabEnemies.Array.data[2]
       value: 
-      objectReference: {fileID: 8586627782194996169, guid: 8a626d0176f2af642a295dc523f71afd, type: 3}
+      objectReference: {fileID: 8586627782194996169, guid: 68b4aa8e771f9a642ba0758a5ffbf25d, type: 3}
     - target: {fileID: 5669529994705670808, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
