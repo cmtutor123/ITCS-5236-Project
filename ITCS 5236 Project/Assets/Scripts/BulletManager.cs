@@ -11,9 +11,16 @@ public class Bullet : MonoBehaviour
     public bool playerBullet;
 
     public GameObject source;
+    private SpriteRenderer sprite;
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         Destroy(gameObject, aliveTime);
+        if(playerBullet)
+            sprite.color = Color.cyan;
+        else
+            sprite.color = Color.red;
+
     }
 
     // Update is called once per frame
