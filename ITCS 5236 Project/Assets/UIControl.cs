@@ -222,6 +222,7 @@ public class UIControl : MonoBehaviour
     {
         // Need assets
         background.style.display = DisplayStyle.Flex;
-        startScreen.style.display = DisplayStyle.Flex;
+        inGame.style.display = DisplayStyle.None;
+        endGame.style.display = DisplayStyle.Flex;
     }
 }

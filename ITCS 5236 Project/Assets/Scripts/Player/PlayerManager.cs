@@ -151,9 +151,9 @@ public class PlayerManager : MonoBehaviour
 
     public void UnjoinPlayer()
     {
+        uiControl.unjoinPlayer(playerId);
         gameManager.UnregisterPlayer(this);
         Destroy(gameObject);
-		uiControl.unjoinPlayer(playerId);
     }
 
     public void UnreadyPlayer()

@@ -76,8 +76,7 @@ public class EnemyMovement : MonoBehaviour
     // Move enemy to destination/create & destroy when moving off screen
     void Update()
     {        
-        if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null)
-            targetTransform = null;
+        
         if (targetTransform == null)
         {
             GameObject playerObject = null;
@@ -88,6 +87,8 @@ public class EnemyMovement : MonoBehaviour
             if (playerObject != null) targetTransform = playerObject.transform;
             if (targetTransform == null) return;
         }
+        if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null)
+            targetTransform = null;
         // Check if enemy is inside of bounds (screen)
         // If inside then move to object (using kinematic arrive)
         var bounds = m_collider.bounds;
@@ -199,11 +200,12 @@ public class EnemyMovement : MonoBehaviour
         // create a drop at place of death
         Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
         foreach(GameObject tether in tethers){
-            if(tether != null)
+            if(tether != null){
                 tether.GetComponent<Tether>().tethered = false;
                 tether.GetComponent<Tether>().tetheredTo = null;
+            }
         }
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     public void TetherOnPerformed()
