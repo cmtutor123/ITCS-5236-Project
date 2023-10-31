@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private int currentWave;
     private UIControl uiControl;
-    private bool inRound;
+    public static bool inRound;
 
     [SerializeField] private GameObject prefabPlayerBase;
     [SerializeField] private List<GameObject> prefabEnemies;

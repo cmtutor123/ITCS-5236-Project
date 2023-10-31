@@ -22,6 +22,8 @@ public class PlayerManager : MonoBehaviour
 
     private UIControl uiControl;
 
+    private float respawnTime = 3f;
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -58,6 +60,7 @@ public class PlayerManager : MonoBehaviour
     {
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
+        playerShipController.playerManager = this;
         hasPlayerObject = true;
     }
 
@@ -174,5 +177,19 @@ public class PlayerManager : MonoBehaviour
     {
         gameManager.UnregisterPlayer(this);
         Destroy(gameObject);
+    }
+
+    public void RespawnPlayer()
+    {
+        StartCoroutine(RespawnShip());
+    }
+
+    public IEnumerator RespawnShip()
+    {
+        yield return new WaitForSeconds(respawnTime);
+        if (GameManager.inRound)
+        {
+            SpawnPlayer();
+        }
     }
 }

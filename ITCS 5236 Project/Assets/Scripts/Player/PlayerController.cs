@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
 
     private bool canMove = false;
     private bool isShooting = false;
-    
 
+    public PlayerManager playerManager;
 
     private void Awake()
     {
@@ -195,5 +195,11 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(shootDelay);
         canShoot = true;
+    }
+
+    public void ShipDestroyed()
+    {
+        if (playerManager != null) playerManager.RespawnPlayer();
+        Destroy(gameObject);
     }
 }

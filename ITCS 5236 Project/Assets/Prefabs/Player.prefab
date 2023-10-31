@@ -212,9 +212,9 @@ MonoBehaviour:
   deathEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4551078448849309539}
-        m_TargetAssemblyTypeName: DeathManager, Assembly-CSharp
-        m_MethodName: TriggerDeath
+      - m_Target: {fileID: 117979452467282095}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: ShipDestroyed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
