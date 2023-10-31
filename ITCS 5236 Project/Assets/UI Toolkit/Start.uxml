@@ -43,6 +43,10 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="Endgame" style="flex-grow: 1; justify-content: center; align-self: auto; align-items: center; display: none; width: 100%; height: 100%; max-width: initial; max-height: initial;">
+            <ui:Label tabindex="-1" text="You lose!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="width: 100%; -unity-text-align: upper-center;" />
+            <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Restart" class="button" style="display: flex;" />
+        </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="InGame" style="flex-grow: 0; display: none; width: 100%; height: 100%; position: absolute; flex-shrink: 0;">
         <ui:Label tabindex="-1" text="Wave ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" class="Title" style="-unity-text-align: upper-center; align-self: auto; justify-content: flex-start; position: absolute; left: 50%; top: auto; right: 50%;">

@@ -76,7 +76,8 @@ public class EnemyMovement : MonoBehaviour
     // Move enemy to destination/create & destroy when moving off screen
     void Update()
     {        
-
+        if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null)
+            targetTransform = null;
         if (targetTransform == null)
         {
             GameObject playerObject = null;
@@ -197,6 +198,11 @@ public class EnemyMovement : MonoBehaviour
     public void onDeath(){
         // create a drop at place of death
         Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
+        foreach(GameObject tether in tethers){
+            if(tether != null)
+                tether.GetComponent<Tether>().tethered = false;
+                tether.GetComponent<Tether>().tetheredTo = null;
+        }
         Destroy(this.gameObject);
     }
 
@@ -215,7 +221,6 @@ public class EnemyMovement : MonoBehaviour
                     tether.GetComponent<Tether>().tetheredTo = gameObject;
                     tetherAmount--;
                     targetTransform = null;
-                    gameManager.UnregisterDrop(tether);
                 }
             }
         }

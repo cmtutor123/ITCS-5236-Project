@@ -16,6 +16,7 @@ public class UIControl : MonoBehaviour
     private VisualElement creditsScreen;
     private VisualElement background;
     private VisualElement inGame;
+    private VisualElement endGame;
     private VisualElement[] readyB;
     private VisualElement[] shipB;
     private ProgressBar[] playerHP;
@@ -39,6 +40,8 @@ public class UIControl : MonoBehaviour
         creditsScreen = root.Q<VisualElement>("CreditsMenu");
         selectScreen = root.Q<VisualElement>("SelectMenu");
         inGame = root.Q<VisualElement>("InGame");
+        endGame = root.Q<VisualElement>("Endgame");
+
 
         readyB = new VisualElement[4];
         shipB = new VisualElement[4];
@@ -82,6 +85,7 @@ public class UIControl : MonoBehaviour
         Button quitButton = startScreen.Q<Button>("Exit");
         Button backButton = creditsScreen.Q<Button>("Back");
         Button back2Button = settingsScreen.Q<Button>("Back");
+        Button restartButton = endGame.Q<Button>("Restart");
 
         startButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
@@ -120,6 +124,9 @@ public class UIControl : MonoBehaviour
         });
         quitButton.RegisterCallback<ClickEvent>(ev => {
             Application.Quit();
+        });
+        restartButton.RegisterCallback<ClickEvent>(ev => {
+            gameManager.RestartGame();
         });
     }
 
