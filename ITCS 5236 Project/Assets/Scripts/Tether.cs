@@ -5,13 +5,16 @@ using UnityEngine;
 public class Tether : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool tethered;
+    public bool tethered = false;
     private Rigidbody2D rb;
     public GameObject tetheredTo;
     public float maxMoveSpeed;
     public float tetherSpeed;
+    private GameManager gameManager;
+    bool _temp = false;
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         rb = GetComponent<Rigidbody2D>();
         LineRenderer lr = gameObject.AddComponent<LineRenderer>();
         lr.material = new Material(Shader.Find("Sprites/Default"));
@@ -27,7 +30,11 @@ public class Tether : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_temp != tethered){
+            TetherActivate();
+        }
         LineRenderer lr = GetComponent<LineRenderer>();
+        _temp = tethered;
         if(tethered){
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
@@ -44,5 +51,12 @@ public class Tether : MonoBehaviour
             lr.positionCount = 0;
             rb.velocity = rb.velocity * 0.97f;
         }
+    }
+
+    void TetherActivate(){
+        if(tethered)
+            gameManager.UnregisterDrop(gameObject);
+        else
+            gameManager.RegisterDrop(gameObject);
     }
 }
