@@ -124,11 +124,11 @@ public class EnemyMovement : MonoBehaviour
                 // tether or shoot depending on enemy type
                 if(gameObject.tag == "EnemyDrop" && targetTransform.tag == "Drop") {
                     TetherOnPerformed();
-                } else if (gameObject.tag == "EnemyDrop" && tetherAmount <= 0 && targetTransform.tag != "Drop") {
+                } else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && targetTransform.tag != "Drop") {
                     Escape();
-                } else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && targetTransform.tag == null){
-                    Escape();
-                }
+                } /**else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && targetTransform.tag == null){
+                    //Escape();
+                }**/
                 else if(canShoot) {
                     //Debug.Log("Shooting");
                     Shoot();
@@ -232,7 +232,7 @@ public class EnemyMovement : MonoBehaviour
         }
     }
     void Escape(){
-
+        Debug.Log("Escaping");
         // set destination to leave screen (destroys self and drops)
         float enemyXPosition = transform.position.x;
         float enemyYPosition = transform.position.y;

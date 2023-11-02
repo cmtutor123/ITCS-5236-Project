@@ -6,12 +6,14 @@ public class Tether : MonoBehaviour
 {
     // Start is called before the first frame update
     public bool tethered = false;
+    public bool tetheredToPlayer = false;
     private Rigidbody2D rb;
     public GameObject tetheredTo;
     public float maxMoveSpeed;
     public float tetherSpeed;
     private GameManager gameManager;
     bool _temp = false;
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -54,9 +56,16 @@ public class Tether : MonoBehaviour
     }
 
     void TetherActivate(){
-        if(tethered)
+        if(tethered){
             gameManager.UnregisterDrop(gameObject);
-        else
+            if(tetheredTo.tag == "Player"){
+                tetheredToPlayer = true;
+            } else {
+                tetheredToPlayer = false;
+            }
+        } else {
             gameManager.RegisterDrop(gameObject);
+            tetheredToPlayer = false;
+        }
     }
 }

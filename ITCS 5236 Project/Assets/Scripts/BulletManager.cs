@@ -64,5 +64,9 @@ public class Bullet : MonoBehaviour
     {
         this.playerBullet = playerBullet;
     }
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
 }
 

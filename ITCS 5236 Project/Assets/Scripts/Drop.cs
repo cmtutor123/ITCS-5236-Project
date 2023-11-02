@@ -5,6 +5,10 @@ using UnityEngine;
 public class Drop : MonoBehaviour
 {
     public int resources;
+    private Tether tether;
+    void Start(){
+        tether = gameObject.GetComponent<Tether>();
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Base")
@@ -16,6 +20,7 @@ public class Drop : MonoBehaviour
 
     void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        if(!tether.tethered)
+            Destroy(gameObject);
     }
 }
