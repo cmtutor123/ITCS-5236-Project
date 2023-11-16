@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myTransform: {fileID: 1727126986}
-  centroidChangeRange: 2
+  centroidChangeRange: 0.02
   clusterNumbers: 3
   centroidPrefab: {fileID: 1944899082319032673, guid: a237825b4a27a5141b1a1b9ce0c52c17, type: 3}
 --- !u!212 &1727126985

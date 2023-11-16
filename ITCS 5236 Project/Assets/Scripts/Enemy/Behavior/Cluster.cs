@@ -56,7 +56,6 @@ public class Cluster : MonoBehaviour
         if(objects.Count == 0) {
             return centroids;
         }
-        List<GameObject> oldCentroids = new List<GameObject>();
         for(int i = 0; i < numberOfClusters; i++) {
             Vector3 randomLocation = new Vector3(Random.value * x_max, Random.value * y_max, 0.0f);
             GameObject newCentroid = Instantiate(centroidPrefab, randomLocation, Quaternion.identity);
@@ -64,6 +63,8 @@ public class Cluster : MonoBehaviour
 
             Debug.Log("New Centroid Created With Coords of X: " + newCentroid.transform.position.x + " Y: " + newCentroid.transform.position.y );
         }
+        List<GameObject> oldCentroids = new List<GameObject>();
+
 
         // CREATE A LIST THAT HOLDS EACH CLUSTER (EACH INDEX CORRELATES TO CENTROIDS)
         List<List<GameObject>> clusters = new List<List<GameObject>>();
@@ -77,6 +78,7 @@ public class Cluster : MonoBehaviour
         while(!clusterDone) {    
             // GET THE DISTANCE BETWEEN EVERY POINT [GAME OBJECT] TO EVERY CENTROID
             // AND STORE POINT TO THE CLOSEST CLUSTER. (CLUSTER N CORRELATES TO CENTROID N).
+            Debug.Log("ITERATION***********");
 
             // clear clusters for itteration
             clusters = ClearClusters(clusters);
@@ -107,10 +109,11 @@ public class Cluster : MonoBehaviour
                     clusters[indexOfBestDistance].Add(point);
                 }
             }
-        
+
 
             // UPDATE CENTROID POSITION BASE ON AVERAGE POSITION OF POINTS IN CLUSTER
             oldCentroids = centroids;
+
             centroids = UpdateCentroids(centroids, clusters);
 
             // determine if we should break
@@ -178,6 +181,10 @@ public class Cluster : MonoBehaviour
             centroids[i].transform.position = newCentroidLocation;
         }
 
+        foreach (GameObject centroid in centroids) {
+            Debug.Log("Centroid update to X: " + centroid.transform.position.x + " Centroid update to Y: " + centroid.transform.position.y); 
+        }
+
         return centroids;
     } 
 
@@ -202,14 +209,24 @@ public class Cluster : MonoBehaviour
     /// <param name="range">Determine the minimal distance needed to stop algorithm</param>
     /// <returns>True if the algorithm can stop and false if the algorithm must run again.</returns>
     private bool CentroidsInRange(List<GameObject> newCentroids, List<GameObject> oldCentroids, float range) {
-        float[] centroidDifference = new float[newCentroids.Count];
+        float[] centroidDifference = new float[clusterNumbers];
 
         // find the distance for every variable and retrun if out of range
-        for(int i = 0; i < newCentroids.Count; i++) {
-            centroidDifference[i] = EuclideanDistance(newCentroids[i].transform.position, oldCentroids[i].transform.position);
+        for(int i = 0; i < clusterNumbers; i++) {
+
+            Debug.Log("new centroid x: " + newCentroids[i].transform.position.x);
+            Debug.Log("old centroid x: " + oldCentroids[i].transform.position.x);
+            //centroidDifference[i] = EuclideanDistance(newCentroids[i].transform.position, oldCentroids[i].transform.position);
+            float test = newCentroids[i].transform.position.x - oldCentroids[i].transform.position.x;
+            
+            Debug.Log("Difference: " + test);
+            
             if(centroidDifference[i] > range) {
+                Debug.Log("Must go through another itteration");
                 return false;
             }
+
+            Debug.Log("In range " + i);
         }
 
         // if all centroids are in range then return true
