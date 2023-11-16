@@ -25,7 +25,7 @@ public class TestEnemyMovement : MonoBehaviour
 
 
         Cluster clusterAlgorith = GetComponent<Cluster>();
-        targetVector = clusterAlgorith.GetDestination();
+        targetVector = clusterAlgorith.GetDestination().transform.position;
     }
 
     // Update is called once per frame

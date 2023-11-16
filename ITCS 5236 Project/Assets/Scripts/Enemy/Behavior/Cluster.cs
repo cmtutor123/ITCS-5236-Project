@@ -7,11 +7,12 @@ public class Cluster : MonoBehaviour
     // private GameManager manager;
     [SerializeField] private Transform myTransform;
     private List<GameObject> drops;
-    private List<Vector3> finalClusters;
-    private Vector3 destination;
+    private List<GameObject> finalClusters;
+    private GameObject destination;
     [SerializeField] float centroidChangeRange;
     [SerializeField] int clusterNumbers;
-    [SerializeField] int carryCapacity;
+   // [SerializeField] int carryCapacity;
+    [SerializeField] GameObject centroidPrefab;
 
     // Start is called before the first frame update
     void Start() {
@@ -20,10 +21,12 @@ public class Cluster : MonoBehaviour
 
         // get a list of all the drops
         drops = new List<GameObject>(GameObject.FindGameObjectsWithTag("Drop"));
-        Debug.Log(drops);
+        foreach (GameObject drop in drops) {
+            Debug.Log("*******Drop**********");
+        }
 
         // run clustering algorithm to find where the clusters are on the screen
-       // finalClusters = ClusterBehavior(drops, clusterNumbers);
+        finalClusters = ClusterBehavior(drops, clusterNumbers);
 
         // get destination to move to
         /*if(finalClusters.Count == 0) {
@@ -40,22 +43,26 @@ public class Cluster : MonoBehaviour
     /// <param name="objects">Objects that you want to group (i.e. drop objects)</param>
     /// <param name="numberOfClusters">Number of groupings</param>
     /// <returns>A list of vectors indicating where the groups are located.</returns>
-    private List<Vector3> ClusterBehavior(List<GameObject> objects, int numberOfClusters) {
+    private List<GameObject> ClusterBehavior(List<GameObject> objects, int numberOfClusters) {
 
         // CREATE N CENTROIDS AND RANDOMLY SET THEIR VALUES
 
         // declare max of random positions on world screen
-        int x_max = 1000;
-        int y_max = 1000;
+        int x_max = 9;
+        int y_max = 4;
 
-        List<Vector3> centroids = new List<Vector3>();
+        List<GameObject> centroids = new List<GameObject>();
         // Check if there are no objects to go to
         if(objects.Count == 0) {
             return centroids;
         }
-        List<Vector3> oldCentroids = new List<Vector3>();
+        List<GameObject> oldCentroids = new List<GameObject>();
         for(int i = 0; i < numberOfClusters; i++) {
-            centroids.Add(new Vector3(Random.value * x_max, Random.value * y_max, 0.0f));
+            Vector3 randomLocation = new Vector3(Random.value * x_max, Random.value * y_max, 0.0f);
+            GameObject newCentroid = Instantiate(centroidPrefab, randomLocation, Quaternion.identity);
+            centroids.Add(newCentroid);
+
+            Debug.Log("New Centroid Created With Coords of X: " + newCentroid.transform.position.x + " Y: " + newCentroid.transform.position.y );
         }
 
         // CREATE A LIST THAT HOLDS EACH CLUSTER (EACH INDEX CORRELATES TO CENTROIDS)
@@ -71,10 +78,6 @@ public class Cluster : MonoBehaviour
             // GET THE DISTANCE BETWEEN EVERY POINT [GAME OBJECT] TO EVERY CENTROID
             // AND STORE POINT TO THE CLOSEST CLUSTER. (CLUSTER N CORRELATES TO CENTROID N).
 
-            foreach (Vector3 centroid in centroids) {
-                Debug.DrawLine(centroid, new Vector3(centroid.x + 5, centroid.y, 0) , Color.white, 2.5f);
-            }
-
             // clear clusters for itteration
             clusters = ClearClusters(clusters);
 
@@ -88,7 +91,7 @@ public class Cluster : MonoBehaviour
 
                 for (int i = 0; i < numberOfClusters; i++){
                     // distance between point and centroid i
-                    float curDistance = EuclideanDistance(point.transform.position, centroids[i]);
+                    float curDistance = EuclideanDistance(point.transform.position, centroids[i].transform.position);
 
                     // if current distance is smaller than best distance than change best distance
                     if(curDistance < bestDistance) {
@@ -114,6 +117,21 @@ public class Cluster : MonoBehaviour
             clusterDone = CentroidsInRange(centroids, oldCentroids, centroidChangeRange);
         }
 
+        for (int i = 0; i < clusters.Count; i++) {
+
+            foreach (GameObject drop in clusters[i]) {
+                if(i == 0) {
+                    drop.GetComponent<Renderer>().material.color = Color.cyan;
+                }
+                if(i == 1) {
+                    drop.GetComponent<Renderer>().material.color = Color.magenta;
+                }
+                if(i == 2) {
+                    drop.GetComponent<Renderer>().material.color = Color.yellow;
+                }
+            }
+        }
+
         return centroids;
 
     }
@@ -126,8 +144,8 @@ public class Cluster : MonoBehaviour
     /// <param name="centroid">Location 2 to compare</param>
     /// <returns>Distance between the point and centroid</returns>
         private float EuclideanDistance(Vector3 point, Vector3 centroid) {
-        float x_distance = Mathf.Pow((point.x - centroid.x), 2.0f);
-        float y_distance = Mathf.Pow((point.y - centroid.y), 2.0f);
+        float x_distance = Mathf.Pow((centroid.x - point.x), 2.0f);
+        float y_distance = Mathf.Pow((centroid.y - point.y), 2.0f);
 
         return Mathf.Sqrt(x_distance + y_distance);
     }
@@ -138,7 +156,7 @@ public class Cluster : MonoBehaviour
     /// <param name="centroids">Location to be updated</param>
     /// <param name="clusters">Current grouping of objects</param>
     /// <returns>Updated centroids list</returns>
-    private List<Vector3> UpdateCentroids(List<Vector3> centroids, List<List<GameObject>> clusters) {
+    private List<GameObject> UpdateCentroids(List<GameObject> centroids, List<List<GameObject>> clusters) {
         
          // find the average points for each centroid
         float x_total;
@@ -156,12 +174,8 @@ public class Cluster : MonoBehaviour
              }
 
             // set centroid to average of x and y total of a cluster
-            Vector3 tempCentroid = new Vector3();
-
-            tempCentroid.x = x_total / clusters[i].Count;
-            tempCentroid.y = y_total / clusters[i].Count;
-
-            centroids[i] = tempCentroid;
+            Vector3 newCentroidLocation = new Vector3(x_total / clusters[i].Count, y_total / clusters[i].Count, 0);
+            centroids[i].transform.position = newCentroidLocation;
         }
 
         return centroids;
@@ -179,8 +193,6 @@ public class Cluster : MonoBehaviour
         return clusters;
     }
 
-    // check if the centroid location is drastically changing. If not, then stop running the
-    // clustering algorithm
     /// <summary>
     /// Check if centroid location has drastically changed. If it has not, then stop running the
     /// clustering algorithm.
@@ -189,12 +201,12 @@ public class Cluster : MonoBehaviour
     /// <param name="oldCentroids">List of old centroids</param>
     /// <param name="range">Determine the minimal distance needed to stop algorithm</param>
     /// <returns>True if the algorithm can stop and false if the algorithm must run again.</returns>
-    private bool CentroidsInRange(List<Vector3> newCentroids, List<Vector3> oldCentroids, float range) {
+    private bool CentroidsInRange(List<GameObject> newCentroids, List<GameObject> oldCentroids, float range) {
         float[] centroidDifference = new float[newCentroids.Count];
 
         // find the distance for every variable and retrun if out of range
         for(int i = 0; i < newCentroids.Count; i++) {
-            centroidDifference[i] = EuclideanDistance(newCentroids[i], oldCentroids[i]);
+            centroidDifference[i] = EuclideanDistance(newCentroids[i].transform.position, oldCentroids[i].transform.position);
             if(centroidDifference[i] > range) {
                 return false;
             }
@@ -205,13 +217,12 @@ public class Cluster : MonoBehaviour
 
     }
 
-
     /// <summary>
     /// Using the clusters, determine which cluster is the closest.
     /// </summary>
     /// <param name="centroids">Location of the cluster</param>
     /// <returns>The cluster closest to the player</returns>
-    private Vector3 GetDestination(List<Vector3> centroids) {
+    private GameObject GetDestination(List<GameObject> centroids) {
         // go to location with most amount of drops and closest
 
         float bestDistance = Mathf.Infinity;
@@ -223,7 +234,7 @@ public class Cluster : MonoBehaviour
 
             // determine the weight of a current cluster
             //distanceToCluster =  Mathf.Pow((EuclideanDistance(self, centroid) / clusters[i].Count), 2.0f);
-            distanceToCluster = EuclideanDistance(myTransform.position, centroids[i]);
+            distanceToCluster = EuclideanDistance(myTransform.position, centroids[i].transform.position);
             
             // if better location found then set as new destination
             if(distanceToCluster < bestDistance) {
@@ -233,7 +244,7 @@ public class Cluster : MonoBehaviour
 
         }
 
-        Vector3 bestCentroidLocation = centroids[bestLocationIndex];
+        GameObject bestCentroidLocation = centroids[bestLocationIndex];
 
         return bestCentroidLocation;
 
@@ -243,7 +254,7 @@ public class Cluster : MonoBehaviour
     /// Access the destination variable.
     /// </summary>
     /// <returns>Destination of closest cluster</returns>
-    public Vector3 GetDestination() {
+    public GameObject GetDestination() {
         return destination;
     }
 
