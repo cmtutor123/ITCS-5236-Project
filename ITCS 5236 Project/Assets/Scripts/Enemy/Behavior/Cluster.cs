@@ -7,7 +7,8 @@ public class Cluster : MonoBehaviour
     // private GameManager manager;
     [SerializeField] private Transform myTransform;
     private List<GameObject> drops;
-    private List<GameObject> finalClusters;
+    private List<List<GameObject>> finalClusters;
+    List<GameObject> centroids;
     private GameObject destination;
     [SerializeField] float centroidChangeRange;
     [SerializeField] int clusterNumbers;
@@ -26,14 +27,10 @@ public class Cluster : MonoBehaviour
         }
 
         // run clustering algorithm to find where the clusters are on the screen
+        centroids = new List<GameObject>();
         finalClusters = ClusterBehavior(drops, clusterNumbers);
 
-        // get destination to move to
-        /*if(finalClusters.Count == 0) {
-            destination = GameObject.FindGameObjectWithTag("Player").transform.position;
-        } else {
-            destination = GetDestination(finalClusters);
-        }*/
+        destination = GetDestination(finalClusters);
 
     }
 
@@ -42,8 +39,8 @@ public class Cluster : MonoBehaviour
     /// </summary>
     /// <param name="objects">Objects that you want to group (i.e. drop objects)</param>
     /// <param name="numberOfClusters">Number of groupings</param>
-    /// <returns>A list of vectors indicating where the groups are located.</returns>
-    private List<GameObject> ClusterBehavior(List<GameObject> objects, int numberOfClusters) {
+    /// <returns>A list of sets of drops that indicate a grouping.</returns>
+    private List<List<GameObject>> ClusterBehavior(List<GameObject> objects, int numberOfClusters) {
 
         // CREATE N CENTROIDS AND RANDOMLY SET THEIR VALUES
 
@@ -51,11 +48,10 @@ public class Cluster : MonoBehaviour
         int x_max = 9;
         int y_max = 4;
 
-        List<GameObject> centroids = new List<GameObject>();
         List<Vector3> oldCentroids = new List<Vector3>();
         // Check if there are no objects to go to
         if(objects.Count == 0) {
-            return centroids;
+            return new List<List<GameObject>>();
         }
         for(int i = 0; i < numberOfClusters; i++) {
             Vector3 randomLocation = new Vector3(Random.value * x_max, Random.value * y_max, 0.0f);
@@ -125,6 +121,7 @@ public class Cluster : MonoBehaviour
             /*for(int i = 0; i < numberOfClusters; i++) {
                 print("oldCentroid " + i + " : " + oldCentroids[i]);
                 print("newCentroid " + i + " : " + centroids[i].transform.position);
+                print(i + " cluster: " + clusters[i].Count);
             }*/
 
             // determine if we should break
@@ -146,7 +143,7 @@ public class Cluster : MonoBehaviour
             }
         }
 
-        return centroids;
+        return clusters;
 
     }
 
@@ -232,14 +229,14 @@ public class Cluster : MonoBehaviour
         // find the distance for every variable and retrun if out of range
         for(int i = 0; i < clusterNumbers; i++) {
 
-            Debug.Log("new centroid x: " + newCentroids[i]);
-            Debug.Log("old centroid x: " + oldCentroids[i]);
+            // Debug.Log("new centroid x: " + newCentroids[i]);
+            // Debug.Log("old centroid x: " + oldCentroids[i]);
             centroidDifference[i] = EuclideanDistance(newCentroids[i].transform.position, oldCentroids[i]);
             
-            Debug.Log("Euclidean Difference: " + centroidDifference[i]);
+            // Debug.Log("Euclidean Difference: " + centroidDifference[i]);
             
            if(Mathf.Abs(centroidDifference[i]) > range) {
-                Debug.Log("Must go through another itteration");
+                // Debug.Log("Must go through another itteration");
                 return false;
             }
 
@@ -252,47 +249,37 @@ public class Cluster : MonoBehaviour
     }
 
     /// <summary>
-    /// Using the clusters, determine which cluster is the closest.
-    /// </summary>
-    /// <param name="centroids">Location of the cluster</param>
-    /// <returns>The cluster closest to the player</returns>
-    private GameObject GetDestination(List<GameObject> centroids) {
-        // go to location with most amount of drops and closest
-
-        float bestDistance = Mathf.Infinity;
-        float distanceToCluster = Mathf.Infinity;
-
-        int bestLocationIndex = -1;
-
-        for (int i = 0; i < centroids.Count; i++) {
-
-            // determine the weight of a current cluster
-            //distanceToCluster =  Mathf.Pow((EuclideanDistance(self, centroid) / clusters[i].Count), 2.0f);
-            distanceToCluster = EuclideanDistance(myTransform.position, centroids[i].transform.position);
-            
-            // if better location found then set as new destination
-            if(distanceToCluster < bestDistance) {
-                bestDistance = distanceToCluster;
-                bestLocationIndex = i;
-            } 
-
-        }
-
-        GameObject bestCentroidLocation = centroids[bestLocationIndex];
-
-        return bestCentroidLocation;
-
-    } 
-
-    /// <summary>
     /// Access the destination variable.
     /// </summary>
+    /// <param name="clusters">Groups of drops
     /// <returns>Destination of closest cluster</returns>
-    public GameObject GetDestination() {
+    public GameObject GetDestination(List<List<GameObject>> clusters) {
+        
+        // Test code for enemy movement
+        GameObject destination;
+        float bestDistance = Mathf.Infinity;
+        int index = -1;
+
+        for(int i = 0; i < clusterNumbers; i++) {
+            if(clusters[i].Count != 0) {
+                float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
+                // print(i + "cluster distance = " + distance);
+                if(distance < bestDistance) {
+                    index = i;
+                }
+            }
+        }
+
+        destination = clusters[index][Random.Range(0, clusters[index].Count - 1)];
+        destination.GetComponent<Renderer>().material.color = Color.red;
+
+
         return destination;
     }
 
-
+    public GameObject GetDestination() {
+        return destination;
+    }
     public Vector3 Clone(GameObject item) {
         Vector3 cloneItem = item.transform.position;
         return cloneItem;

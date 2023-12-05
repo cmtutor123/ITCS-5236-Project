@@ -15,6 +15,7 @@ public class TestEnemyMovement : MonoBehaviour
     [SerializeField] private float radiusOfSat;
 
     private Rigidbody2D rb;
+    private Cluster clusterAlgorith;
     
     
     
@@ -24,14 +25,14 @@ public class TestEnemyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>(); 
 
 
-        Cluster clusterAlgorith = GetComponent<Cluster>();
-        targetVector = clusterAlgorith.GetDestination().transform.position;
+        clusterAlgorith = GetComponent<Cluster>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // move towards target location
+        targetVector = clusterAlgorith.GetDestination().transform.position;
 
         Vector3 towardsTarget = targetVector - myTransform.position;
 
