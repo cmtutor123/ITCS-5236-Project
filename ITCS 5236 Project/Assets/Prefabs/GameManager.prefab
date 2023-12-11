@@ -102,3 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fc9a32a8b903a14f83f063362dd176e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTransform: {fileID: 0}
+  prefabPlayerBase: {fileID: 0}
+  prefabEnemies:
+  - {fileID: 8586627782194996169, guid: 8a626d0176f2af642a295dc523f71afd, type: 3}
+  - {fileID: 8586627782194996169, guid: 2dff39f683dd7294db9053e405ab3336, type: 3}
+  - {fileID: 8586627782194996169, guid: 68b4aa8e771f9a642ba0758a5ffbf25d, type: 3}

@@ -345,9 +345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a520e4c3709bb7449038d28c49e6cb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  centroidChangeRange: 0
-  clusterNumbers: 0
-  carryCapacity: 0
+  myTransform: {fileID: 4135757015496335809}
+  centroidChangeRange: 2
+  clusterNumbers: 3
+  centroidPrefab: {fileID: 1944899082319032673, guid: a237825b4a27a5141b1a1b9ce0c52c17, type: 3}
 --- !u!114 &5118659240384486038
 MonoBehaviour:
   m_ObjectHideFlags: 0

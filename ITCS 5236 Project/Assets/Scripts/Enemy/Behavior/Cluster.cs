@@ -11,7 +11,7 @@ public class Cluster : MonoBehaviour
         private List<GameObject> finalCentroids;
     private GameObject destination;
     [SerializeField] float centroidChangeRange;
-    [SerializeField] int clusterNumbers;
+    private int clusterNumbers;
    // [SerializeField] int carryCapacity;
     [SerializeField] GameObject centroidPrefab;
 
@@ -24,6 +24,17 @@ public class Cluster : MonoBehaviour
         drops = new List<GameObject>(GameObject.FindGameObjectsWithTag("Drop"));
         foreach (GameObject drop in drops) {
             Debug.Log("*******Drop**********");
+        }
+
+        if(drops.Count == 1) {
+            print("clusters = 1");
+            clusterNumbers = 1;
+        } else if (drops.Count < 5) {
+            print("clusters = 2");
+            clusterNumbers = 2;
+        } else {
+            print("clusters = 3");
+            clusterNumbers = 3;
         }
 
         // run clustering algorithm to find where the clusters are on the screen
@@ -129,7 +140,7 @@ public class Cluster : MonoBehaviour
             clusterDone = CentroidsInRange(centroids, oldCentroids, centroidChangeRange);
         }
 
-        for (int i = 0; i < clusters.Count; i++) {
+        /*for (int i = 0; i < clusters.Count; i++) {
              print("cyan is cluster 0");
              print("magenta is cluster 1");
              print("yellow is cluster 2");
@@ -145,7 +156,7 @@ public class Cluster : MonoBehaviour
                     drop.GetComponent<Renderer>().material.color = Color.yellow;
                 }
             }
-        }
+        }*/
 
         return centroids;
 
@@ -262,7 +273,7 @@ public class Cluster : MonoBehaviour
         // Test code for enemy movement
         GameObject destination;
         float bestDistance = Mathf.Infinity;
-        int index = -1;
+        int index = 0;
 
         for(int i = 0; i < clusterNumbers; i++) {
             float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
@@ -276,7 +287,7 @@ public class Cluster : MonoBehaviour
         destination = centroids[index];
         destination.GetComponent<Renderer>().material.color = Color.green;
 
-
+        print("going to centroid " + index);
         return destination;
     }
 
@@ -288,6 +299,9 @@ public class Cluster : MonoBehaviour
         return cloneItem;
     }
 
+    public List<GameObject> GetCentroids() {
+        return finalCentroids;
+    }
 
 
 }

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject prefabPlayerBase;
     [SerializeField] private List<GameObject> prefabEnemies;
+    //private Cluster clusterAlgorith;
 
     private GameObject playerBaseManager;
 
@@ -31,6 +32,9 @@ public class GameManager : MonoBehaviour
     {
         InitializeRegisters();
         uiControl = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<UIControl>();
+
+        // clustering algorithm for drop enemys.
+        //clusterAlgorith = GetComponent<Cluster>();
     }
 
 
@@ -193,35 +197,36 @@ public class GameManager : MonoBehaviour
         }
 
         GameObject newEnemy;
-       /* if(drops.Count <= 0) {
+        // if there are drops then include drop enemy to the random enemy selection
+        if(drops.Count <= 0) {
             newEnemy = Instantiate(prefabEnemies[Random.Range(0, 1)], spawnLocation, Quaternion.identity);
         } else {
             newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
-        } */
+        }
 
-        newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
+        // newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
 
         Debug.Log(newEnemy.tag);
         switch(newEnemy.tag) {
             case "EnemyPlayer":
-                // Debug.Log("EnemyPlayer created");
+                Debug.Log("EnemyPlayer created");
                 targetTransform = null;
                 break;
 
             case "EnemyBase":
-                // Debug.Log("EnemyBase created");
+                Debug.Log("EnemyBase created");
                 targetTransform = playerBaseManager.transform; 
                 break;
 
             case "EnemyDrop":
 
-                // Debug.Log(drops.Count);
+                Debug.Log(drops.Count);
                 if(drops.Count > 0) {
-                    // Debug.Log("EnemyDrop created");
-                    targetTransform = drops[Random.Range(0, drops.Count)].transform;
+                    Debug.Log("EnemyDrop created");
+                    //targetTransform = clusterAlgorith.GetDestination().transform;
                 }
                 else {
-                    targetTransform = null;
+                    //targetTransform = null;
                 }
                 break;
 
@@ -237,6 +242,8 @@ public class GameManager : MonoBehaviour
         playerBaseManager = Instantiate(prefabPlayerBase, Vector2.zero, Quaternion.identity);
     }
 
+
+    // Return a random player ship
     public GameObject GetPlayerTarget()
     {
         List<GameObject> alivePlayers = new List<GameObject>();
@@ -250,6 +257,8 @@ public class GameManager : MonoBehaviour
         if (alivePlayers.Count == 0) return null;
         return alivePlayers[Random.Range(0, alivePlayers.Count)];
     }
+    
+    
     public Transform GetDropTarget(){
         if(drops.Count > 0) {
             return drops[Random.Range(0, drops.Count)].transform;
