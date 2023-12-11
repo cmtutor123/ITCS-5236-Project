@@ -285,7 +285,7 @@ public class Cluster : MonoBehaviour
         }
 
         destination = centroids[index];
-        destination.GetComponent<Renderer>().material.color = Color.green;
+        //destination.GetComponent<Renderer>().material.color = Color.green;
 
         print("going to centroid " + index);
         return destination;
