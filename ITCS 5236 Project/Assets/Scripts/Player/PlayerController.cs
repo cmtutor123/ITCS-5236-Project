@@ -202,4 +202,56 @@ public class PlayerController : MonoBehaviour
         if (playerManager != null) playerManager.RespawnPlayer();
         Destroy(gameObject);
     }
+
+    public void UpdateStats()
+    {
+        /*
+        Visuals
+        ship sprite
+        color
+        Ship Stats
+        thrustPower
+        maxVelocity
+        knockbackResistance
+        damageResistance
+        tetherCount
+        tetherEfficiency
+        fireRate
+        maxHealth
+        Projectile Stats
+        pierce
+        bounce
+        homing
+        aoe
+        range
+        knockback
+        proximityDestroy
+        destory aoe
+        healPlayer
+        stunChance
+        stunDuration
+        dot damage
+        dot rate
+        dot duration
+        Ability Stats
+        cooldown
+        duration
+        speed increate
+        fire rate increase
+        damage increase
+        knockback immunity
+        damage immunity
+        spawn object
+        bomb
+        aoe
+        damage
+        knockback
+        delay
+        turret
+        radius
+        damage
+        rate of fire
+        tether efficiency
+        */
+    }
 }

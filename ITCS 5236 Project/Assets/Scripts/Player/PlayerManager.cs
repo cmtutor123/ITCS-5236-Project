@@ -24,6 +24,11 @@ public class PlayerManager : MonoBehaviour
 
     private float respawnTime = 3f;
 
+    private PlayerClass playerClass;
+
+    public List<Upgrade> possibleUpgrades = new List<Upgrade>();
+    public List<Upgrade> selectedUpgrades = new List<Upgrade>();
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -61,6 +66,7 @@ public class PlayerManager : MonoBehaviour
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
         playerShipController.playerManager = this;
+        playerShipController.UpdateStats();
         hasPlayerObject = true;
     }
 
