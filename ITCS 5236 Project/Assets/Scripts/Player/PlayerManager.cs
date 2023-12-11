@@ -26,6 +26,9 @@ public class PlayerManager : MonoBehaviour
 
     private PlayerClass playerClass;
 
+    public List<Upgrade> possibleUpgrades = new List<Upgrade>();
+    public List<Upgrade> selectedUpgrades = new List<Upgrade>();
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
