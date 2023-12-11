@@ -24,6 +24,8 @@ public class PlayerManager : MonoBehaviour
 
     private float respawnTime = 3f;
 
+    private PlayerClass playerClass;
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -61,6 +63,7 @@ public class PlayerManager : MonoBehaviour
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
         playerShipController.playerManager = this;
+        playerShipController.UpdateStats();
         hasPlayerObject = true;
     }
 

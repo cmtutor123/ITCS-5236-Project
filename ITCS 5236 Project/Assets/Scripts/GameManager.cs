@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private const int MAX_PLAYERS = 4;
 
     private const float PLAYER_SPAWN_DELAY = 0.5f;
-    private const float ENEMY_SPAWN_DELAY = 5f;
+    private const float BASE_ENEMY_SPAWN_DELAY = 5f;
 
     public Transform targetTransform;
 
@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     //private Cluster clusterAlgorith;
 
     private GameObject playerBaseManager;
+
+    private float enemySpawnDelay;
+    private float enemyCap;
 
     private void Start()
     {
@@ -117,6 +120,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartRound()
     {
+        enemyCap = 5 + Mathf.Clamp(currentWave / 2, 0, 10);
+        enemySpawnDelay = BASE_ENEMY_SPAWN_DELAY - 0.2f * Mathf.Clamp(currentWave, 0, 20);
         yield return InitialPlayerSpawn();
         inRound = true;
         yield return StartEnemyWaves(currentWave);
@@ -148,8 +153,9 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartEnemyWaves(int round)
     {
         if (InRound(round)) SpawnEnemies(round);
-        yield return new WaitForSeconds(ENEMY_SPAWN_DELAY);
-        if (InRound(round)) yield return StartEnemyWaves(round);
+        Debug.Log("Enemy Count: " + enemies.Count);
+        yield return new WaitForSeconds(enemySpawnDelay);
+        if (InRound(round) && enemies.Count < enemyCap) yield return StartEnemyWaves(round);
     }
 
     public bool InRound(int round)
