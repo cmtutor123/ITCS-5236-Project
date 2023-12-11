@@ -26,13 +26,18 @@ public class TestEnemyMovement : MonoBehaviour
 
 
         clusterAlgorith = GetComponent<Cluster>();
+        // targetVector = Vector3.one;
     }
 
     // Update is called once per frame
     void Update()
     {
         // move towards target location
-        targetVector = clusterAlgorith.GetDestination().transform.position;
+        if(clusterAlgorith.GetDestination() != null) {
+            targetVector = clusterAlgorith.GetDestination().transform.position;
+        } else {
+            targetVector = Vector3.zero; 
+        }
 
         Vector3 towardsTarget = targetVector - myTransform.position;
 

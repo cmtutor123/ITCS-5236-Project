@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-    // get current 
+    // get current fields for enemy
     [SerializeField] private Transform myTransform;
     private Transform targetTransform;
     [SerializeField] private GameObject enemyToSpawn;
     [SerializeField] private GameObject dropPrefab;
+
 
     // for seeing if object is in camera view (screen)
     private Camera mainCamera;
@@ -20,6 +21,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float radiusOfSat;
+
 
     // for shooting (Player and Base Enemy)
     [SerializeField] private Bullet bullet;
@@ -76,19 +78,31 @@ public class EnemyMovement : MonoBehaviour
     // Move enemy to destination/create & destroy when moving off screen
     void Update()
     {        
-        
+        // If target no longer exists attack something else.
+        // Drop Enemy -> Leave screen
+        // Player Enemy -> Get another live enemy
+        // Base Enemy -> Game Over
         if (targetTransform == null)
         {
             GameObject playerObject = null;
+
             if(gameObject.tag == "EnemyDrop")
                 targetTransform = gameManager.GetDropTarget();
+
             else if(gameObject.tag == "EnemyPlayer")
                 playerObject = gameManager.GetPlayerTarget();
-            if (playerObject != null) targetTransform = playerObject.transform;
-            if (targetTransform == null) return;
+
+
+            if (playerObject != null) {
+                targetTransform = playerObject.transform;
+            } else {
+                return;
+            }
         }
-        if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null)
+        
+        if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null) {
             targetTransform = null;
+        }
         // Check if enemy is inside of bounds (screen)
         // If inside then move to object (using kinematic arrive)
         var bounds = m_collider.bounds;

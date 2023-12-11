@@ -8,7 +8,7 @@ public class Cluster : MonoBehaviour
     [SerializeField] private Transform myTransform;
     private List<GameObject> drops;
     private List<List<GameObject>> finalClusters;
-    List<GameObject> centroids;
+        private List<GameObject> finalCentroids;
     private GameObject destination;
     [SerializeField] float centroidChangeRange;
     [SerializeField] int clusterNumbers;
@@ -27,10 +27,9 @@ public class Cluster : MonoBehaviour
         }
 
         // run clustering algorithm to find where the clusters are on the screen
-        centroids = new List<GameObject>();
-        finalClusters = ClusterBehavior(drops, clusterNumbers);
+        finalCentroids = ClusterBehavior(drops, clusterNumbers);
 
-        destination = GetDestination(finalClusters);
+        destination = GetDestination(finalCentroids);
 
     }
 
@@ -40,7 +39,7 @@ public class Cluster : MonoBehaviour
     /// <param name="objects">Objects that you want to group (i.e. drop objects)</param>
     /// <param name="numberOfClusters">Number of groupings</param>
     /// <returns>A list of sets of drops that indicate a grouping.</returns>
-    private List<List<GameObject>> ClusterBehavior(List<GameObject> objects, int numberOfClusters) {
+    private List<GameObject> ClusterBehavior(List<GameObject> objects, int numberOfClusters) {
 
         // CREATE N CENTROIDS AND RANDOMLY SET THEIR VALUES
 
@@ -48,11 +47,13 @@ public class Cluster : MonoBehaviour
         int x_max = 9;
         int y_max = 4;
 
-        List<Vector3> oldCentroids = new List<Vector3>();
         // Check if there are no objects to go to
         if(objects.Count == 0) {
-            return new List<List<GameObject>>();
+            return new List<GameObject>();
         }
+
+        List<Vector3> oldCentroids = new List<Vector3>();
+        List<GameObject> centroids = new List<GameObject>();
         for(int i = 0; i < numberOfClusters; i++) {
             Vector3 randomLocation = new Vector3(Random.value * x_max, Random.value * y_max, 0.0f);
             GameObject newCentroid = Instantiate(centroidPrefab, randomLocation, Quaternion.identity);
@@ -129,6 +130,9 @@ public class Cluster : MonoBehaviour
         }
 
         for (int i = 0; i < clusters.Count; i++) {
+             print("cyan is cluster 0");
+             print("magenta is cluster 1");
+             print("yellow is cluster 2");
 
             foreach (GameObject drop in clusters[i]) {
                 if(i == 0) {
@@ -143,7 +147,7 @@ public class Cluster : MonoBehaviour
             }
         }
 
-        return clusters;
+        return centroids;
 
     }
 
@@ -253,7 +257,7 @@ public class Cluster : MonoBehaviour
     /// </summary>
     /// <param name="clusters">Groups of drops
     /// <returns>Destination of closest cluster</returns>
-    public GameObject GetDestination(List<List<GameObject>> clusters) {
+    public GameObject GetDestination(List<GameObject> centroids) {
         
         // Test code for enemy movement
         GameObject destination;
@@ -261,17 +265,16 @@ public class Cluster : MonoBehaviour
         int index = -1;
 
         for(int i = 0; i < clusterNumbers; i++) {
-            if(clusters[i].Count != 0) {
-                float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
-                // print(i + "cluster distance = " + distance);
-                if(distance < bestDistance) {
-                    index = i;
-                }
+            float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
+            print(i + " cluster distance = " + distance);
+            if(distance < bestDistance) {
+                bestDistance = distance;
+                index = i;
             }
         }
 
-        destination = clusters[index][Random.Range(0, clusters[index].Count - 1)];
-        destination.GetComponent<Renderer>().material.color = Color.red;
+        destination = centroids[index];
+        destination.GetComponent<Renderer>().material.color = Color.green;
 
 
         return destination;
