@@ -94,9 +94,10 @@ public class EnemyMovement : MonoBehaviour
         {
             GameObject playerObject = null;
 
-            if(gameObject.tag == "EnemyDrop")
-                targetTransform = gameManager.GetDropTarget();
-
+            if(gameObject.tag == "EnemyDrop"){
+                print("null is current targetTransform");
+                //targetTransform = gameManager.GetDropTarget();
+            }
             else if(gameObject.tag == "EnemyPlayer")
                 playerObject = gameManager.GetPlayerTarget();
 
@@ -104,12 +105,17 @@ public class EnemyMovement : MonoBehaviour
             if (playerObject != null) {
                 targetTransform = playerObject.transform;
             } else {
-                return;
+               // return;
             }
         }
         
-        if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null) {
+        /*if(targetTransform.tag == "Drop" && targetTransform.GetComponent<Tether>().tetheredTo != null) {
             targetTransform = null;
+        }*/
+
+        if(targetTransform == null && gameObject.tag == "EnemyDrop") {
+            print("Escaping due to having no target transform");
+            Escape();
         }
 
 
@@ -146,13 +152,47 @@ public class EnemyMovement : MonoBehaviour
                 jetfire.SetActive(false);
 
                 // tether or shoot depending on enemy type
-                if(gameObject.tag == "EnemyDrop" && ((targetTransform).tag == "Drop" || (targetTransform).tag == "Centroid" )) {
+                /*if(gameObject.tag == "EnemyDrop" && ((targetTransform).tag == "Drop" || (targetTransform).tag == "Centroid" )) {
                     TetherOnPerformed();
                 } else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && ((targetTransform).tag != "Drop" || (targetTransform).tag != "Centroid")){
+                    print("this escape has been reached");
                     Escape();
                 } /**else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && targetTransform.tag == null){
                     //Escape();
                 }**/
+
+                if(gameObject.tag == "EnemyDrop") {
+                    // Escape if tether amount is full
+                    if(tetherAmount == 0) {
+                        Escape();
+                    }                         
+                    // Escape if there is no drops on the screen
+                    else if(gameManager.GetDrops().Count == 0) {
+                        Escape();
+                    }
+                    // Tether if Target is Drop or Centroid
+                    else if(targetTransform.tag == "Drop" || targetTransform.tag == "Centroid") {
+                        print("In drop and centroid if statement");
+
+                        //bool allTethered = true;
+                        /*foreach(GameObject drop in gameManager.GetDrops()) {
+
+                            if(!drop.GetComponent<Tether>().tethered) {
+                                print("Drop made it in");
+                                allTethered = false;
+                            }
+                        }
+                        print("all tethered " + allTethered);
+                        if(allTethered) {
+                            Escape();
+                        } else {*/
+                        TetherOnPerformed();
+
+                    } else {
+
+                    }
+
+                }
                 else if(canShoot) {
                     //Debug.Log("Shooting");
                     Shoot();
@@ -163,7 +203,19 @@ public class EnemyMovement : MonoBehaviour
 
         // if outside of bounds then destroy enemy object and place a new one somewhere else
         else {
-            Destroy(this.gameObject);
+            foreach(GameObject tether in tethers){
+                if(tether != null){
+                    tether.GetComponent<Tether>().tethered = false;
+                    tether.GetComponent<Tether>().tetheredTo = null;
+                }
+            }
+            if(gameObject.tag == "EnemyDrop") {
+                foreach(GameObject centroid in clusterAlgorith.GetCentroids()) {
+                    Destroy(centroid);
+                }
+            }
+
+            Destroy(gameObject);
             Debug.Log("Enemy outside of bounds");
             Instantiate(enemyToSpawn, myTransform.position, Quaternion.identity);
         }
@@ -171,6 +223,10 @@ public class EnemyMovement : MonoBehaviour
 
     public bool InBounds()
     {
+        if(gameObject.tag == "EnemyDrop") {
+            return transform.position.x >= GameManager.BOUNDRY_X_MIN - 4 && transform.position.x <= GameManager.BOUNDRY_X_MAX + 4 && transform.position.y >= GameManager.BOUNDRY_Y_MIN - 4 && transform.position.y <= GameManager.BOUNDRY_Y_MAX + 4;
+        } 
+        
         return transform.position.x >= GameManager.BOUNDRY_X_MIN && transform.position.x <= GameManager.BOUNDRY_X_MAX && transform.position.y >= GameManager.BOUNDRY_Y_MIN && transform.position.y <= GameManager.BOUNDRY_Y_MAX;
         //return GeometryUtility.TestPlanesAABB(cameraFrustum, m_collider.bounds);
     }
@@ -210,7 +266,23 @@ public class EnemyMovement : MonoBehaviour
         // if collide with player then destroy self (for now)
         if(other.gameObject.tag == "Player") {
 
-            Destroy(this.gameObject);
+            if(gameObject.tag == "EnemyDrop") {
+
+            }
+
+            foreach(GameObject tether in tethers){
+                if(tether != null){
+                    tether.GetComponent<Tether>().tethered = false;
+                    tether.GetComponent<Tether>().tetheredTo = null;
+                }
+            }
+            if(gameObject.tag == "EnemyDrop") {
+                foreach(GameObject centroid in clusterAlgorith.GetCentroids()) {
+                    Destroy(centroid);
+                }
+            }
+
+            Destroy(gameObject);
 
             // create a drop at place of death
             // Instantiate(dropPrefab, myTransform.position, Quaternion.identity);
@@ -253,6 +325,7 @@ public class EnemyMovement : MonoBehaviour
                     tether.GetComponent<Tether>().tetheredTo = gameObject;
                     tetherAmount--;
                     targetTransform = null;
+                    print("Tether");
                 }
             }
         }

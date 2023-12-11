@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        Debug.Log("Aim Button Pressed");
+        //Debug.Log("Aim Button Pressed");
         if (hasPlayerObject) playerShipController.AimOnPerformed(context);
     }
 
@@ -74,17 +74,17 @@ public class PlayerManager : MonoBehaviour
     {
         if (false && context.performed)
         {
-            Debug.Log("Move Button Pressed");
+            //Debug.Log("Move Button Pressed");
             if (hasPlayerObject) playerShipController.MoveOnPerformed(context);
         }
         else if (context.started)
         {
-            Debug.Log("Move Button Started");
+            //Debug.Log("Move Button Started");
             if (hasPlayerObject) playerShipController.MoveOnStarted(context);
         }
         else if (context.canceled)
         {
-            Debug.Log("Move Button Canceled");
+            //Debug.Log("Move Button Canceled");
             if (hasPlayerObject) playerShipController.MoveOnCanceled(context);
         }
     }
@@ -144,7 +144,7 @@ public class PlayerManager : MonoBehaviour
     {
 		if (context.performed)
         {
-            Debug.Log("Change Button Pressed");
+            //Debug.Log("Change Button Pressed");
             if (onPlayerSelect && !isReady) ChangeShip(context.ReadValue<Vector2>().x);
         }
     }

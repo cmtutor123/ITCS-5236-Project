@@ -140,24 +140,25 @@ public class Cluster : MonoBehaviour
             clusterDone = CentroidsInRange(centroids, oldCentroids, centroidChangeRange);
         }
 
-        /*for (int i = 0; i < clusters.Count; i++) {
+        for (int i = 0; i < clusters.Count; i++) {
              print("cyan is cluster 0");
              print("magenta is cluster 1");
              print("yellow is cluster 2");
 
             foreach (GameObject drop in clusters[i]) {
                 if(i == 0) {
-                    drop.GetComponent<Renderer>().material.color = Color.cyan;
+                    drop.GetComponent<Renderer>().material.color = Color.red;
                 }
                 if(i == 1) {
-                    drop.GetComponent<Renderer>().material.color = Color.magenta;
+                    drop.GetComponent<Renderer>().material.color = Color.white;
                 }
                 if(i == 2) {
                     drop.GetComponent<Renderer>().material.color = Color.yellow;
                 }
             }
-        }*/
+        }
 
+        finalClusters = clusters;
         return centroids;
 
     }
@@ -276,11 +277,13 @@ public class Cluster : MonoBehaviour
         int index = 0;
 
         for(int i = 0; i < clusterNumbers; i++) {
-            float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
-            print(i + " cluster distance = " + distance);
-            if(distance < bestDistance) {
-                bestDistance = distance;
-                index = i;
+            if(finalClusters[i].Count != 0) {
+                float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
+                print(i + " cluster distance = " + distance);
+                if(distance < bestDistance) {
+                    bestDistance = distance;
+                    index = i;
+                }
             }
         }
 

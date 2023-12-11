@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     public void AimOnPerformed(InputAction.CallbackContext context)
     {
         aimDirection = context.ReadValue<Vector2>();
-        Debug.Log("Aim: " + aimDirection);
+        //Debug.Log("Aim: " + aimDirection);
     }
     public void AimOnCanceled(InputAction.CallbackContext context)
     {
