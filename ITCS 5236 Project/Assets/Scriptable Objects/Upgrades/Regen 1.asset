@@ -18,4 +18,5 @@ MonoBehaviour:
   - regen
   modifiers:
   - 5
-  requirements: []
+  requirements:
+  - {fileID: 11400000, guid: 97e7c7a87e65f5c4db09ef3999db111c, type: 2}

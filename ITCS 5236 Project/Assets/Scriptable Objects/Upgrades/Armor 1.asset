@@ -18,4 +18,5 @@ MonoBehaviour:
   - damageResist
   modifiers:
   - 0.9
-  requirements: []
+  requirements:
+  - {fileID: 11400000, guid: f17387532a3b0b94b96fcb5f65884da5, type: 2}

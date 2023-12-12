@@ -20,4 +20,5 @@ MonoBehaviour:
   modifiers:
   - 0.5
   - 2.5
-  requirements: []
+  requirements:
+  - {fileID: 11400000, guid: 28b75f79c670bdf4fb5f224ab4e40742, type: 2}
