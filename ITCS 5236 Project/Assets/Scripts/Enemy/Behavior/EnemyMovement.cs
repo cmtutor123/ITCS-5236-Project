@@ -104,8 +104,6 @@ public class EnemyMovement : MonoBehaviour
 
             if (playerObject != null) {
                 targetTransform = playerObject.transform;
-            } else {
-               // return;
             }
         }
         
@@ -151,15 +149,11 @@ public class EnemyMovement : MonoBehaviour
                 rb.velocity = Vector2.zero;
                 jetfire.SetActive(false);
 
-                // tether or shoot depending on enemy type
-                /*if(gameObject.tag == "EnemyDrop" && ((targetTransform).tag == "Drop" || (targetTransform).tag == "Centroid" )) {
-                    TetherOnPerformed();
-                } else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && ((targetTransform).tag != "Drop" || (targetTransform).tag != "Centroid")){
-                    print("this escape has been reached");
-                    Escape();
-                } /**else if (gameObject.tag == "EnemyDrop" && tetherAmount < maxTethers && targetTransform.tag == null){
-                    //Escape();
-                }**/
+                if(gameObject.tag == "EnemyPlayer") {
+                    Quaternion aimTowards = Quaternion.FromToRotation(Vector3.up, towardsTarget);
+                    myTransform.rotation =  Quaternion.Lerp(myTransform.rotation, aimTowards, rotationSpeed * Time.deltaTime);
+                }
+
 
                 if(gameObject.tag == "EnemyDrop") {
                     // Escape if tether amount is full
@@ -342,18 +336,18 @@ public class EnemyMovement : MonoBehaviour
         float enemyYPosition = transform.position.y;
         tempX = enemyXPosition;
         tempY = enemyYPosition;
-        if(enemyXPosition - Mathf.Abs(GameManager.BOUNDRY_X_MIN) < enemyXPosition - Mathf.Abs(GameManager.BOUNDRY_X_MAX)) {
-            tempX = GameManager.BOUNDRY_X_MIN - 10;
+        if(Mathf.Abs(enemyXPosition - GameManager.BOUNDRY_X_MIN) < Mathf.Abs(enemyXPosition - GameManager.BOUNDRY_X_MAX)) {
+            tempX = GameManager.BOUNDRY_X_MIN - 12;
         }
         else {
-            tempX = GameManager.BOUNDRY_X_MAX + 10;
+            tempX = GameManager.BOUNDRY_X_MAX + 12;
         }
 
-        if(enemyYPosition - Mathf.Abs(GameManager.BOUNDRY_Y_MIN) < enemyYPosition - Mathf.Abs(GameManager.BOUNDRY_Y_MAX)) {
-            tempY = GameManager.BOUNDRY_Y_MIN - 10;
+        if(Mathf.Abs(enemyYPosition - GameManager.BOUNDRY_Y_MIN) < Mathf.Abs(enemyYPosition - GameManager.BOUNDRY_Y_MAX)) {
+            tempY = GameManager.BOUNDRY_Y_MIN - 12;
         }
         else {
-            tempY = GameManager.BOUNDRY_Y_MAX + 10;
+            tempY = GameManager.BOUNDRY_Y_MAX + 12;
         }
         escape = true;
     }
