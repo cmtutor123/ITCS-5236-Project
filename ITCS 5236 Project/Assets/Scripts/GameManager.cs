@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
         for (int i = removedPlayerId; i < MAX_PLAYERS - 1; i++)
         {
             PlayerManager currentPlayer = playerManagers[i + 1];
-            currentPlayer.SetPlayerId(i);
+            if (currentPlayer != null) currentPlayer.SetPlayerId(i);
             playerManagers[i] = currentPlayer;
             playerManagers[i + 1] = null;
         }
