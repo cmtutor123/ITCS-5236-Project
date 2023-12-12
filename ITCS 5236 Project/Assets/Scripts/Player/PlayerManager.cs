@@ -208,4 +208,20 @@ public class PlayerManager : MonoBehaviour
             hasPlayerObject = false;
         }
     }
+
+    public float GetHealth()
+    {
+        if (hasPlayerObject)
+        {
+            if (playerShip != null)
+            {
+                Health health = playerShip.GetComponent<Health>();
+                if (health != null)
+                {
+                    return health.GetHealth();
+                }
+            }
+        }
+        return 0;
+    }
 }

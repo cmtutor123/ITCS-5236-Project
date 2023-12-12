@@ -284,8 +284,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerManager currentPlayer = playerManagers[playerIndex];
         if (currentPlayer == null) return 0;
-        else if (!currentPlayer.HasPlayerObject()) return 0;
-        else return currentPlayer.GetPlayerShip().GetComponent<Health>().GetHealth();
+        else return currentPlayer.GetHealth();
     }
     public float GetBaseHealth(){
         return playerBase.GetComponent<Health>().GetHealth();

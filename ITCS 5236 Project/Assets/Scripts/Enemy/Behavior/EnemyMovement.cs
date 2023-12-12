@@ -113,7 +113,7 @@ public class EnemyMovement : MonoBehaviour
             targetTransform = null;
         }*/
 
-        if(targetTransform == null && gameObject.tag == "EnemyDrop") {
+        if(targetTransform == null /*&& gameObject.tag == "EnemyDrop"*/) {
             print("Escaping due to having no target transform");
             Escape();
         }

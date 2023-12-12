@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerManager != null) playerManager.RespawnPlayer();
         Destroy(gameObject);
+        if (tether != null) Destroy(tether);
     }
 
     public void UpdateStats()
