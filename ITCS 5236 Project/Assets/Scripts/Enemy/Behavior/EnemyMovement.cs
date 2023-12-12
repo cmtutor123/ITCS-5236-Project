@@ -211,7 +211,6 @@ public class EnemyMovement : MonoBehaviour
 
             Destroy(gameObject);
             Debug.Log("Enemy outside of bounds");
-            Instantiate(enemyToSpawn, myTransform.position, Quaternion.identity);
         }
     }
 
