@@ -14,6 +14,7 @@ public class Cluster : MonoBehaviour
     private int clusterNumbers;
    // [SerializeField] int carryCapacity;
     [SerializeField] GameObject centroidPrefab;
+    public int centroidIndex;
 
     // Start is called before the first frame update
     void Start() {
@@ -140,7 +141,7 @@ public class Cluster : MonoBehaviour
             clusterDone = CentroidsInRange(centroids, oldCentroids, centroidChangeRange);
         }
 
-        for (int i = 0; i < clusters.Count; i++) {
+       /* for (int i = 0; i < clusters.Count; i++) {
              print("cyan is cluster 0");
              print("magenta is cluster 1");
              print("yellow is cluster 2");
@@ -156,7 +157,7 @@ public class Cluster : MonoBehaviour
                     drop.GetComponent<Renderer>().material.color = Color.yellow;
                 }
             }
-        }
+        }*/
 
         finalClusters = clusters;
         return centroids;
@@ -273,15 +274,17 @@ public class Cluster : MonoBehaviour
         
         // Test code for enemy movement
         GameObject destination;
-        float bestDistance = Mathf.Infinity;
+        float bestDestination = Mathf.NegativeInfinity;
         int index = 0;
 
         for(int i = 0; i < clusterNumbers; i++) {
             if(finalClusters[i].Count != 0) {
                 float distance = EuclideanDistance(myTransform.position, centroids[i].transform.position);
                 print(i + " cluster distance = " + distance);
-                if(distance < bestDistance) {
-                    bestDistance = distance;
+                int numberInCluster = finalClusters[i].Count;
+                float destinationWeight = numberInCluster - distance;
+                if(destinationWeight > bestDestination) {
+                    bestDestination = destinationWeight;
                     index = i;
                 }
             }
@@ -289,6 +292,7 @@ public class Cluster : MonoBehaviour
 
         destination = centroids[index];
         //destination.GetComponent<Renderer>().material.color = Color.green;
+        centroidIndex = index;
 
         print("going to centroid " + index);
         return destination;
