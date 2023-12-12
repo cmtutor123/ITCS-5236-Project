@@ -198,4 +198,14 @@ public class PlayerManager : MonoBehaviour
             SpawnPlayer();
         }
     }
+
+    public void DestroyPlayer()
+    {
+        if (hasPlayerObject)
+        {
+            Destroy(playerShip);
+            playerShip = null;
+            hasPlayerObject = false;
+        }
+    }
 }

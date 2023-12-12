@@ -18,6 +18,7 @@ public class PlayerBaseManager : MonoBehaviour
 
     private void Update()
     {
+        return;
         if (inWave && currentResources >= neededResources)
         {
             EndWave();
@@ -45,5 +46,10 @@ public class PlayerBaseManager : MonoBehaviour
     public void AddResources(int amount)
     {
         currentResources += Mathf.Clamp(amount, 0, int.MaxValue - currentResources);
+        Debug.Log("Resources: " + currentResources + "/" + neededResources);
+        if (currentResources >= neededResources)
+        {
+            EndWave();
+        }
     }
 }

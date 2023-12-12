@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> prefabEnemies;
     //private Cluster clusterAlgorith;
 
-    private GameObject playerBaseManager;
+    private GameObject playerBase;
+    private PlayerBaseManager playerBaseManager;
 
     private float enemySpawnDelay;
     private float enemyCap;
@@ -122,6 +123,7 @@ public class GameManager : MonoBehaviour
     {
         enemyCap = 5 + Mathf.Clamp(currentWave / 2, 0, 10);
         enemySpawnDelay = BASE_ENEMY_SPAWN_DELAY - 0.2f * Mathf.Clamp(currentWave, 0, 20);
+        playerBaseManager.StartWave(Mathf.Clamp(20 + 2 * currentWave, 20, 100));
         yield return InitialPlayerSpawn();
         inRound = true;
         yield return StartEnemyWaves(currentWave);
@@ -131,6 +133,10 @@ public class GameManager : MonoBehaviour
     {
         inRound = false;
         currentWave++;
+        DestroyPlayers();
+        DestroyEnemies();
+        DestroyDrops();
+        UpgradeSelect();
     }
 
     public void EndGame(){
@@ -221,7 +227,7 @@ public class GameManager : MonoBehaviour
 
             case "EnemyBase":
                 Debug.Log("EnemyBase created");
-                targetTransform = playerBaseManager.transform; 
+                targetTransform = playerBase.transform; 
                 break;
 
             case "EnemyDrop":
@@ -245,7 +251,8 @@ public class GameManager : MonoBehaviour
 
     public void SpawnPlayerBase()
     {
-        playerBaseManager = Instantiate(prefabPlayerBase, Vector2.zero, Quaternion.identity);
+        playerBase = Instantiate(prefabPlayerBase, Vector2.zero, Quaternion.identity);
+        playerBaseManager = playerBase.GetComponent<PlayerBaseManager>();
     }
 
 
@@ -281,9 +288,41 @@ public class GameManager : MonoBehaviour
         else return currentPlayer.GetPlayerShip().GetComponent<Health>().GetHealth();
     }
     public float GetBaseHealth(){
-        return playerBaseManager.GetComponent<Health>().GetHealth();
+        return playerBase.GetComponent<Health>().GetHealth();
     }
     public void RestartGame(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void DestroyPlayers()
+    {
+        foreach (PlayerManager playerManager in playerManagers)
+        {
+            if (playerManager != null)
+            {
+                playerManager.DestroyPlayer();
+            }
+        }
+    }
+
+    public void DestroyEnemies()
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+    }
+
+    public void DestroyDrops()
+    {
+        foreach (GameObject drop in drops)
+        {
+            Destroy(drop);
+        }
+    }
+
+    public void UpgradeSelect()
+    {
+        Debug.Log("Start Upgrade Select");
     }
 }
