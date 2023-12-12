@@ -1,0 +1,37 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="UpgradePanel" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="UpgradeSelect" style="flex-grow: 1; flex-direction: column; justify-content: space-between; flex-wrap: nowrap; align-items: flex-start; align-self: stretch;">
+            <ui:VisualElement name="Window" style="flex-grow: 0.8; flex-basis: 0; flex-shrink: 0.8; flex-wrap: nowrap;">
+                <ui:VisualElement name="PlayerNumber" style="flex-grow: 1;">
+                    <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PlayerNumberLabel" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Options" style="flex-grow: 1;">
+                    <ui:VisualElement name="Option" style="flex-grow: 1; flex-direction: column;">
+                        <ui:VisualElement name="Background" style="flex-grow: 1;">
+                            <ui:VisualElement name="Foreground" style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" />
+                                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Option" style="flex-grow: 1; flex-direction: column;">
+                        <ui:VisualElement name="Background" style="flex-grow: 1;">
+                            <ui:VisualElement name="Foreground" style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" />
+                                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                    <ui:VisualElement name="Option" style="flex-grow: 1; flex-direction: column;">
+                        <ui:VisualElement name="Background" style="flex-grow: 1;">
+                            <ui:VisualElement name="Foreground" style="flex-grow: 1;">
+                                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" />
+                                <ui:Label tabindex="-1" text="Label" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" />
+                            </ui:VisualElement>
+                        </ui:VisualElement>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
