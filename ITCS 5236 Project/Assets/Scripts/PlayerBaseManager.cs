@@ -18,7 +18,6 @@ public class PlayerBaseManager : MonoBehaviour
 
     private void Update()
     {
-        return;
         if (inWave && currentResources >= neededResources)
         {
             EndWave();

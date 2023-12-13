@@ -14,14 +14,18 @@ public class UIControl : MonoBehaviour
     private VisualElement settingsScreen;
     private VisualElement selectScreen;
     private VisualElement creditsScreen;
+    private VisualElement upgradeScreen;
     private VisualElement background;
     private VisualElement inGame;
     private VisualElement endGame;
     private VisualElement[] readyB;
+    private VisualElement[] playerUpgrades;
+    private Button[] playerUpChoices;
     private VisualElement[] shipB;
     private ProgressBar[] playerHP;
     private ProgressBar baseHP;
     private Label[] playerNames;
+    private Label[] abilityText;
     private VisualElement[] playerHUD;
     int playersJoined = 0;
     int playersReady = 0;
@@ -39,6 +43,7 @@ public class UIControl : MonoBehaviour
         settingsScreen = root.Q<VisualElement>("SettingsMenu");
         creditsScreen = root.Q<VisualElement>("CreditsMenu");
         selectScreen = root.Q<VisualElement>("SelectMenu");
+        upgradeScreen = root.Q<VisualElement>("UpgradeMenu");
         inGame = root.Q<VisualElement>("InGame");
         endGame = root.Q<VisualElement>("Endgame");
 
@@ -60,6 +65,15 @@ public class UIControl : MonoBehaviour
         shipB[1]= readyB[1].Q<VisualElement>("S2");
         shipB[2]= readyB[2].Q<VisualElement>("S3");
         shipB[3]= readyB[3].Q<VisualElement>("S4");
+        
+        //Player Upgrade sections
+        playerUpgrades = new VisualElement[4];
+        playerUpgrades[0] = upgradeScreen.Q<VisualElement>("P1U");
+        playerUpgrades[1] = upgradeScreen.Q<VisualElement>("P2U");
+        playerUpgrades[2] = upgradeScreen.Q<VisualElement>("P3U");
+        playerUpgrades[3] = upgradeScreen.Q<VisualElement>("P4U");
+        
+        
 
         playerHUD = new VisualElement[4];
         playerHUD[0] = inGame.Q<VisualElement>("P1");
@@ -86,6 +100,16 @@ public class UIControl : MonoBehaviour
         Button backButton = creditsScreen.Q<Button>("Back");
         Button back2Button = settingsScreen.Q<Button>("Back");
         Button restartButton = endGame.Q<Button>("Restart");
+
+        playerUpChoices = new Button[12];
+        abilityText = new Label[12];
+        for(int i = 0; i < 12; i++){
+            playerUpChoices[i] = playerUpgrades[i/3].Q<Button>("P" + ((i%3)+1) + "A" + ((i/3)+1) + "B");
+            abilityText[i] = playerUpgrades[i/3].Q<Label>("P" + ((i%3)+1) + "A" + ((i/3)+1));
+            playerUpChoices[i].RegisterCallback<ClickEvent>(ev => {
+                //gameManager.UpgradePlayer((i/3), (i%3));
+            });
+        }
 
         startButton.RegisterCallback<ClickEvent>(ev => {
             startScreen.style.display = DisplayStyle.None;
@@ -161,11 +185,13 @@ public class UIControl : MonoBehaviour
             if (i < playersJoined)
             {
                 selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.Flex;
+                upgradeScreen.Q<VisualElement>("P" + (i + 1) + "U").style.display = DisplayStyle.Flex;
                 shipB[i].style.backgroundImage = new StyleBackground(Resources.Load<Sprite>("Ship1"));
             }
             else
             {
                 selectScreen.Q<VisualElement>("Player" + (i + 1)).style.display = DisplayStyle.None;
+                upgradeScreen.Q<VisualElement>("P" + (i + 1) + "U").style.display = DisplayStyle.None;
             }
         }
     }
@@ -224,5 +250,10 @@ public class UIControl : MonoBehaviour
         background.style.display = DisplayStyle.Flex;
         inGame.style.display = DisplayStyle.None;
         endGame.style.display = DisplayStyle.Flex;
+    }
+
+    public void SetAbilityText(Label abilityText, string title, string desc)
+    {
+        abilityText.text = "<b>" + title + "</b>\n\n" + desc;
     }
 }

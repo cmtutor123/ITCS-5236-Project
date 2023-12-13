@@ -1,3 +1,33 @@
+.AbilityButton {
+    flex-grow: 1;
+    align-self: stretch;
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    justify-content: center;
+    padding-top: 1%;
+    padding-right: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+}
+
+.AbilityText {
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&guid=e4e32a6f8f3de46bcb86acc3c6fbb648&type=3#Ubuntu-Bold');
+    -unity-font-definition: initial;
+    -unity-font-style: normal;
+    font-size: 100%;
+    -unity-text-align: middle-center;
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+    margin-left: 1%;
+    flex-grow: 1;
+    -unity-background-scale-mode: stretch-to-fill;
+    flex-shrink: 0;
+    white-space: normal;
+}
+
 .basebars {
     border-top-width: 0;
     border-right-width: 0;
