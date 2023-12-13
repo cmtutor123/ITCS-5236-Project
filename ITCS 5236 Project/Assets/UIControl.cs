@@ -105,9 +105,9 @@ public class UIControl : MonoBehaviour
         abilityText = new Label[12];
         for(int i = 0; i < 12; i++){
             Debug.Log(i);
-            playerUpChoices[i] = playerUpgrades[i/3].Q<Button>("P" + ((i/3)+1) + "A" + ((i%3)+1) + "B");
-			Debug.Log(playerUpChoices[i]);
-            abilityText[i] = playerUpgrades[i/3].Q<Label>("P" + ((i/3)+1) + "A" + ((i%3)+1));
+            playerUpChoices[i] = playerUpgrades[i / 3].Q<Button>("P" + ((i / 3) + 1) + "A" + ((i % 3) + 1) + "B");
+            Debug.Log(playerUpChoices[i]);
+            abilityText[i] = playerUpgrades[i / 3].Q<Label>("P" + ((i / 3) + 1) + "A" + ((i % 3) + 1));
             playerUpChoices[i].RegisterCallback<ClickEvent>(ev => {
                 //gameManager.UpgradePlayer((i/3), (i%3));
             });
