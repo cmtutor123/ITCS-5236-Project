@@ -43,7 +43,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     public GameObject GetPlayerShip()
@@ -103,10 +103,10 @@ public class PlayerManager : MonoBehaviour
     public void OnShoot(InputAction.CallbackContext context)
     {
         //Debug.Log("Shoot Button Pressed");
-        if(context.performed){
+        if (context.performed) {
             if (hasPlayerObject) playerShipController.ShootOnPerformed(context);
         }
-        if(context.canceled){
+        if (context.canceled) {
             if (hasPlayerObject) playerShipController.ShootOnCanceled(context);
         }
     }
@@ -127,7 +127,7 @@ public class PlayerManager : MonoBehaviour
             //Debug.Log("Tether Button Pressed");
             if (hasPlayerObject) playerShipController.TetherOnPerformed(context);
         }
-        if(context.canceled){
+        if (context.canceled) {
             if (hasPlayerObject) playerShipController.TetherOnCanceled(context);
         }
     }
@@ -153,7 +153,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnButtonChange(InputAction.CallbackContext context)
     {
-		if (context.performed)
+        if (context.performed)
         {
             //Debug.Log("Change Button Pressed");
             if (onPlayerSelect && !isReady) ChangeShip(context.ReadValue<Vector2>().x);
@@ -264,6 +264,7 @@ public class PlayerManager : MonoBehaviour
         }
         //Debug.Log("Upgrade Count: " + selectedUpgrades.Count);
         CheckUpgradeRequirements();
+        UpdateStats();
     }
 
     public void CheckUpgradeRequirements()
@@ -302,13 +303,8 @@ public class PlayerManager : MonoBehaviour
 
     public void UpdateStats()
     {
-        stats.Clear();
-        List<(string, float)> classStats = playerClass.GetStats();
-        foreach((string, float) stat in classStats)
-        {
-            stats.Add(stat.Item1, stat.Item2);
-        }
-        foreach(Upgrade upgrade in selectedUpgrades)
+        SetBaseStats();
+        foreach (Upgrade upgrade in selectedUpgrades)
         {
             if (upgrade.stats == null || upgrade.modifiers == null || upgrade.stats.Count == 0 || upgrade.modifiers.Count == 0 || upgrade.stats.Count != upgrade.modifiers.Count) { }
             else
@@ -328,5 +324,11 @@ public class PlayerManager : MonoBehaviour
         {
             playerShipController.UpdateStats(stats);
         }
+    }
+
+    public void SetBaseStats()
+    {
+        stats.Clear();
+
     }
 }
