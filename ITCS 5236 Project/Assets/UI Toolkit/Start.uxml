@@ -54,7 +54,7 @@
     </ui:VisualElement>
     <ui:VisualElement name="InGame" style="flex-grow: 0; display: none; width: 100%; height: 100%; position: absolute; flex-shrink: 0;">
         <ui:Label tabindex="-1" text="Wave ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" class="Title" style="-unity-text-align: upper-center; align-self: auto; justify-content: flex-start; position: absolute; left: 50%; top: auto; right: 50%;">
-            <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" class="resource" style="position: relative; left: auto; right: auto; bottom: auto; top: 25%;" />
+            <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" class="resource" style="position: relative; left: auto; right: auto; bottom: auto; top: 25%; display: none;" />
         </ui:Label>
         <ui:VisualElement name="P1" style="flex-direction: row; min-width: 25%; max-width: 25%; flex-grow: 0; display: flex; position: absolute; left: 0; top: 0; flex-shrink: 0;">
             <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1N" class="Name" style="-unity-text-align: upper-left;" />
