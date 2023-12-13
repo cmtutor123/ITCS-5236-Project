@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public float waveProgress = 0;
+
     private const int MAX_PLAYERS = 4;
 
     private const float PLAYER_SPAWN_DELAY = 0.5f;
@@ -413,5 +415,10 @@ public class GameManager : MonoBehaviour
                 playerManager.UnjoinPlayer();
             }
         }
+    }
+
+    public int GetScore()
+    {
+        return ((int) (100 * (currentWave + waveProgress))) * 10;
     }
 }
