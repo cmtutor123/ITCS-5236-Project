@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
 
     private int playerId;
 
-    private bool hasPlayerObject;
+    public bool hasPlayerObject;
 
     private bool isReady = false;
     private bool onPlayerSelect = true;
@@ -68,11 +68,12 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnPlayer()
     {
+        Debug.Log("Spawn Player Ship");
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
         playerShipController.playerManager = this;
-        playerShipController.UpdateShipStats();
         hasPlayerObject = true;
+        UpdateStats();
     }
 
     public void OnAim(InputAction.CallbackContext context)
@@ -232,6 +233,7 @@ public class PlayerManager : MonoBehaviour
 
     public void InitializeUpgradeLists()
     {
+        Debug.Log("Initializing Upgrade List");
         foreach (Upgrade upgrade in upgradesAll)
         {
             if (upgrade.requirements == null || upgrade.requirements.Count == 0)
@@ -243,6 +245,7 @@ public class PlayerManager : MonoBehaviour
                 lockedUpgrades.Add(upgrade);
             }
         }
+        Debug.Log("Upgrade List Initialized");
     }
 
     public void SelectUpgrade(int index)
@@ -329,6 +332,13 @@ public class PlayerManager : MonoBehaviour
     public void SetBaseStats()
     {
         stats.Clear();
-
+        stats.Add("damage", 25);
+        stats.Add("fireRate", 2.5f);
+        stats.Add("health", 100);
+        stats.Add("damageResist", 1);
+        stats.Add("regen", 0.04f);
+        stats.Add("tetherCount", 1);
+        stats.Add("maxSpeed", 15);
+        stats.Add("thrust", 10);
     }
 }

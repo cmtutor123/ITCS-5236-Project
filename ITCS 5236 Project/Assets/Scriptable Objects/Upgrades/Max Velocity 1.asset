@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Aerodynamic
   upgradeDescription: Allows your ship to travel at faster speeds.
   stats:
-  - '"maxSpeed"'
+  - maxSpeed
   modifiers:
   - 1.5
   requirements:

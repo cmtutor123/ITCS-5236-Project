@@ -26,6 +26,8 @@ public class PlayerBaseManager : MonoBehaviour
 
     public void StartWave(int resources)
     {
+        Debug.Log("Start Wave");
+        Debug.Log("Resources Needed: " + resources);
         currentResources = 0;
         neededResources = resources;
         inWave = true;

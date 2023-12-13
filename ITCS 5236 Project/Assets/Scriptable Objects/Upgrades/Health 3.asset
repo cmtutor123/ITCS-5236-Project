@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Health Up
   upgradeDescription: Increase your max health.
   stats:
-  - '"health"'
+  - health
   modifiers:
   - 1.25
   requirements:

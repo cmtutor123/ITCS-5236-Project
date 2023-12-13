@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour
     {
         if(tetherAmount > 0)
         {
+            if (transform == null) return;
             foreach(RaycastHit2D hit in Physics2D.CircleCastAll(transform.position, 5f, Vector2.zero))
             {
                 if(hit.collider.gameObject.tag == "Drop" && tetherAmount > 0 && !hit.collider.gameObject.GetComponent<Tether>().tethered)
@@ -208,60 +209,50 @@ public class PlayerController : MonoBehaviour
 
     public void UpdateStats(Dictionary<string, float> stats)
     {
+        Debug.Log("Update Controller Stats");
         this.stats = stats;
         UpdateShipStats();
-        /*
-        Visuals
-        ship sprite
-        color
-        Ship Stats
-        thrustPower
-        maxVelocity
-        knockbackResistance
-        damageResistance
-        tetherCount
-        tetherEfficiency
-        fireRate
-        maxHealth
-        Projectile Stats
-        pierce
-        bounce
-        homing
-        aoe
-        range
-        knockback
-        proximityDestroy
-        destory aoe
-        healPlayer
-        stunChance
-        stunDuration
-        dot damage
-        dot rate
-        dot duration
-        Ability Stats
-        cooldown
-        duration
-        speed increate
-        fire rate increase
-        damage increase
-        knockback immunity
-        damage immunity
-        spawn object
-        bomb
-        aoe
-        damage
-        knockback
-        delay
-        turret
-        radius
-        damage
-        rate of fire
-        tether efficiency
-        */
     }
 
     public void UpdateShipStats()
     {
+        Debug.Log("Update Ship Stats");
+        foreach (string stat in stats.Keys)
+        {
+            Debug.Log(stat + ": " + stats[stat]);
+        }
+        bulletDamage = GetStat("damage");
+        shootDelay = 1 / GetStat("fireRate");
+        Health health = GetComponent<Health>();
+        if (health != null)
+        {
+            health.SetMaxHealth(GetStat("health"));
+            health.SetRegen(GetStat("regen"));
+            health.SetDamageMultiplier(GetStat("damageResist"));
+        }
+        maxTethers = (int) GetStat("tetherCount");
+        initialSpeed = GetStat("thrust");
+        moveSpeed = GetStat("thrust");
+        maxMoveSpeed = GetStat("maxSpeed");
+    }
 
+    public float GetStat(string stat)
+    {
+        Debug.Log("Getting Stat: " + stat);
+        if (stats.ContainsKey(stat))
+        {
+            Debug.Log("Key Found");
+            return stats[stat];
+        }
+        else
+        {
+            Debug.Log("Key Not Found");
+            return 0;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        playerManager.hasPlayerObject = false;
     }
 }

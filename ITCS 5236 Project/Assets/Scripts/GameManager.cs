@@ -118,6 +118,7 @@ public class GameManager : MonoBehaviour
     {
         SpawnPlayerBase();
         uiControl.gameStarted = true;
+        Debug.Log("Start Game");
         foreach (PlayerManager playerManager in playerManagers)
         {
             if (playerManager != null)
@@ -130,10 +131,12 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartRound()
     {
+        Debug.Log("Start Round");
         enemyCap = 5 + Mathf.Clamp(currentWave / 2, 0, 10);
+        Debug.Log("Enemy Cap: " + enemyCap);
         enemySpawnDelay = BASE_ENEMY_SPAWN_DELAY - 0.2f * Mathf.Clamp(currentWave, 0, 20);
-        //playerBaseManager.StartWave(Mathf.Clamp(20 + 2 * currentWave, 20, 100));
-        playerBaseManager.StartWave(3);
+        Debug.Log("Enemy Spawn Delay: " + enemySpawnDelay);
+        playerBaseManager.StartWave(Mathf.Clamp(5 + currentWave, 5, 15));
         yield return InitialPlayerSpawn();
         inRound = true;
         yield return StartEnemyWaves(currentWave);
@@ -155,6 +158,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator InitialPlayerSpawn()
     {
+        Debug.Log("Spawn All Players");
         yield return new WaitForSeconds(PLAYER_SPAWN_DELAY);
         if (PlayerExists(0)) SpawnPlayer(0);
         yield return new WaitForSeconds(PLAYER_SPAWN_DELAY);
@@ -168,8 +172,9 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartEnemyWaves(int round)
     {
+        Debug.Log("Starting Enemy Wave");
         if (InRound(round)) SpawnEnemies(round);
-        //Debug.Log("Enemy Count: " + enemies.Count);
+        Debug.Log("Enemy Count: " + enemies.Count);
         yield return new WaitForSeconds(enemySpawnDelay);
         if (InRound(round) && enemies.Count < enemyCap) yield return StartEnemyWaves(round);
     }
@@ -181,16 +186,19 @@ public class GameManager : MonoBehaviour
 
     public bool PlayerExists(int id)
     {
+        Debug.Log("Player " + (id + 1) + " Exists: " + playerManagers[id] != null);
         return playerManagers[id] != null;
     }
 
     public void SpawnPlayer(int id)
     {
+        Debug.Log("Spawn Player " + (id + 1));
         playerManagers[id].SpawnPlayer();
     }
 
     public void SpawnEnemies(int wave)
     {
+        Debug.Log("Spawning Enemies");
         if (prefabEnemies.Count == 0) return;
         Vector2 spawnLocation;
         if (Random.Range(0, 2) == 0)
