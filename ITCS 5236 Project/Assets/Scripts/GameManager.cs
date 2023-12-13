@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartEnemyWaves(int round)
     {
         if (InRound(round)) SpawnEnemies(round);
-        Debug.Log("Enemy Count: " + enemies.Count);
+        //Debug.Log("Enemy Count: " + enemies.Count);
         yield return new WaitForSeconds(enemySpawnDelay);
         if (InRound(round) && enemies.Count < enemyCap) yield return StartEnemyWaves(round);
     }
@@ -228,23 +228,23 @@ public class GameManager : MonoBehaviour
 
         // newEnemy = Instantiate(prefabEnemies[Random.Range(0, prefabEnemies.Count)], spawnLocation, Quaternion.identity);
 
-        Debug.Log(newEnemy.tag);
+        //Debug.Log(newEnemy.tag);
         switch(newEnemy.tag) {
             case "EnemyPlayer":
-                Debug.Log("EnemyPlayer created");
+                //Debug.Log("EnemyPlayer created");
                 targetTransform = null;
                 break;
 
             case "EnemyBase":
-                Debug.Log("EnemyBase created");
+                //Debug.Log("EnemyBase created");
                 targetTransform = playerBase.transform; 
                 break;
 
             case "EnemyDrop":
 
-                Debug.Log(drops.Count);
+                //Debug.Log(drops.Count);
                 if(drops.Count > 0) {
-                    Debug.Log("EnemyDrop created");
+                    //Debug.Log("EnemyDrop created");
                     //targetTransform = clusterAlgorith.GetDestination().transform;
                 }
                 else {
@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
                 break;
 
             default:
-                Debug.Log("ERROR: Default created");
+                //Debug.Log("ERROR: Default created");
                 targetTransform = null;
                 break;
         }
@@ -332,7 +332,7 @@ public class GameManager : MonoBehaviour
 
     public void UpgradeSelect()
     {
-        Debug.Log("Start Upgrade Select");
+        //Debug.Log("Start Upgrade Select");
         for (int i = 0; i < playerManagers.Length; i++)
         {
             PlayerManager playerManager = playerManagers[i];
@@ -361,18 +361,32 @@ public class GameManager : MonoBehaviour
         uiControl.ShowUpgradeSelect();
     }
 
+    public void HideUpgrades(int player)
+    {
+        PlayerManager playerManager = playerManagers[player];
+        if (playerManager != null)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                int k = player * 3 + j;
+                uiControl.SetAbilityText(k, "", "");
+            }
+        }
+    }
+
     public void UpgradeSelected(int player, int upgrade)
     {
-        Debug.Log("Player = " + player + " | Upgrade = " + upgrade);
+        //Debug.Log("Player = " + player + " | Upgrade = " + upgrade);
         if (upgradeSelected[player])
         {
-            Debug.Log("Upgrade Already Selected");
+            //Debug.Log("Upgrade Already Selected");
             return;
         }
         if (playerManagers[player] != null)
         {
             playerManagers[player].SelectUpgrade(upgrade);
             upgradeSelected[player] = true;
+            HideUpgrades(player);
         }
         if (upgradeSelected[0] && upgradeSelected[1] && upgradeSelected[2] && upgradeSelected[3])
         {

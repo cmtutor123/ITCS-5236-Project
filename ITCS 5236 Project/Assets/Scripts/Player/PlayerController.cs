@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour
     void Shoot(){
             if(canShoot){
                 canShoot = false;
-                Debug.Log("Fire");
+                //Debug.Log("Fire");
                 Bullet _temp = Instantiate(bullet, transform.position, transform.rotation);
                 _temp.GetComponent<Bullet>().setPlayerBullet(true);
                 _temp.GetComponent<Bullet>().source = gameObject;
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
     }
     public void TetherOnCanceled(InputAction.CallbackContext context)
     {
-        Debug.Log("Tether Canceled");
+        //Debug.Log("Tether Canceled");
         tetherAmount = maxTethers;
         foreach(GameObject tether in tethers)
         {

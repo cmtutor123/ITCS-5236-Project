@@ -102,7 +102,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnShoot(InputAction.CallbackContext context)
     {
-        Debug.Log("Shoot Button Pressed");
+        //Debug.Log("Shoot Button Pressed");
         if(context.performed){
             if (hasPlayerObject) playerShipController.ShootOnPerformed(context);
         }
@@ -115,7 +115,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Ability Button Pressed");
+            //Debug.Log("Ability Button Pressed");
             if (hasPlayerObject) playerShipController.AbilityOnPerformed(context);
         }
     }
@@ -124,7 +124,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Tether Button Pressed");
+            //Debug.Log("Tether Button Pressed");
             if (hasPlayerObject) playerShipController.TetherOnPerformed(context);
         }
         if(context.canceled){
@@ -136,7 +136,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Select Button Pressed");
+            //Debug.Log("Select Button Pressed");
             if (onPlayerSelect && !isReady) ReadyPlayer();
         }
     }
@@ -145,7 +145,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Back Button Pressed");
+            //Debug.Log("Back Button Pressed");
             if (onPlayerSelect && isReady) UnreadyPlayer();
             else if (onPlayerSelect && !isReady) UnjoinPlayer();
         }
@@ -262,7 +262,7 @@ public class PlayerManager : MonoBehaviour
             possibleUpgrades.Add(upgradeSelection[0]);
             upgradeSelection.RemoveAt(0);
         }
-        Debug.Log("Upgrade Count: " + selectedUpgrades.Count);
+        //Debug.Log("Upgrade Count: " + selectedUpgrades.Count);
         CheckUpgradeRequirements();
     }
 
@@ -296,7 +296,7 @@ public class PlayerManager : MonoBehaviour
             possibleUpgrades.Remove(selection);
             upgradeSelection.Add(selection);
         }
-        Debug.Log("Selection Count: " + upgradeSelection.Count + " From: " + possibleUpgrades.Count);
+        //Debug.Log("Selection Count: " + upgradeSelection.Count + " From: " + possibleUpgrades.Count);
         return upgradeSelection;
     }
 
