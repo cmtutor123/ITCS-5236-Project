@@ -123,7 +123,8 @@ public class GameManager : MonoBehaviour
     {
         enemyCap = 5 + Mathf.Clamp(currentWave / 2, 0, 10);
         enemySpawnDelay = BASE_ENEMY_SPAWN_DELAY - 0.2f * Mathf.Clamp(currentWave, 0, 20);
-        playerBaseManager.StartWave(Mathf.Clamp(20 + 2 * currentWave, 20, 100));
+        //playerBaseManager.StartWave(Mathf.Clamp(20 + 2 * currentWave, 20, 100));
+        playerBaseManager.StartWave(3);
         yield return InitialPlayerSpawn();
         inRound = true;
         yield return StartEnemyWaves(currentWave);
@@ -323,5 +324,26 @@ public class GameManager : MonoBehaviour
     public void UpgradeSelect()
     {
         Debug.Log("Start Upgrade Select");
+        for (int i = 0; i < playerManagers.Length; i++)
+        {
+            PlayerManager playerManager = playerManagers[i];
+            if (playerManager != null)
+            {
+                List<Upgrade> upgradeSelection = playerManager.GetUpgradeSelection();
+                for (int j = 0; j < 3; j++)
+                {
+                    int k = i * 3 + j;
+                    if (j < upgradeSelection.Count)
+                    {
+                        uiControl.SetAbilityText(k, upgradeSelection[j].upgradeName, upgradeSelection[j].upgradeDescription);
+                    }
+                    else
+                    {
+                        uiControl.SetAbilityText(k, "Dud", "No Effect");
+                    }
+                }
+            }
+        }
+        uiControl.ShowUpgradeSelect();
     }
 }

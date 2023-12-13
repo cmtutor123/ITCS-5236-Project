@@ -106,6 +106,8 @@ public class UIControl : MonoBehaviour
         for(int i = 0; i < 12; i++){
             playerUpChoices[i] = playerUpgrades[i/3].Q<Button>("P" + ((i%3)+1) + "A" + ((i/3)+1) + "B");
             abilityText[i] = playerUpgrades[i/3].Q<Label>("P" + ((i%3)+1) + "A" + ((i/3)+1));
+            Debug.Log(i);
+            Debug.Log(playerUpChoices[i] == null);
             playerUpChoices[i].RegisterCallback<ClickEvent>(ev => {
                 //gameManager.UpgradePlayer((i/3), (i%3));
             });
@@ -255,5 +257,22 @@ public class UIControl : MonoBehaviour
     public void SetAbilityText(Label abilityText, string title, string desc)
     {
         abilityText.text = "<b>" + title + "</b>\n\n" + desc;
+    }
+
+    public void SetAbilityText(int index, string title, string desc)
+    {
+        SetAbilityText(abilityText[index], title, desc);
+    }
+
+    public void ShowUpgradeSelect()
+    {
+        inGame.style.display = DisplayStyle.None;
+        upgradeScreen.style.display = DisplayStyle.Flex;
+    }
+
+    public void HideUpgradeSelect()
+    {
+        inGame.style.display = DisplayStyle.Flex;
+        upgradeScreen.style.display = DisplayStyle.None;
     }
 }

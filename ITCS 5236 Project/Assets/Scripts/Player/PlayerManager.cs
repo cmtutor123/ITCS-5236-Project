@@ -153,6 +153,7 @@ public class PlayerManager : MonoBehaviour
 
     public void OnButtonChange(InputAction.CallbackContext context)
     {
+        return;
 		if (context.performed)
         {
             //Debug.Log("Change Button Pressed");
