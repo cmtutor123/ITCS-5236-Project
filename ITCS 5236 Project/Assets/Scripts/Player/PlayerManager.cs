@@ -28,6 +28,11 @@ public class PlayerManager : MonoBehaviour
 
     public List<Upgrade> possibleUpgrades = new List<Upgrade>();
     public List<Upgrade> selectedUpgrades = new List<Upgrade>();
+    public List<Upgrade> lockedUpgrades = new List<Upgrade>();
+    public List<Upgrade> upgradesAll = new List<Upgrade>();
+    public List<Upgrade> upgradeSelection = new List<Upgrade>();
+
+    public Dictionary<string, float> stats = new Dictionary<string, float>();
 
     void Start()
     {
@@ -66,7 +71,7 @@ public class PlayerManager : MonoBehaviour
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
         playerShipController.playerManager = this;
-        playerShipController.UpdateStats();
+        playerShipController.UpdateShipStats();
         hasPlayerObject = true;
     }
 
@@ -223,5 +228,103 @@ public class PlayerManager : MonoBehaviour
             }
         }
         return 0;
+    }
+
+    public void InitializeUpgradeLists()
+    {
+        foreach (Upgrade upgrade in upgradesAll)
+        {
+            if (upgrade.requirements == null || upgrade.requirements.Count == 0)
+            {
+                possibleUpgrades.Add(upgrade);
+            }
+            else
+            {
+                lockedUpgrades.Add(upgrade);
+            }
+        }
+    }
+
+    public void SelectUpgrade(int index)
+    {
+        if (index < upgradeSelection.Count)
+        {
+            selectedUpgrades.Add(upgradeSelection[index]);
+            upgradeSelection.RemoveAt(index);
+        }
+        else if (upgradeSelection.Count != 0)
+        {
+            selectedUpgrades.Add(upgradeSelection[0]);
+            upgradeSelection.RemoveAt(0);
+        }
+        while (selectedUpgrades.Count > 0)
+        {
+            possibleUpgrades.Add(upgradeSelection[0]);
+            upgradeSelection.RemoveAt(0);
+        }
+        CheckUpgradeRequirements();
+    }
+
+    public void CheckUpgradeRequirements()
+    {
+        for (int i = lockedUpgrades.Count - 1; i >= 0; i--)
+        {
+            Upgrade current = lockedUpgrades[i];
+            bool met = true;
+            foreach (Upgrade requirement in current.requirements)
+            {
+                if (!selectedUpgrades.Contains(requirement))
+                {
+                    met = false;
+                    break;
+                }
+            }
+            if (met)
+            {
+                lockedUpgrades.Remove(current);
+                possibleUpgrades.Add(current);
+            }
+        }
+    }
+
+    public List<Upgrade> GetUpgradeSelection()
+    {
+        while (upgradeSelection.Count < 3 && possibleUpgrades.Count > 0)
+        {
+            Upgrade selection = possibleUpgrades[Random.Range(0, possibleUpgrades.Count)];
+            possibleUpgrades.Remove(selection);
+            upgradeSelection.Add(selection);
+        }
+        return upgradeSelection;
+    }
+
+    public void UpdateStats()
+    {
+        stats.Clear();
+        List<(string, float)> classStats = playerClass.GetStats();
+        foreach((string, float) stat in classStats)
+        {
+            stats.Add(stat.Item1, stat.Item2);
+        }
+        foreach(Upgrade upgrade in selectedUpgrades)
+        {
+            if (upgrade.stats == null || upgrade.modifiers == null || upgrade.stats.Count == 0 || upgrade.modifiers.Count == 0 || upgrade.stats.Count != upgrade.modifiers.Count) { }
+            else
+            {
+                for (int i = 0; i < upgrade.stats.Count; i++)
+                {
+                    string stat = upgrade.stats[i];
+                    if (!stats.ContainsKey(stat))
+                    {
+                        stats.Add(stat, 1);
+                    }
+                    stats[stat] *= upgrade.modifiers[i];
+                }
+            }
+        }
+        if (hasPlayerObject && playerShipController != null)
+        {
+            playerShipController.UpdateStats(stats);
+        }
     }
 }
