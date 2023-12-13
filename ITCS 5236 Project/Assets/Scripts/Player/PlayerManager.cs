@@ -295,6 +295,7 @@ public class PlayerManager : MonoBehaviour
             possibleUpgrades.Remove(selection);
             upgradeSelection.Add(selection);
         }
+        Debug.Log("Selection Count: " + upgradeSelection.Count + " From: " + possibleUpgrades.Count);
         return upgradeSelection;
     }
 

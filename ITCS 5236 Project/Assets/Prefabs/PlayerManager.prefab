@@ -228,3 +228,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPlayerShip: {fileID: 5300629192605111423, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
+  possibleUpgrades: []
+  selectedUpgrades: []
+  lockedUpgrades: []
+  upgradesAll:
+  - {fileID: 11400000, guid: bf6aafcc99015f14d9b145393ccc506c, type: 2}
+  - {fileID: 11400000, guid: ab943da54ac168e4c9a96312cf8b7daa, type: 2}
+  - {fileID: 11400000, guid: 4ac57f747354a9745bd0d70995abce14, type: 2}
+  - {fileID: 11400000, guid: 17b3c7af960fd3f4cb5c394f35e8deed, type: 2}
+  - {fileID: 11400000, guid: 6f5854aba7d841643bcfa3da014afdc6, type: 2}
+  - {fileID: 11400000, guid: 6fcefa9258c0af54eafe7841a655984d, type: 2}
+  - {fileID: 11400000, guid: 4eb2d2942646cc24b8cfd64de48b751d, type: 2}
+  - {fileID: 11400000, guid: 41df53d6a22401841b3af0e3bc337983, type: 2}
+  - {fileID: 11400000, guid: efc0c011c9306e342b42a918ad57adfe, type: 2}
+  - {fileID: 11400000, guid: 1c5b5df5f6cff6f46badea4929caa57e, type: 2}
+  - {fileID: 11400000, guid: 60e8c071d4d2e10478377e322fad0eb5, type: 2}
+  - {fileID: 11400000, guid: a9b87fbfa6deea24e9bbd1e93c193d45, type: 2}
+  - {fileID: 11400000, guid: de5ad4bd829c0bf40ae4a5ef7095ee0e, type: 2}
+  - {fileID: 11400000, guid: cfe8899bae39df149b680aadfee4593e, type: 2}
+  - {fileID: 11400000, guid: f7e83f03fb030e940a8b6ccdfd04d35c, type: 2}
+  - {fileID: 11400000, guid: 28b75f79c670bdf4fb5f224ab4e40742, type: 2}
+  - {fileID: 11400000, guid: 2052e941ed400f44e9af62a92d296e59, type: 2}
+  - {fileID: 11400000, guid: 519a686a19615624989952f12cffcbc2, type: 2}
+  - {fileID: 11400000, guid: 16e73d4ac9352414fb11b1148564c78e, type: 2}
+  - {fileID: 11400000, guid: 78cbe6a9f97822346a8a2d37da8b0d44, type: 2}
+  - {fileID: 11400000, guid: 97e7c7a87e65f5c4db09ef3999db111c, type: 2}
+  - {fileID: 11400000, guid: f17387532a3b0b94b96fcb5f65884da5, type: 2}
+  - {fileID: 11400000, guid: 3e330eb755db43c47a162b576e0832bf, type: 2}
+  - {fileID: 11400000, guid: 9a881bdab1618034cab391c6f2993695, type: 2}
+  - {fileID: 11400000, guid: 9865cb83e5baa3c419508df6e5c5d330, type: 2}
+  - {fileID: 11400000, guid: e6c8f1a062214a34b92e4537a2aaedd4, type: 2}
+  - {fileID: 11400000, guid: 60a96e18a5a38e74b944ba730fbd8865, type: 2}
+  - {fileID: 11400000, guid: 1843b68bee089c34f849a7bdf47c7c50, type: 2}
+  - {fileID: 11400000, guid: 4f0cf23af2ac6ed4193ce26a66a9f383, type: 2}
+  - {fileID: 11400000, guid: 74f156fb9a6dc954ea0feddf575df691, type: 2}
+  - {fileID: 11400000, guid: 385daccde0bfe8a4989fb606f6615b5a, type: 2}
+  - {fileID: 11400000, guid: a5a0ffa8453109e48b367d90b8e9c2bb, type: 2}
+  - {fileID: 11400000, guid: 88a7e7cc132583840a9cc6f14e4981a7, type: 2}
+  - {fileID: 11400000, guid: 04b52aa2015f5494398c5335611d2e3e, type: 2}
+  - {fileID: 11400000, guid: fee8069dccf39794db0bc8001e44df4f, type: 2}
+  upgradeSelection: []

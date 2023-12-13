@@ -116,6 +116,13 @@ public class GameManager : MonoBehaviour
     {
         SpawnPlayerBase();
         uiControl.gameStarted = true;
+        foreach (PlayerManager playerManager in playerManagers)
+        {
+            if (playerManager != null)
+            {
+                playerManager.InitializeUpgradeLists();
+            }
+        }
         StartCoroutine(StartRound());
     }
 
