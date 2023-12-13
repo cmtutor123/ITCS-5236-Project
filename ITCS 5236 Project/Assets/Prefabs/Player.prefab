@@ -239,11 +239,12 @@ MonoBehaviour:
   shootDelay: 0.2
   bullet: {fileID: 7113458419409050006, guid: f7b9ab290832e43cebab6951a3e29752, type: 3}
   bulletDamage: 50
-  bulletSpeed: 10
+  bulletSpeed: 20
   tetherAmount: 2
   moveSpeed: 10
   maxMoveSpeed: 15
   turnSpeed: 0.5
+  playerManager: {fileID: 0}
 --- !u!114 &7881124538300997965
 MonoBehaviour:
   m_ObjectHideFlags: 0

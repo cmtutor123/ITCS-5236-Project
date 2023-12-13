@@ -228,6 +228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPlayerShip: {fileID: 5300629192605111423, guid: a8863ce88cbdb8e4b8252bbe585ca540, type: 3}
+  hasPlayerObject: 0
   possibleUpgrades: []
   selectedUpgrades: []
   lockedUpgrades: []
@@ -259,8 +260,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1843b68bee089c34f849a7bdf47c7c50, type: 2}
   - {fileID: 11400000, guid: 4f0cf23af2ac6ed4193ce26a66a9f383, type: 2}
   - {fileID: 11400000, guid: 74f156fb9a6dc954ea0feddf575df691, type: 2}
-  - {fileID: 11400000, guid: 385daccde0bfe8a4989fb606f6615b5a, type: 2}
-  - {fileID: 11400000, guid: a5a0ffa8453109e48b367d90b8e9c2bb, type: 2}
   - {fileID: 11400000, guid: 88a7e7cc132583840a9cc6f14e4981a7, type: 2}
   - {fileID: 11400000, guid: 04b52aa2015f5494398c5335611d2e3e, type: 2}
   - {fileID: 11400000, guid: fee8069dccf39794db0bc8001e44df4f, type: 2}

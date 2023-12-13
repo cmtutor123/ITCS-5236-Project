@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Start Round");
         enemyCap = 5 + Mathf.Clamp(currentWave / 2, 0, 10);
         Debug.Log("Enemy Cap: " + enemyCap);
-        enemySpawnDelay = BASE_ENEMY_SPAWN_DELAY - 0.2f * Mathf.Clamp(currentWave, 0, 20);
+        enemySpawnDelay = BASE_ENEMY_SPAWN_DELAY - 0.4f * Mathf.Clamp(currentWave, 0, 12);
         Debug.Log("Enemy Spawn Delay: " + enemySpawnDelay);
         playerBaseManager.StartWave(Mathf.Clamp(5 + currentWave, 5, 15));
         yield return InitialPlayerSpawn();
@@ -308,6 +308,7 @@ public class GameManager : MonoBehaviour
         return playerBase.GetComponent<Health>().GetHealth();
     }
     public void RestartGame(){
+        UnjoinPlayerManagers();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -400,6 +401,17 @@ public class GameManager : MonoBehaviour
         {
             uiControl.HideUpgradeSelect();
             StartCoroutine(StartRound());
+        }
+    }
+
+    public void UnjoinPlayerManagers()
+    {
+        foreach (PlayerManager playerManager in playerManagers)
+        {
+            if (playerManager != null)
+            {
+                playerManager.UnjoinPlayer();
+            }
         }
     }
 }

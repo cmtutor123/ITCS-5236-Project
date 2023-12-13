@@ -40,6 +40,7 @@ public class Tether : MonoBehaviour
         if(tethered){
             lr.positionCount = 2;
             lr.SetPosition(0, transform.position);
+            if (tetheredTo == null) return;
             lr.SetPosition(1, tetheredTo.transform.position);
             if (rb.velocity.magnitude > maxMoveSpeed)
             {
