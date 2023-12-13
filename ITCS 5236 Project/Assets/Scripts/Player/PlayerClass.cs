@@ -30,5 +30,9 @@ public class PlayerClass : ScriptableObject
     [Header("Sprite")]
     [SerializeField] public Sprite spaceshipSprite;
 
-
+    public List<(string, float)> GetStats()
+    {
+        List<(string, float)> stats = new List<(string, float)>();
+        return stats;
+    }
 }

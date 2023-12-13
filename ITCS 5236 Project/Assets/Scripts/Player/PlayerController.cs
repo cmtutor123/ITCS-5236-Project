@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
 
     public PlayerManager playerManager;
 
+    public Dictionary<string, float> stats = new Dictionary<string, float>();
+
     private void Awake()
     {
         input = new PlayerControls();
@@ -204,8 +206,10 @@ public class PlayerController : MonoBehaviour
         if (tether != null) Destroy(tether);
     }
 
-    public void UpdateStats()
+    public void UpdateStats(Dictionary<string, float> stats)
     {
+        this.stats = stats;
+        UpdateShipStats();
         /*
         Visuals
         ship sprite
@@ -254,5 +258,10 @@ public class PlayerController : MonoBehaviour
         rate of fire
         tether efficiency
         */
+    }
+
+    public void UpdateShipStats()
+    {
+
     }
 }
