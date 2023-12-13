@@ -257,11 +257,12 @@ public class PlayerManager : MonoBehaviour
             selectedUpgrades.Add(upgradeSelection[0]);
             upgradeSelection.RemoveAt(0);
         }
-        while (selectedUpgrades.Count > 0)
+        while (upgradeSelection.Count > 0)
         {
             possibleUpgrades.Add(upgradeSelection[0]);
             upgradeSelection.RemoveAt(0);
         }
+        Debug.Log("Upgrade Count: " + selectedUpgrades.Count);
         CheckUpgradeRequirements();
     }
 

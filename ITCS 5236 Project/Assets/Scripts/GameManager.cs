@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     private float enemySpawnDelay;
     private float enemyCap;
 
+    private bool[] upgradeSelected = new bool[4];
+
     private void Start()
     {
         InitializeRegisters();
@@ -336,6 +338,7 @@ public class GameManager : MonoBehaviour
             PlayerManager playerManager = playerManagers[i];
             if (playerManager != null)
             {
+                upgradeSelected[i] = false;
                 List<Upgrade> upgradeSelection = playerManager.GetUpgradeSelection();
                 for (int j = 0; j < 3; j++)
                 {
@@ -350,7 +353,31 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                upgradeSelected[i] = true;
+            }
         }
         uiControl.ShowUpgradeSelect();
+    }
+
+    public void UpgradeSelected(int player, int upgrade)
+    {
+        Debug.Log("Player = " + player + " | Upgrade = " + upgrade);
+        if (upgradeSelected[player])
+        {
+            Debug.Log("Upgrade Already Selected");
+            return;
+        }
+        if (playerManagers[player] != null)
+        {
+            playerManagers[player].SelectUpgrade(upgrade);
+            upgradeSelected[player] = true;
+        }
+        if (upgradeSelected[0] && upgradeSelected[1] && upgradeSelected[2] && upgradeSelected[3])
+        {
+            uiControl.HideUpgradeSelect();
+            StartCoroutine(StartRound());
+        }
     }
 }
