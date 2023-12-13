@@ -43,6 +43,9 @@
                     <ui:VisualElement name="S4" class="ship" style="flex-grow: 1;" />
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-shrink: 1; align-self: stretch; height: 10%; align-items: stretch; position: absolute; bottom: 1%; width: 100%;">
+                <ui:Label tabindex="-1" text="Press Select to Confirm" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="flex-shrink: 1; flex-grow: 1; -unity-text-align: middle-center; font-size: 25%; color: rgb(255, 255, 255); margin-bottom: 1%;" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Endgame" style="flex-grow: 1; justify-content: center; align-self: auto; align-items: center; display: none; width: 100%; height: 100%; max-width: initial; max-height: initial;">
             <ui:Label tabindex="-1" text="You lose!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="width: 100%; -unity-text-align: upper-center;" />
@@ -79,50 +82,55 @@
             <ui:ProgressBar value="22" high-value="2000" name="BaseHP" style="height: 14px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="UpgradeMenu" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center; align-self: center; display: none;">
-        <ui:VisualElement name="P1U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
-            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A1B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A1" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A2B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A2" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A3B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A3" class="AbilityText" />
-            </ui:Button>
+    <ui:VisualElement name="UpgradeMenu" style="flex-grow: 1; display: none;">
+        <ui:VisualElement style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center; align-self: center; display: flex;">
+            <ui:VisualElement name="P1U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
+                <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A1B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A1" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A2B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A2" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A3B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1A3" class="AbilityText" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="P2U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
+                <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A1B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A1" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A2B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A2" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A3B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A3" class="AbilityText" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="P3U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
+                <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A1B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A1" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A2B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A2" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A3B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A3" class="AbilityText" />
+                </ui:Button>
+            </ui:VisualElement>
+            <ui:VisualElement name="P4U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
+                <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A1B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A1" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A2B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A2" class="AbilityText" />
+                </ui:Button>
+                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A3B" class="AbilityButton">
+                    <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A3" class="AbilityText" />
+                </ui:Button>
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="P2U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
-            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A1B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A1" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A2B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A2" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A3B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P2A3" class="AbilityText" />
-            </ui:Button>
-        </ui:VisualElement>
-        <ui:VisualElement name="P3U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
-            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A1B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A1" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A2B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A2" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A3B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P3A3" class="AbilityText" />
-            </ui:Button>
-        </ui:VisualElement>
-        <ui:VisualElement name="P4U" style="flex-grow: 1; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; align-self: stretch; justify-content: space-around; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;);">
-            <ui:Button text="&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A1B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A1" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A2B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A2" class="AbilityText" />
-            </ui:Button>
-            <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A3B" class="AbilityButton">
-                <ui:Label tabindex="-1" text="&lt;b&gt;Ability Name Error&lt;/b&gt;&#10;&#10;This ability was not initialized correctly" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P4A3" class="AbilityText" />
-            </ui:Button>
+        <ui:VisualElement style="flex-grow: 0; height: 5%; margin-bottom: 1%; margin-top: 1%;">
+            <ui:Label tabindex="-1" text="Click to upgrade your ship" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="align-self: stretch; flex-grow: 1; flex-shrink: 1; -unity-text-align: middle-center; font-size: 25%;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
