@@ -35,14 +35,14 @@ public class Bullet : MonoBehaviour
         {
             if (collision.tag == "EnemyBase" || collision.tag == "EnemyPlayer" || collision.tag == "EnemyDrop" )
             {
-                Debug.Log("Bullet hit Enemy");
+                //Debug.Log("Bullet hit Enemy");
                 collision.gameObject.GetComponent<Health>().Damage(damage);
-                Debug.Log(collision.gameObject.GetComponent<Health>().GetHealth());
+                //Debug.Log(collision.gameObject.GetComponent<Health>().GetHealth());
                 Destroy(gameObject);
             }
             if (collision.tag == "Player")
             {
-                Debug.Log("Bullet hit Player");
+                //Debug.Log("Bullet hit Player");
                 if(!playerBullet)
                     collision.gameObject.GetComponent<Health>().Damage(damage);
                 if(playerBullet)
@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
             }
             if (collision.tag == "Base")
             {
-                Debug.Log("Bullet hit base");
+                //Debug.Log("Bullet hit base");
                 if(!playerBullet){
                     //A {} can be added here including the destroy(gameobject) if we want the player bullet to travel thru base
                     collision.gameObject.GetComponent<Health>().Damage(damage);

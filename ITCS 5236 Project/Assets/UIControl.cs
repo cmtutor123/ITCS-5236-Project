@@ -104,9 +104,7 @@ public class UIControl : MonoBehaviour
         playerUpChoices = new Button[12];
         abilityText = new Label[12];
         for(int i = 0; i < 12; i++){
-            Debug.Log(i);
             playerUpChoices[i] = playerUpgrades[i / 3].Q<Button>("P" + ((i / 3) + 1) + "A" + ((i % 3) + 1) + "B");
-            Debug.Log(playerUpChoices[i]);
             abilityText[i] = playerUpgrades[i / 3].Q<Label>("P" + ((i / 3) + 1) + "A" + ((i % 3) + 1));
             int player = i / 3;
             int upgrade = i % 3;
@@ -258,13 +256,13 @@ public class UIControl : MonoBehaviour
 
     public void SetAbilityText(Label abilityText, string title, string desc)
     {
-        Debug.Log(abilityText == null);
+        //Debug.Log(abilityText == null);
         abilityText.text = "<b>" + title + "</b>\n\n" + desc;
     }
 
     public void SetAbilityText(int index, string title, string desc)
     {
-        Debug.Log(index);
+        //Debug.Log(index);
         SetAbilityText(abilityText[index], title, desc);
     }
 
