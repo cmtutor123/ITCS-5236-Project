@@ -28,7 +28,8 @@ public class PlayerBaseManager : MonoBehaviour
     {
         Debug.Log("Start Wave");
         Debug.Log("Resources Needed: " + resources);
-        gameManager.waveProgress = 0;
+        if (gameManager == null) gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        if (gameManager != null) gameManager.waveProgress = 0;
         currentResources = 0;
         neededResources = resources;
         inWave = true;
@@ -48,7 +49,8 @@ public class PlayerBaseManager : MonoBehaviour
     public void AddResources(int amount)
     {
         currentResources += Mathf.Clamp(amount, 0, int.MaxValue - currentResources);
-        gameManager.waveProgress = currentResources / neededResources;
+        if (gameManager == null) gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        if (gameManager != null) gameManager.waveProgress = currentResources / neededResources;
         //Debug.Log("Resources: " + currentResources + "/" + neededResources);
         if (currentResources >= neededResources)
         {
