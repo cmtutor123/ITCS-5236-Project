@@ -254,6 +254,7 @@ public class UIControl : MonoBehaviour
         background.style.display = DisplayStyle.Flex;
         inGame.style.display = DisplayStyle.None;
         endGame.style.display = DisplayStyle.Flex;
+        SetEndScore(gameManager.GetScore());
     }
 
     public void SetAbilityText(Label abilityText, string title, string desc)
@@ -283,6 +284,6 @@ public class UIControl : MonoBehaviour
         inGame.Q<Label>("Wave").text = "Score: " + wave;
     }
 	public void SetEndScore(int score){
-        endGame.Q<Label>("EndScore").text = "You Lose!\nScore: " + score;
+        endGame.Q<Label>("EndScore").text = "Game Over!\nScore: " + score;
     }
 }
