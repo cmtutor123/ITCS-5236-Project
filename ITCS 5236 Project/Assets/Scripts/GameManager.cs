@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public Color[] shipColors = new Color[4];
+
     public float waveProgress = 0;
 
     private const int MAX_PLAYERS = 4;
@@ -121,11 +123,13 @@ public class GameManager : MonoBehaviour
         SpawnPlayerBase();
         uiControl.gameStarted = true;
         Debug.Log("Start Game");
-        foreach (PlayerManager playerManager in playerManagers)
+        for (int i = 0; i < 4; i++)
         {
+            PlayerManager playerManager = playerManagers[i];
             if (playerManager != null)
             {
                 playerManager.InitializeUpgradeLists();
+                playerManager.SetColor(shipColors[i]);
             }
         }
         StartCoroutine(StartRound());
