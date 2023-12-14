@@ -49,9 +49,10 @@ public class PlayerBaseManager : MonoBehaviour
     public void AddResources(int amount)
     {
         currentResources += Mathf.Clamp(amount, 0, int.MaxValue - currentResources);
+        Debug.Log("AddResources() Called");
         if (gameManager == null) gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        if (gameManager != null) gameManager.waveProgress = currentResources / neededResources;
-        //Debug.Log("Resources: " + currentResources + "/" + neededResources);
+        if (gameManager != null) gameManager.waveProgress = (float)currentResources / neededResources;
+        Debug.Log("Resources: " + currentResources + "/" + neededResources + " , Score: " + (gameManager == null ? "null" : gameManager.GetScore()));
         if (currentResources >= neededResources)
         {
             EndWave();
