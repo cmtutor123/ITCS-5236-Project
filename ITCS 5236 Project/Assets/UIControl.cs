@@ -282,4 +282,7 @@ public class UIControl : MonoBehaviour
 	public void SetWave(int wave){
         inGame.Q<Label>("Wave").text = "Score: " + wave;
     }
+	public void SetEndScore(int score){
+        endGame.Q<Label>("EndScore").text = "You Lose!\nScore: " + score;
+    }
 }
