@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/Start.uss?fileID=7433441132597879392&amp;guid=aefeb202aa23d4735803a84bb6f259a6&amp;type=3#Start" />
     <Style src="project://database/Assets/UI%20Toolkit/PlayerUI.uss?fileID=7433441132597879392&amp;guid=0f8794efdeed0024788a25bb0694d915&amp;type=3#PlayerUI" />
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/Background.png?fileID=7482667652216324306&amp;guid=bc044ac37a7194e09973270ece75edd3&amp;type=3#Square&apos;); -unity-background-image-tint-color: rgb(32, 32, 32); width: 100%; height: 100%; max-width: 100%; max-height: 100%; min-width: 100%; min-height: 100%; display: flex;">
-        <ui:VisualElement name="StartMenu" style="flex-grow: 1; justify-content: center; align-items: stretch; align-self: auto; display: flex; width: 100%; height: 100%; max-width: initial; max-height: initial; min-width: initial; min-height: initial;">
+        <ui:VisualElement name="StartMenu" style="flex-grow: 1; justify-content: center; align-items: stretch; align-self: auto; display: none; width: 100%; height: 100%; max-width: initial; max-height: initial; min-width: initial; min-height: initial;">
             <ui:Label tabindex="-1" text="Space Game&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="-unity-font-style: bold; -unity-text-align: upper-center; font-size: 24px; -unity-text-outline-width: 10px; -unity-text-outline-color: rgba(241, 241, 241, 0.33); -unity-font-definition: initial; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/Fonts/Ubuntu-Bold.ttf?fileID=12800000&amp;guid=e4e32a6f8f3de46bcb86acc3c6fbb648&amp;type=3#Ubuntu-Bold&apos;);" />
             <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Start" class="button" style="display: flex;" />
             <ui:Button text="Help" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Settings" class="button" style="display: flex;" />
@@ -47,8 +47,8 @@
                 <ui:Label tabindex="-1" text="Press Select to Confirm" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="flex-shrink: 1; flex-grow: 1; -unity-text-align: middle-center; font-size: 25%; color: rgb(255, 255, 255); margin-bottom: 1%;" />
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Endgame" style="flex-grow: 1; justify-content: center; align-self: auto; align-items: center; display: none; width: 100%; height: 100%; max-width: initial; max-height: initial;">
-            <ui:Label tabindex="-1" text="You lose!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="width: 100%; -unity-text-align: upper-center;" />
+        <ui:VisualElement name="Endgame" style="flex-grow: 1; justify-content: center; align-self: auto; align-items: center; display: flex; width: 100%; height: 100%; max-width: initial; max-height: initial;">
+            <ui:Label tabindex="-1" text="You lose!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EndScore" class="text" style="width: 100%; -unity-text-align: upper-center;" />
             <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Restart" class="button" style="display: flex;" />
         </ui:VisualElement>
     </ui:VisualElement>
