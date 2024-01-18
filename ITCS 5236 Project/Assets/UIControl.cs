@@ -46,6 +46,7 @@ public class UIControl : MonoBehaviour
         upgradeScreen = root.Q<VisualElement>("UpgradeMenu");
         inGame = root.Q<VisualElement>("InGame");
         endGame = root.Q<VisualElement>("Endgame");
+		
 
 
         readyB = new VisualElement[4];
@@ -73,7 +74,7 @@ public class UIControl : MonoBehaviour
         playerUpgrades[2] = upgradeScreen.Q<VisualElement>("P3U");
         playerUpgrades[3] = upgradeScreen.Q<VisualElement>("P4U");
         
-        
+        Label Wave = inGame.Q<Label>("Wave");
 
         playerHUD = new VisualElement[4];
         playerHUD[0] = inGame.Q<VisualElement>("P1");
@@ -162,6 +163,7 @@ public class UIControl : MonoBehaviour
                 playerHP[i].value = gameManager.GetPlayerHealth(i);
             }
             baseHP.value = gameManager.GetBaseHealth();
+			SetWave(gameManager.GetScore());
         }
     }
 
@@ -252,6 +254,7 @@ public class UIControl : MonoBehaviour
         background.style.display = DisplayStyle.Flex;
         inGame.style.display = DisplayStyle.None;
         endGame.style.display = DisplayStyle.Flex;
+        SetEndScore(gameManager.GetScore());
     }
 
     public void SetAbilityText(Label abilityText, string title, string desc)
@@ -276,5 +279,11 @@ public class UIControl : MonoBehaviour
     {
         inGame.style.display = DisplayStyle.Flex;
         upgradeScreen.style.display = DisplayStyle.None;
+    }
+	public void SetWave(int wave){
+        inGame.Q<Label>("Wave").text = "Score: " + wave;
+    }
+	public void SetEndScore(int score){
+        endGame.Q<Label>("EndScore").text = "Game Over!\nScore: " + score;
     }
 }

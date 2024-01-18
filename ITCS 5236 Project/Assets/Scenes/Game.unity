@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07fe77e56f74443181b6a46219707ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameStarted: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +296,66 @@ PrefabInstance:
     - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: prefabEnemies.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[0].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[0].b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[0].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[0].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[1].b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[1].g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[1].r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[2].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[2].b
+      value: 0.10190296
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[2].g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[2].r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[3].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[3].b
+      value: 0.95409155
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
+      propertyPath: shipColors.Array.data[3].r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4564396449156874258, guid: 3aaa45a488f21524883e575b62eccfc4, type: 3}
       propertyPath: prefabEnemies.Array.data[0]

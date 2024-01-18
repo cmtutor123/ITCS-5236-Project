@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 
     public Dictionary<string, float> stats = new Dictionary<string, float>();
 
+    public Color shipColor;
+
     private void Awake()
     {
         input = new PlayerControls();
@@ -254,5 +256,11 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         playerManager.hasPlayerObject = false;
+    }
+
+    public void SetColor(Color color)
+    {
+        shipColor = color;
+        transform.GetChild(0).GetChild(1).GetComponent<SpriteRenderer>().color = shipColor;
     }
 }

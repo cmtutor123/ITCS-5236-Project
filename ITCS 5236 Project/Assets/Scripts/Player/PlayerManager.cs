@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
+    public Color shipColor;
+
     private GameManager gameManager;
 
     [SerializeField] private GameObject prefabPlayerShip;
@@ -72,6 +74,7 @@ public class PlayerManager : MonoBehaviour
         playerShip = Instantiate(prefabPlayerShip);
         playerShipController = playerShip.GetComponent<PlayerController>();
         playerShipController.playerManager = this;
+        playerShipController.SetColor(shipColor);
         hasPlayerObject = true;
         UpdateStats();
     }
@@ -154,11 +157,13 @@ public class PlayerManager : MonoBehaviour
 
     public void OnButtonChange(InputAction.CallbackContext context)
     {
+        /*
         if (context.performed)
         {
             //Debug.Log("Change Button Pressed");
             if (onPlayerSelect && !isReady) ChangeShip(context.ReadValue<Vector2>().x);
         }
+        */
     }
 
     public void UnjoinPlayer()
@@ -340,5 +345,10 @@ public class PlayerManager : MonoBehaviour
         stats.Add("tetherCount", 1);
         stats.Add("maxSpeed", 15);
         stats.Add("thrust", 10);
+    }
+
+    public void SetColor(Color shipColor)
+    {
+        this.shipColor = shipColor;
     }
 }

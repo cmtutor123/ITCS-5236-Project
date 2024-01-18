@@ -15,7 +15,7 @@
             <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Back" class="button" style="display: flex;" />
         </ui:VisualElement>
         <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; display: none; justify-content: center;">
-            <ui:Label tabindex="-1" text="Goal: Get the highest score by dragging drops to your base and progressing through the enemy waves.&#10;&#10;Instructions:&#10;You can play with either keyboard or remote controller. The basic controls are below.&#10;&#10;Aim - WASD/ Left Joystick&#10;Move Forward - Shift / Left Trigger&#10;Shoot - Space Bar / Right Trigger&#10;Tether - Left Ctrl / Right Bumper&#10;Ability - Left Alt / Left Bumper" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="align-self: center;" />
+            <ui:Label tabindex="-1" text="Goal: Get the highest score by dragging drops to your base and progressing through the enemy waves.&#10;&#10;Instructions:&#10;You can play with either keyboard or remote controller. The basic controls are below.&#10;&#10;Aim - WASD/ Left Joystick&#10;Move Forward - Shift / Left Trigger&#10;Shoot - Space Bar / Right Trigger&#10;Tether - Left Ctrl / Right Bumper" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="align-self: center; white-space: normal;" />
             <ui:Button text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Back" class="button" style="display: flex;" />
         </ui:VisualElement>
         <ui:VisualElement name="SelectMenu" style="flex-grow: 0; flex-direction: row; display: none; position: relative; width: 100%; height: 100%; max-width: initial; min-width: 100%; max-height: initial; min-height: 100%; flex-shrink: 0;">
@@ -48,13 +48,13 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Endgame" style="flex-grow: 1; justify-content: center; align-self: auto; align-items: center; display: none; width: 100%; height: 100%; max-width: initial; max-height: initial;">
-            <ui:Label tabindex="-1" text="You lose!" parse-escape-sequences="true" display-tooltip-when-elided="true" class="text" style="width: 100%; -unity-text-align: upper-center;" />
+            <ui:Label tabindex="-1" text="You lose!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="EndScore" class="text" style="width: 100%; -unity-text-align: upper-center;" />
             <ui:Button text="Restart" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Restart" class="button" style="display: flex;" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement name="InGame" style="flex-grow: 0; display: none; width: 100%; height: 100%; position: absolute; flex-shrink: 0;">
         <ui:Label tabindex="-1" text="Wave ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Wave" class="Title" style="-unity-text-align: upper-center; align-self: auto; justify-content: flex-start; position: absolute; left: 50%; top: auto; right: 50%;">
-            <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" class="resource" style="position: relative; left: auto; right: auto; bottom: auto; top: 25%;" />
+            <ui:Label tabindex="-1" text="PIC: ##" parse-escape-sequences="true" display-tooltip-when-elided="true" name="WaveR" class="resource" style="position: relative; left: auto; right: auto; bottom: auto; top: 25%; display: none;" />
         </ui:Label>
         <ui:VisualElement name="P1" style="flex-direction: row; min-width: 25%; max-width: 25%; flex-grow: 0; display: flex; position: absolute; left: 0; top: 0; flex-shrink: 0;">
             <ui:Label tabindex="-1" text="Player 1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="P1N" class="Name" style="-unity-text-align: upper-left;" />
